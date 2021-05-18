@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# Проект для НКО Старшие Братья и Старшие Сестры
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Установка проекта
+```sh
+npm install
+```
 
-In the project directory, you can run:
+## Запуск проекта для разработки с hot-reload
+```sh
+npm run start
+```
 
-### `npm start`
+## Запуск линтера в терминале
+Эта команда проверит все файлы и если найдет ошибки или если ей что-то не понравится, то выведет информацию в терминале. Некоторые проблемы она может починить сама, для этого этого необходимо выполнить команду с флагом --fix (в терминале будет информация об этом).
+```sh
+npx eslint ./
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Установленные зависимости
+**Prettier и Eslint**</br>
+```
+npm install --save-dev --save-exact prettier
+npm install eslint --save-dev
+npm install --save-dev eslint-config-airbnb-base
+npm install eslint-plugin-import --save-dev
+npm install --save-dev eslint-config-prettier
+```
 
-### `npm test`
+**React Helmet**</br>
+`npm install --save react-helmet`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**React modal**</br>
+`npm install --save react-modal`
 
-### `npm run build`
+**React Hook Form**</br>
+`npm install react-hook-form`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Prop-Types**</br>
+`npm install --save prop-types`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**React Router**</br>
+`npm i --save react-router-dom`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Date-fns**</br>
+`npm install date-fns --save`
 
-### `npm run eject`
+**Lottie**</br>
+`npm install lottie-web`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Axios**</br>
+`npm install axios`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Axios-mock-adapter**</br>
+`npm install axios-mock-adapter --save-dev`
