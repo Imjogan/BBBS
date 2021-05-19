@@ -1,6 +1,6 @@
 import '../index.css';
 import { Helmet } from 'react-helmet';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 
 function App() {
