@@ -24,3 +24,5 @@ function CalendarBlock(props) {
     </div>
   </li> 
 }
+
+export default CalendarBlock;
