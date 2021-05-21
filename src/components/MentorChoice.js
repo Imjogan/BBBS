@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 
-function CalendarBlock(props) {
+function MentorChoice(props) {
   <>
     <section className="two-columns two-columns_style_place ">
       <article className="block-place background-yellow">
@@ -28,4 +28,4 @@ function CalendarBlock(props) {
   </>
 }
 
-export default CalendarBlock;
+export default MentorChoice;
