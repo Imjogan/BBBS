@@ -1,8 +1,8 @@
-import Article from './Article';
+import ArticleBlock from './ArticleBlock';
 
 function ArticleBlue() {
   return (
-    <Article className={'background-blue'} />
+    <ArticleBlock className={'background-blue'} />
   );
 }
 
