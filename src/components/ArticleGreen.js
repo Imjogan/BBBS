@@ -1,7 +1,7 @@
-import Article from './Article';
+import ArticleBlock from './ArticleBlock';
 
 function ArticleGreen() {
-  return <Article className={'background-green'} />;
+  return <ArticleBlock className={'background-green'} />;
 }
 
 export default ArticleGreen;
