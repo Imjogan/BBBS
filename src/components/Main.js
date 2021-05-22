@@ -5,6 +5,7 @@ import VideoCards from './VideoCards';
 import ArticleGreen from './ArticleGreen';
 import GreetingInfo from './GreetingInfo';
 import MentorChoice from './MentorChoice';
+import WatchAndRead from './WatchAndRead';
 
 function Main() {
   return (
@@ -13,6 +14,7 @@ function Main() {
       <MentorChoice />
       <ArticleBlue />
       <VideoCards />
+      <WatchAndRead />
       <Questions />
       <ArticleGreen />
     </main>
