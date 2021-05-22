@@ -14,9 +14,9 @@ function App() {
         <Header />
         <main class='content page__content'>
           <Main />
+        </main>
           <Footer />
           <AuthPopup />
-        </main>
       </div>
     </div>
   );
