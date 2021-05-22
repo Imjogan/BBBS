@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CalendarBlock from './CalendarBlock';
-import Article from './Article';
+import Article from '../Article';
 
 
 function GreetingInfo(props) {
