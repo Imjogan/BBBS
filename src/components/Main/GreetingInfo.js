@@ -5,7 +5,7 @@ import Article from './Article';
 
 
 function GreetingInfo(props) {
-  const Calendar = true; // временное hard-значение
+  const Calendar = false; // временное hard-значение
   return (
     <section className="two-columns two-columns_style_first">
       {Calendar ? <CalendarBlock /> : <Article />}

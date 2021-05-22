@@ -9,7 +9,7 @@ import WatchAndRead from './WatchAndRead';
 
 function Main() {
   return (
-    <main class='content page__content'>
+    <>
       <GreetingInfo />
       <MentorChoice />
       <ArticleBlue />
@@ -17,7 +17,7 @@ function Main() {
       <WatchAndRead />
       <Questions />
       <ArticleGreen />
-    </main>
+    </>
   );
 }
 
