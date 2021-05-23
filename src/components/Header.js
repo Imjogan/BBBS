@@ -26,7 +26,7 @@ function Header () {
         </nav>
         <form action="#" name="searcg" className="header__form-search display-none" method="POST">
           <label className="header__field">
-            <input id="search-input" required name="search" minLength={2} maxLength={40} placeholder className="header__input" type="text" />
+            <input id="search-input" required name="search" minLength={2} maxLength={40} className="header__input" type="text" />
             <span className="header__input-error" />
           </label>
           <div className="header__answer">
