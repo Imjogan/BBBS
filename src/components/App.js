@@ -12,13 +12,15 @@ import api from '../utils/api'
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(true)
 
+function fff () {
+return api.getCitiesList().then(res=> {console.log(res)})
+}
+
+ 
+fff ()
 
 
- /*  api.getCitiesList()
-
-
-
-  api.getUserProfile()
+  /* api.getUserProfile()
 
 
   api.getMainPage()
@@ -37,8 +39,8 @@ function App() {
         console.log('Токен:', res.access)
       }
     })
-    .catch(err => console.log(err))
- */
+    .catch(err => console.log(err)) */
+ 
 
   return (
     <div className='body'>

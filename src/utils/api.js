@@ -19,42 +19,42 @@ const headers = {
 
 
 function auth({ username, password }) {
-  instance.post('/token', { username, password }, { headers: { 'Content-Type': 'application/json' } })
+ return instance.post('/token', { username, password }, { headers: { 'Content-Type': 'application/json' } })
     .then((res) => {
       checkResponse(res)
     })
 }
 
 function getCitiesList() {
-  instance.get('/cities', headers)
+  return instance.get('/cities', headers)
     .then((res) => {
       checkResponse(res)
     })
 }
 
 function getUserProfile() {
-  instance.get('/profile', headers)
+  return instance.get('/profile', headers)
     .then((res) => {
       checkResponse(res)
     })
 }
 
 function getMainPage() {
-  instance.get('/main', headers)
+  return instance.get('/main', headers)
     .then((res) => {
       checkResponse(res)
     })
 }
 
 function getEvents() {
-  instance.get('/afisha/events', headers)
+  return  instance.get('/afisha/events', headers)
     .then((res) => {
       checkResponse(res)
     })
 }
 
 function takePartInEvent(event) {
-  instance.post('/afisha/event-participants/', event, headers)
+  return instance.post('/afisha/event-participants/', event, headers)
     .then((res) => {
       checkResponse(res)
     })
