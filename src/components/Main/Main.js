@@ -5,17 +5,19 @@ import VideoCards from './VideoCards';
 import ArticleGreen from './ArticleGreen';
 import GreetingInfo from './GreetingInfo';
 import MentorChoice from './MentorChoice';
+import WatchAndRead from './WatchAndRead';
 
-function Main() {
+function Main(props) {
   return (
-    <main class='content page__content'>
-      <GreetingInfo />
+    <>
+      <GreetingInfo isLoggedIn={props.isLoggedIn}/>
       <MentorChoice />
       <ArticleBlue />
       <VideoCards />
+      <WatchAndRead />
       <Questions />
       <ArticleGreen />
-    </main>
+    </>
   );
 }
 

@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 
 
 function Article(props) {
+  return(
   <Link to="#">
-    <article classNameName="block-guest background-green">
+    <article className="block-guest background-green">
       <div className="block-guest__container-header">
         <div className="block-guest__logo"></div>
       </div>
@@ -13,6 +14,7 @@ function Article(props) {
       </div>
     </article>
   </Link>
+  )
 }
 
 export default Article;
