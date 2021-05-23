@@ -13,7 +13,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(true)
 
 function fff () {
-return api.getCitiesList().then(res=> {console.log(res)})
+return api.getCitiesList().then(res=> {
+  console.log(res)})
 }
 
  
