@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import CalendarBlock from './CalendarBlock';
+import CalendarBlock from '../Calendar/CalendarBlock';
 import Article from './Article';
 
 

@@ -1,10 +1,8 @@
 
-import React from 'react';
-import Header from '../Header'
-import Footer from '../Footer'
+import { useEffect, useState } from "react";
 import FilterButton from '../FilterButton'
 import CalendarBlock from './CalendarBlock'
-import { useEffect, useState } from "react";
+
 
 export default function Calendar ({arrEvents}) {
     const [DataFilter, SetDataFilter] = useState()
@@ -13,45 +11,25 @@ export default function Calendar ({arrEvents}) {
     //     setIsMonth(true)
     // }, [DataFilter])
     
-    // function handlerData(arr){
-    //     Array.from(arr.forEach(item => (new Data(item))))
-    //     return 
-    // }
+    function handlerData(arr){
+        Array.from(arr.forEach(item => (console.log(item))))
+    }
 
   return (
     <>
-      <Header/>
       <main className="content page__content">
         <section className="content__header">
           <h1 className="title">Календарь</h1>
           <section className="menu">
             <ul className="menu__list menu__list_center">
-              {handlerData(arrEvents).map(item => (
-              <FilterButton
-              nameMonth ={item}
-              />
-              ))}
             </ul>
           </section>
         </section>
         <section className="calendar">
           <ul className="list">
-            {arrEvents.map((item)=>(
-              <CalendarBlock
-                onCaption={}
-                onData={}
-                ontitle={}
-                onNumber={}
-                onContactTime={}
-                onPlace={}
-                onContactPerson={}
-                onPlaceNumber={}
-              />
-            ))}
           </ul>
         </section>
       </main>
-      <Footer/>
     </>
-  )
+  );
 }
