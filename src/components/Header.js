@@ -1,4 +1,4 @@
-function Header () {
+function Header (props) {
   return (
     <header className="header page__header">
         <a href="./index.html" className="header__logo">наставники.про</a>
@@ -44,7 +44,7 @@ function Header () {
         </form>
         <button type="button" className="header__search" />
         <div className="header__divisor" />
-        <button type="button" className="header__account" />
+        <button type="button" className={props.isLogged? "header__account" : "header__account"} />
         <button type="button" className="header__menu" />
       </header>
   )
