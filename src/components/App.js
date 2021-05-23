@@ -12,6 +12,8 @@ import api from '../utils/api'
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(true)
 
+
+
 function fff () {
 return api.getCitiesList().then(res=> {
   console.log(res)})
@@ -20,6 +22,11 @@ return api.getCitiesList().then(res=> {
  
 fff ()
 
+function gergbe() {
+  api.getMainPage().then(res=> {
+    console.log(res)})
+}
+gergbe()
 
   /* api.getUserProfile()
 

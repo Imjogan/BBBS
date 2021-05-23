@@ -2,13 +2,13 @@ import instance from '../source/mock';
 
 
 
-/* 
+
 function checkResponse(res) {
   if (res) {
     return res;
   }
   return Promise.reject(new Error(`Ошибка: какая то`))
-} */
+}
 
 const headers = {
   headers: {
@@ -20,42 +20,34 @@ const headers = {
 
 function auth({ username, password }) {
  return instance.post('/token', { username, password }, { headers: { 'Content-Type': 'application/json' } })
-    /* .then((res) => {
-      checkResponse(res)
-    }) */
+ .then(res=> (checkResponse(res)))
+    
 }
 
 function getCitiesList() {
   return instance.get('/cities', headers)
+  .then(res=> (checkResponse(res)))
    
 }
 
 function getUserProfile() {
   return instance.get('/profile', headers)
-    /* .then((res) => {
-      checkResponse(res)
-    }) */
+  .then(res=> (checkResponse(res)))
 }
 
 function getMainPage() {
   return instance.get('/main', headers)
-    /* .then((res) => {
-      checkResponse(res)
-    }) */
+  .then(res=> (checkResponse(res)))
 }
 
 function getEvents() {
   return  instance.get('/afisha/events', headers)
-    /* .then((res) => {
-      checkResponse(res)
-    }) */
+  .then(res=> (checkResponse(res)))
 }
 
 function takePartInEvent(event) {
   return instance.post('/afisha/event-participants/', event, headers)
-    /* .then((res) => {
-      checkResponse(res)
-    }) */
+  .then(res=> (checkResponse(res)))
 }
 
 export default {
@@ -65,4 +57,4 @@ export default {
   getMainPage,
   getEvents,
   takePartInEvent
-};
+}
