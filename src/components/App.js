@@ -14,7 +14,7 @@ function App() {
 
 
 
-  /* api.getCitiesList()
+ /*  api.getCitiesList()
 
 
 
@@ -37,8 +37,8 @@ function App() {
         console.log('Токен:', res.access)
       }
     })
-    .catch(err => console.log(err)) */
-
+    .catch(err => console.log(err))
+ */
 
   return (
     <div className='body'>
