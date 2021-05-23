@@ -18,40 +18,40 @@ export default function Calendar ({arrEvents}) {
     //     return 
     // }
 
-    return (
-      <>
-            <Header/>
-          <main className="content page__content">
-            <section className="content__header">
-              <h1 className="title">Календарь</h1>
-              <section className="menu">
-                <ul className="menu__list menu__list_center">
-                  {handlerData(arrEvents).map(item => (
-                    <FilterButton
-                    nameMonth ={item}
-                    />
-                  ))}
-                </ul>
-              </section>
-            </section>
-            <section className="calendar">
-              <ul className="list">
-                {arrEvents.map((item)=>(
-                    <CalendarBlock
-                    onCaption={}
-                    onData={}
-                    ontitle={}
-                    onNumber={}
-                    onContactTime={}
-                    onPlace={}
-                    onContactPerson={}
-                    onPlaceNumber={}
-                    />
-                ))}
-              </ul>
-            </section>
-          </main>
-          <Footer/>
-      </>
-    );
+  return (
+    <>
+      <Header/>
+      <main className="content page__content">
+        <section className="content__header">
+          <h1 className="title">Календарь</h1>
+          <section className="menu">
+            <ul className="menu__list menu__list_center">
+              {handlerData(arrEvents).map(item => (
+              <FilterButton
+              nameMonth ={item}
+              />
+              ))}
+            </ul>
+          </section>
+        </section>
+        <section className="calendar">
+          <ul className="list">
+            {arrEvents.map((item)=>(
+              <CalendarBlock
+                onCaption={}
+                onData={}
+                ontitle={}
+                onNumber={}
+                onContactTime={}
+                onPlace={}
+                onContactPerson={}
+                onPlaceNumber={}
+              />
+            ))}
+          </ul>
+        </section>
+      </main>
+      <Footer/>
+    </>
+  )
 }
