@@ -1,4 +1,4 @@
-function Header () {
+function Header (props) {
   return (
     <header className="header page__header">
         <a href="./index.html" className="header__logo">наставники.про</a>
@@ -26,7 +26,7 @@ function Header () {
         </nav>
         <form action="#" name="searcg" className="header__form-search display-none" method="POST">
           <label className="header__field">
-            <input id="search-input" required name="search" minLength={2} maxLength={40} placeholder className="header__input" type="text" />
+            <input id="search-input" required name="search" minLength={2} maxLength={40} className="header__input" type="text" />
             <span className="header__input-error" />
           </label>
           <div className="header__answer">
@@ -44,7 +44,7 @@ function Header () {
         </form>
         <button type="button" className="header__search" />
         <div className="header__divisor" />
-        <button type="button" className="header__account" />
+        <button type="button" className={props.isLogged? "header__account" : "header__account"} />
         <button type="button" className="header__menu" />
       </header>
   )

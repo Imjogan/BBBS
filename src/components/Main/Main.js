@@ -7,10 +7,10 @@ import GreetingInfo from './GreetingInfo';
 import MentorChoice from './MentorChoice';
 import WatchAndRead from './WatchAndRead';
 
-function Main() {
+function Main(props) {
   return (
     <>
-      <GreetingInfo />
+      <GreetingInfo isLoggedIn={props.isLoggedIn}/>
       <MentorChoice />
       <ArticleBlue />
       <VideoCards />
