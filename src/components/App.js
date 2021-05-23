@@ -6,6 +6,7 @@ import Main from './Main/Main';
 import Footer from './Footer';
 import Header from './Header';
 import AuthPopup from './AuthPopup';
+import AboutUs from './AboutUs/AboutUs';
 
 function App() {
 const [isLoggedIn, setIsLoggedIn] = React.useState(true)
@@ -15,7 +16,12 @@ const [isLoggedIn, setIsLoggedIn] = React.useState(true)
       <div className='page'>
         <Header />
         <main class='content page__content'>
-          <Main isLoggedIn={isLoggedIn}/>
+          <Route path='/main'>
+            <Main isLoggedIn={isLoggedIn}/>
+          </Route>
+          <Route path='/about'>
+            <AboutUs />
+          </Route>
         </main>
           <Footer />
           <AuthPopup />
