@@ -43,8 +43,7 @@ function AuthPopup() {
               { required: true, minLength: 2, maxLength: 40 })}
               placeholder="Логин"
               className={red ? "popup__input popup__input_error" : "popup__input"} type="text"
-              onChange={() => setRed(false)}
-                          />
+              onChange={() => setRed(false)}/>
           </label>
           <label className="popup__field">
             <input id="password-input"
@@ -52,12 +51,12 @@ function AuthPopup() {
               placeholder="Пароль"
               className={red ? "popup__input popup__input_error" : "popup__input"}
               type="password"
-              onChange={() => setRed(false)}            />
+              onChange={() => setRed(false)}/>
           </label>
           <p className="popup__help">Забыли пароль?</p>
           <button
             aria-label="submit form" className="popup__button-submit"
-            type="submit"   >Войти</button>
+            type="submit">Войти</button>
         </form>
       </div>
     </div>
