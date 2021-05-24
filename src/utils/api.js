@@ -1,48 +1,60 @@
 import instance from '../source/mock';
 
+
+
+
+function checkResponse(res) {
+  if (res) {
+    return res;
+  }
+  return Promise.reject(new Error(`Ошибка: какая то`))
+}
+
 const headers = {
-    headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('jwt')}`
-    } 
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('jwt')}`
+  }
 }
 
 
-async function auth ({username, password}) {
-   const response = await instance.post('/token', { username, password }, {headers: {'Content-Type': 'application/json'}});
-   return response.data;  
+function auth({ username, password }) {
+ return instance.post('/token', { username, password }, { headers: { 'Content-Type': 'application/json' } })
+ .then(res=> (checkResponse(res)))
+    
 }
 
-async function getCitiesList() {
-    const response = await instance.get('/cities', headers);
-    return response.data;
+function getCitiesList() {
+  return instance.get('/cities', headers)
+  .then(res=> (checkResponse(res)))
+   
 }
 
-async function getUserProfile() {
-    const response = await instance.get('/profile', headers);
-    return response.data;
+function getUserProfile() {
+  return instance.get('/profile', headers)
+  .then(res=> (checkResponse(res)))
 }
 
-async function getMainPage() {
-    const response = await instance.get('/main', headers);
-    return response.data;
+function getMainPage() {
+  return instance.get('/main', headers)
+  .then(res=> (checkResponse(res)))
 }
 
-async function getEvents() {
-    const response = await instance.get('/afisha/events', headers);
-    return response.data;
+function getEvents() {
+  return  instance.get('/afisha/events', headers)
+  .then(res=> (checkResponse(res)))
 }
 
-async function takePartInEvent(event) {
-    const response = await instance.post('/afisha/event-participants/', event, headers)
-    return response.data;
+function takePartInEvent(event) {
+  return instance.post('/afisha/event-participants/', event, headers)
+  .then(res=> (checkResponse(res)))
 }
 
 export default {
-    auth,
-    getCitiesList,
-    getUserProfile,
-    getMainPage,
-    getEvents,
-    takePartInEvent
-};
+  auth,
+  getCitiesList,
+  getUserProfile,
+  getMainPage,
+  getEvents,
+  takePartInEvent
+}
