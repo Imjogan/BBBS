@@ -1,74 +1,88 @@
 import "../index.css";
-import React from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import CurrentListOfEvents from "../context/CurrentListOfEvents";
 import Main from "./Main/Main";
 import Footer from "./Footer";
 import Header from "./Header";
 import AuthPopup from "./AuthPopup";
 import AboutUs from "./AboutUs/AboutUs";
 import api from "../utils/api";
-import Calendar from "./Calendar/calendarPage";
+import Calendar from "./Calendar/calendarPage"
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
-
-  React.useEffect(() => {
-    api
-      .getCitiesList()
-      .then((res) => console.log("Список городов:", res))
-      .catch((err) => console.log(err));
-
-    api
-      .getUserProfile()
-      .then((res) => console.log("Получение профиля:", res))
-      .catch((err) => console.log(err));
-
-    api
-      .getMainPage()
-      .then((res) => console.log("Главная страница:", res))
-      .catch((err) => console.log(err));
-
-    api
-      .getEvents()
-      .then((res) => console.log("Список событий:", res))
-      .catch((err) => console.log(err));
-
-    api
-      .takePartInEvent({ event: 1 })
-      .then((res) => console.log("Записаться на событие:", res))
-      .catch((err) => console.log(err));
-
-    api
-      .auth({ username: "admin", password: "admin2" })
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [listEvents, setListEvents] = useState({
+    address: "",
+    contact: "",
+    description: "",
+    endAt: "",
+    startAt: "",
+    title: "",
+    tags: "",
+    remainSeats: "",
+  });
+  useEffect(() => {
+    Promise.all([api.getMainPage()])
       .then((res) => {
-        if (res.access) {
-          localStorage.setItem("jwt", res.access);
-          console.log("Токен:", res.access);
-        }
+        setListEvents({
+          address: res[0].data.event.address,
+          contact: res[0].data.event.contact,
+          description: res[0].data.event.description,
+          endAt: res[0].data.event.endAt,
+          startAt: res[0].data.event.startAt,
+          title: res[0].data.event.title,
+          tags: `${res[0].data.event.tags[0].name} + ${res[0].data.event.tags[1].name}`,
+          remainSeats: res[0].data.event.remainSeats,
+        });
+        console.log(res[0].data.event);
       })
-      .catch((err) => console.log(err));
+      .then(() => console.log(listEvents));
   }, []);
 
+  /* api.getUserProfile()
+
+
+  api.getMainPage()
+
+
+  api.getEvents()
+
+
+  api.takePartInEvent({ 'event': 1 })
+    
+
+  api.auth({ username: 'admin', password: 'admin2' })
+    .then(res => {
+      if (res.access) {
+        localStorage.setItem('jwt', res.access);
+        console.log('Токен:', res.access)
+      }
+    })
+    .catch(err => console.log(err)) */
+
   return (
-    <div className="body">
-      <div className="page">
-        <Header isLogged={isLoggedIn} />
-        <main class="content page__content">
-          <Route path="/main">
-            <Main isLoggedIn={isLoggedIn} />
-          </Route>
-          <Route path="/about">
-            <AboutUs />
-          </Route>
-          <Route path="/calendar">
-            <Calendar />
-          </Route>
-        </main>
-        <Footer />
-        <AuthPopup />
+    <CurrentListOfEvents.Provider value={listEvents}>
+      <div className="body">
+        <div className="page">
+          <Header isLogged={isLoggedIn} />
+          <main class="content page__content">
+            <Route path="/main">
+              <Main isLoggedIn={isLoggedIn} />
+            </Route>
+            <Route path="/about">
+              <AboutUs />
+            </Route>
+            <Route path="/calendar">
+              <Calendar />
+            </Route>
+          </main>
+          <Footer />
+          <AuthPopup />
+        </div>
       </div>
-    </div>
+    </CurrentListOfEvents.Provider>
   );
 }
 
