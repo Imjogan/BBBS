@@ -14,22 +14,11 @@ function App() {
 
 
 
-function fff () {
-return api.getCitiesList().then(res=> {
-  console.log(res)})
-}
-
- 
-fff ()
-
-function gergbe() {
-  api.getMainPage().then(res=> {
-    console.log(res)})
-}
-gergbe()
-
   /* api.getUserProfile()
 
+api.getCitiesList()
+
+api.getMainPage()
 
   api.getMainPage()
 
