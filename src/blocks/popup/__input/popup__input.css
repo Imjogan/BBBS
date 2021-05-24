@@ -8,7 +8,20 @@
   box-sizing: border-box;
   border-radius: 30px;
   margin: 0 100px 20px;
-    background: #F3F2F2;
+  background: #F3F2F2;
+  color: #000;
+}
+
+.popup__input_error {
+  color: red;
+}
+
+.popup__input:focus {
+  outline: black;
+}
+
+.popup__input_error:focus {
+  outline: red;
 }
 
 .popup__input::placeholder {
