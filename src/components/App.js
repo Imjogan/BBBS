@@ -8,10 +8,11 @@ import Header from './Header';
 import AuthPopup from './AuthPopup';
 import AboutUs from './AboutUs/AboutUs';
 import api from '../utils/api'
+import ProtectedRoute from './ProtectedRoute';
+import Account from './Account/Account';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true)
-
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
 
 
 function fff () {
@@ -61,6 +62,7 @@ gergbe()
           <Route path='/about'>
             <AboutUs />
           </Route>
+          <ProtectedRoute path="/account" component={Account} isLoggedIn={isLoggedIn} />
         </main>
         <Footer />
         <AuthPopup />
