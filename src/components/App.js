@@ -1,7 +1,7 @@
 
 import "../index.css";
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import CurrentListOfEvents from "../context/CurrentListOfEvents";
 import Main from "./Main/Main";
@@ -21,7 +21,7 @@ function App() {
     startAt: "",
     title: "",
     tags: "",
-    remainSeats:"",
+    remainSeats: "",
   });
   useEffect(() => {
     Promise.all([api.getMainPage()])
@@ -36,9 +36,7 @@ function App() {
           tags: `${res[0].data.event.tags[0].name} + ${res[0].data.event.tags[1].name}`,
           remainSeats: res[0].data.event.remainSeats,
         });
-        console.log(res[0].data.event);
       })
-      .then(() => console.log(listEvents));
   }, []);
 
 
@@ -68,25 +66,32 @@ api.getMainPage()
     .catch(err => console.log(err)) */
 
   return (
-    <CurrentListOfEvents.Provider value={listEvents}>
-      <div className="body">
-        <div className="page">
-          <Header isLogged={isLoggedIn} />
-          <main class="content page__content">
-            <Route path="/main">
-              <Main isLoggedIn={isLoggedIn} />
-            </Route>
-            <Route path="/about">
-              <AboutUs />
-            </Route>
-          </main>
-          <Footer />
-          <AuthPopup />
-        </div>
+    <>
+      <Helmet>
+        <title>BBBS</title>
+        <link rel="canonical" /* href="https://www.tacobell.com/" */ />
+      </Helmet>
+      <CurrentListOfEvents.Provider value={listEvents}>
+        <div className="body">
+          <div className="page">
+            <Header isLogged={isLoggedIn} />
+            <main class="content page__content">
+              <Route path="/main">
+                <Main isLoggedIn={isLoggedIn} />
+              </Route>
+              <Route path="/about">
+                <AboutUs />
+              </Route>
+            </main>
+            <Footer />
+            <AuthPopup />
+          </div>
 
-      </div>
-    </CurrentListOfEvents.Provider>
+        </div>
+      </CurrentListOfEvents.Provider>
+      </>
   );
+  
 }
 
 export default App;
