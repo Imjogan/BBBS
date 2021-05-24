@@ -9,15 +9,21 @@ import {
   postEventRes,
 } from '../utils/mockResponses';
 
-const mock = new MockAdapter(axios);
+const instance = axios.create({
+  baseURL: 'http://localhost:3000/api/v1',
+})
 
-mock.onPost('/api/v1/token/').reply(200, postTokenRes);
-mock.onPost('/api/v1/afisha/event-participants/').reply(200, postEventRes)
-mock.onGet('/api/v1/cities/').reply(200, getCityListRes);
-mock.onGet('/api/v1/profile/').reply(200, getUserInfoRes);
-mock.onGet('/api/v1/main/').reply(200, getMainPageRes);
-mock.onGet('/api/v1/afisha/events/').reply(200, getEventRes);
+const headers = {'Content-Type': 'application/json'};
+
+const mock = new MockAdapter(instance);
+
+mock.onPost('/token').reply(200, postTokenRes, headers);
+mock.onGet('/cities').reply(200, getCityListRes, headers);
+mock.onGet('/profile').reply(200, getUserInfoRes, headers);
+mock.onGet('/main').reply(200, getMainPageRes, headers)
+mock.onGet('/afisha/events').reply(200, getEventRes, headers);
+mock.onPost('/afisha/event-participants/').reply(200, postEventRes, headers);
 
 
+export default instance;
 
-export default axios;
