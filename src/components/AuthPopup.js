@@ -5,8 +5,6 @@ function AuthPopup(props) {
 
   // валидация формы
   const { register, handleSubmit } = useForm();
-  const [username, setUsername] = React.useState(''); /* сюда должны как то прийти данные из инпутов */
-  const [password, setPassword] = React.useState(''); /* сюда должны как то прийти данные из инпутов */
 
   const [red, setRed] = React.useState(false);
 
@@ -27,7 +25,13 @@ function AuthPopup(props) {
   }
  */
   const onSubmit = data => {
-    console.log(data); // поменять на запрос к серверу
+
+    props.onSubmit({
+      username: data.login,
+      password: data.password
+    })
+  
+    console.log(data) // поменять на запрос к серверу
     setRed(false);
   };
 

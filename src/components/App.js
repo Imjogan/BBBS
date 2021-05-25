@@ -14,6 +14,8 @@ import Account from './Account/Account';
 import ProtectedRoute from './ProtectedRoute';
 import CurrentUserContext from '../context/CurrentUserContext';
 
+
+
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,6 +46,8 @@ function App() {
       })
   }, []);
 
+  const history = useHistory();
+
   useEffect(() => {
     if (localStorage.getItem('jwt')) {
       api.getUserProfile().then(res => {
@@ -52,9 +56,9 @@ function App() {
       })
        
     } 
-  }, [])
+  }, [history])
 
-
+  
 
   /* api.getUserProfile()
 
@@ -67,6 +71,7 @@ api.getCitiesList()
  */
 
 
+  
   function handleLogPopupOpen() {
     setIsLogPopupOpen(true)
   }
@@ -76,7 +81,6 @@ api.getCitiesList()
   }
 
   /*  пока что jwt всегда тру, даже если не сохранен в localstorage, поэтому всегда открывается страница с акакунтом */
-  const history = useHistory();
   function handleProfileLogoClick() {
 
     if (isLoggedIn) {
@@ -87,14 +91,21 @@ api.getCitiesList()
   }
 
   function handleLoginSubmit(data) {
-    const [username, password] = data;
+    const {username, password} = data;
     api.auth(username, password)
       .then(res => {
         if (res.access) {
           localStorage.setItem('jwt', res.refresh);
+          setIsLoggedIn(true)
+          history.push('/account')
         }
       })
       .catch(err => console.log(err))
+  }
+
+  function handleSignOut () {
+    localStorage.removeItem('jwt');
+    setIsLoggedIn(false)
   }
 
   return (
@@ -118,7 +129,8 @@ api.getCitiesList()
                 </Route>
                 <ProtectedRoute
                   component={Account}
-                  path="/account" isLoggedIn={isLoggedIn} />
+                  path="/account" isLoggedIn={isLoggedIn} 
+                  signOut={handleSignOut} />
               </Switch>
             </main>
             <Footer />
