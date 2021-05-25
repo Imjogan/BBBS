@@ -42,7 +42,7 @@ function AuthPopup(props) {
   return (
     <div className={props.isOpen? 'popup popup-sign-in visible-block' : 'popup popup-sign-in'}>
       <div className="popup__container">
-        <button type="button" aria-label="close popup" className="popup__close" />
+        <button type="button" aria-label="close popup" onClick={props.onClose} className="popup__close" />
         <h2 className="popup__title">Вход</h2>
         <p className="popup__message">Вход в личный кабинет доступен наставникам программы «Старшие Братья Старшие
             Сёстры».</p>

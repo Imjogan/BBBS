@@ -11,11 +11,13 @@ import AuthPopup from "./AuthPopup";
 import AboutUs from "./AboutUs/AboutUs";
 import api from "../utils/api";
 import Account from './Account/Account';
-import ProtectedRoute from './ProtectedRoute'
+import ProtectedRoute from './ProtectedRoute';
+import CurrentUserContext from '../context/CurrentUserContext';
 
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [curentUser, setCurrentUser] = useState({})
   const [listEvents, setListEvents] = useState({
     address: "",
     contact: "",
@@ -42,51 +44,58 @@ function App() {
       })
   }, []);
 
+  useEffect(() => {
+    if (localStorage.getItem('jwt')) {
+      api.getUserProfile().then(res => {
+        setCurrentUser(res.data)
+        setIsLoggedIn(true)
+      })
+       
+    } 
+  }, [])
+
 
 
   /* api.getUserProfile()
 
 api.getCitiesList()
 
-api.getMainPage()
-
-  api.getMainPage()
-
-
   api.getEvents()
-
 
   api.takePartInEvent({ 'event': 1 })
     
  */
 
 
-    function handleLogPopupOpen() {
-      setIsLogPopupOpen(true)
-    }
+  function handleLogPopupOpen() {
+    setIsLogPopupOpen(true)
+  }
 
-    /*  пока что jwt всегда тру, даже если не сохранен в localstorage, поэтому всегда открывается страница с акакунтом */
-    const history = useHistory();
-    function handleProfileLogoClick() {
-    
-     if(localStorage.getItem('jwt')) {
-      setIsLoggedIn(true) /* временно добавил что бы открывался протектед роут */ 
+  function handlePopupClose () {
+    setIsLogPopupOpen(false)
+  }
+
+  /*  пока что jwt всегда тру, даже если не сохранен в localstorage, поэтому всегда открывается страница с акакунтом */
+  const history = useHistory();
+  function handleProfileLogoClick() {
+
+    if (isLoggedIn) {
       history.push('/account')
-     } else {
+    } else {
       handleLogPopupOpen()
-     }
     }
+  }
 
-    function handleLoginSubmit (data) {
-     const [username, password] = data;
-     api.auth(username, password)
-     .then(res => {
-       if (res.access) {
-         localStorage.setItem('jwt', res.refresh);
-       }
-     })
-     .catch(err => console.log(err))
-    }
+  function handleLoginSubmit(data) {
+    const [username, password] = data;
+    api.auth(username, password)
+      .then(res => {
+        if (res.access) {
+          localStorage.setItem('jwt', res.refresh);
+        }
+      })
+      .catch(err => console.log(err))
+  }
 
   return (
     <>
@@ -94,30 +103,34 @@ api.getMainPage()
         <title>BBBS</title>
         <link rel="canonical" /* href="https://www.tacobell.com/" */ />
       </Helmet>
+      <CurrentUserContext.Provider value={curentUser}>
       <CurrentListOfEvents.Provider value={listEvents}>
         <div className="body">
           <div className="page">
-            <Header isLogged={isLoggedIn} onLogoClick={handleProfileLogoClick}/>
+            <Header isLogged={isLoggedIn} onLogoClick={handleProfileLogoClick} />
             <main class="content page__content">
-              <Route path="/main">
-                <Main isLoggedIn={isLoggedIn} />
-              </Route>
-              <Route path="/about">
-                <AboutUs />
-              </Route>
-              <ProtectedRoute 
-              component={Account} 
-              path="/account" isLoggedIn={isLoggedIn}/>
+              <Switch>
+                <Route path="/main">
+                  <Main isLoggedIn={isLoggedIn} />
+                </Route>
+                <Route path="/about">
+                  <AboutUs />
+                </Route>
+                <ProtectedRoute
+                  component={Account}
+                  path="/account" isLoggedIn={isLoggedIn} />
+              </Switch>
             </main>
             <Footer />
-            <AuthPopup isOpen={isLogPopupOpen} onSubmit={handleLoginSubmit}/>
+            <AuthPopup isOpen={isLogPopupOpen} onClose={handlePopupClose} onSubmit={handleLoginSubmit} />
           </div>
 
         </div>
       </CurrentListOfEvents.Provider>
-      </>
+      </CurrentUserContext.Provider>
+    </>
   );
-  
+
 }
 
 export default App;
