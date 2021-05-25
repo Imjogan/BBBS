@@ -19,7 +19,7 @@ import CurrentUserContext from '../context/CurrentUserContext';
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [curentUser, setCurrentUser] = useState({})
+  const [currentUser, setCurrentUser] = useState({});
   const [listEvents, setListEvents] = useState({
     address: "",
     contact: "",
@@ -30,6 +30,7 @@ function App() {
     tags: "",
     remainSeats: "",
   });
+
   useEffect(() => {
     Promise.all([api.getMainPage()])
       .then((res) => {
@@ -115,7 +116,7 @@ api.getCitiesList()
         <title>BBBS</title>
         <link rel="canonical" /* href="https://www.tacobell.com/" */ />
       </Helmet>
-      <CurrentUserContext.Provider value={curentUser}>
+      <CurrentUserContext.Provider value={currentUser}>
       <CurrentListOfEvents.Provider value={listEvents}>
         <div className="body">
           <div className="page">
