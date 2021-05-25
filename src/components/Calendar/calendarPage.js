@@ -1,17 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import FilterButton from "../FilterButton";
 import CalendarBlock from "./CalendarBlock";
+import CurrentListOfEvents from "../../context/CurrentListOfEvents";
 
-export default function Calendar({ arrEvents }) {
+
+
+export default function Calendar() {
+  const Events = useContext(CurrentListOfEvents);
   const [DataFilter, SetDataFilter] = useState();
   const [isMonth, setIsMonth] = useState(false);
-  // useEffect(()=>{
-  //     setIsMonth(true)
-  // }, [DataFilter])
 
-  function handlerData(arr) {
-    Array.from(arr.forEach((item) => console.log(item)));
+  console.log(Events);
+
+
+function chackNum(num) {
+  let text
+  if (num === 1) {
+    text = "место";
+  } else if (num >= 10 || num % 2 !== 0) {
+    text = "мест";
+  } else {
+    text = "места";
   }
+  return text;
+}
 
   return (
     <>
@@ -27,14 +39,16 @@ export default function Calendar({ arrEvents }) {
         <section className="calendar">
           <ul className="list">
             <CalendarBlock
-              onCaption={""}
+              onCaption={'Events.tags'}
               onData={""}
-              ontitle={""}
+              ontitle={'Events.title'}
               onNumber={""}
               onContactTime={""}
-              onPlace={""}
-              onContactPerson={""}
-              onPlaceNumber={""}
+              onPlace={'Events.address'}
+              onContactPerson={'Events.contact'}
+              onPlaceNumber={`Осталось ${'Events.remainSeats'} ${chackNum(
+                1
+              )}`}
             />
           </ul>
         </section>

@@ -13,32 +13,12 @@ import Calendar from "./Calendar/calendarPage"
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [listEvents, setListEvents] = useState({
-    address: "",
-    contact: "",
-    description: "",
-    endAt: "",
-    startAt: "",
-    title: "",
-    tags: "",
-    remainSeats: "",
-  });
+  const [listEvents, setListEvents] = useState();
   useEffect(() => {
-    Promise.all([api.getMainPage()])
-      .then((res) => {
-        setListEvents({
-          address: res[0].data.event.address,
-          contact: res[0].data.event.contact,
-          description: res[0].data.event.description,
-          endAt: res[0].data.event.endAt,
-          startAt: res[0].data.event.startAt,
-          title: res[0].data.event.title,
-          tags: `${res[0].data.event.tags[0].name} + ${res[0].data.event.tags[1].name}`,
-          remainSeats: res[0].data.event.remainSeats,
-        });
-        console.log(res[0].data.event);
-      })
-      .then(() => console.log(listEvents));
+    api.getEvents().then((res) => {
+      console.log(res.data);
+      setListEvents(res.data);
+    });
   }, []);
 
   /* api.getUserProfile()
