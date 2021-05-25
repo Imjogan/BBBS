@@ -14,7 +14,7 @@ function Account(props) {
     <section className="account">
       <div className="account__buttons">
         <button type="button" className="account__button">{city}. Изменить ваш город</button>
-        <button type="button" className="account__button">Выйти</button>
+        <button type="button" onClick={props.signOut} className="account__button">Выйти</button>
       </div>      
       <p className="account__events-text">{events.length!== 0 ? "Вы записаны на мероприятия:" : "У вас нет записи на мероприятие"}
       </p>

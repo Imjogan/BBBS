@@ -44,7 +44,7 @@ function Header (props) {
         </form>
         <button type="button" className="header__search" />
         <div className="header__divisor" />
-        <button type="button" className={props.isLogged? "header__account" : "header__account"} />
+        <button type="button" onClick={props.onLogoClick} className={props.isLogged? "header__account" : "header__account"} />
         <button type="button" className="header__menu" />
       </header>
   )
