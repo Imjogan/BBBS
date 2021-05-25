@@ -10,9 +10,12 @@ import Header from "./Header";
 import AuthPopup from "./AuthPopup";
 import AboutUs from "./AboutUs/AboutUs";
 import api from "../utils/api";
+import Account from './Account/Account';
+import ProtectedRoute from './ProtectedRoute'
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLogPopupOpen, setIsLogPopupOpen] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [listEvents, setListEvents] = useState({
     address: "",
     contact: "",
@@ -55,15 +58,35 @@ api.getMainPage()
 
   api.takePartInEvent({ 'event': 1 })
     
+ */
 
-  api.auth({ username: 'admin', password: 'admin2' })
-    .then(res => {
-      if (res.access) {
-        localStorage.setItem('jwt', res.access);
-        console.log('Токен:', res.access)
-      }
-    })
-    .catch(err => console.log(err)) */
+
+    function handleLogPopupOpen() {
+      setIsLogPopupOpen(true)
+    }
+
+    /*  пока что jwt всегда тру, даже если не сохранен в localstorage, поэтому всегда открывается страница с акакунтом */
+    const history = useHistory();
+    function handleProfileLogoClick() {
+    
+     if(localStorage.getItem('jwt')) {
+      setIsLoggedIn(true) /* временно добавил что бы открывался протектед роут */ 
+      history.push('/account')
+     } else {
+      handleLogPopupOpen()
+     }
+    }
+
+    function handleLoginSubmit (data) {
+     const [username, password] = data;
+     api.auth(username, password)
+     .then(res => {
+       if (res.access) {
+         localStorage.setItem('jwt', res.refresh);
+       }
+     })
+     .catch(err => console.log(err))
+    }
 
   return (
     <>
@@ -74,7 +97,7 @@ api.getMainPage()
       <CurrentListOfEvents.Provider value={listEvents}>
         <div className="body">
           <div className="page">
-            <Header isLogged={isLoggedIn} />
+            <Header isLogged={isLoggedIn} onLogoClick={handleProfileLogoClick}/>
             <main class="content page__content">
               <Route path="/main">
                 <Main isLoggedIn={isLoggedIn} />
@@ -82,9 +105,12 @@ api.getMainPage()
               <Route path="/about">
                 <AboutUs />
               </Route>
+              <ProtectedRoute 
+              component={Account} 
+              path="/account" isLoggedIn={isLoggedIn}/>
             </main>
             <Footer />
-            <AuthPopup />
+            <AuthPopup isOpen={isLogPopupOpen} onSubmit={handleLoginSubmit}/>
           </div>
 
         </div>

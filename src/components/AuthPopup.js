@@ -1,10 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-function AuthPopup() {
+function AuthPopup(props) {
 
   // валидация формы
   const { register, handleSubmit } = useForm();
+  const [username, setUsername] = React.useState(''); /* сюда должны как то прийти данные из инпутов */
+  const [password, setPassword] = React.useState(''); /* сюда должны как то прийти данные из инпутов */
 
   const [red, setRed] = React.useState(false);
 
@@ -15,6 +17,15 @@ function AuthPopup() {
     return false;
   }
 
+  /* function handleSubmit(e) {
+    e.preventDefault();
+    
+    props.onSubmit({
+      username,
+      password
+    })
+  }
+ */
   const onSubmit = data => {
     console.log(data); // поменять на запрос к серверу
     setRed(false);
@@ -29,7 +40,7 @@ function AuthPopup() {
 
 
   return (
-    <div className="popup popup-sign-in visible_block">
+    <div className={props.isOpen? 'popup popup-sign-in visible-block' : 'popup popup-sign-in'}>
       <div className="popup__container">
         <button type="button" aria-label="close popup" className="popup__close" />
         <h2 className="popup__title">Вход</h2>
