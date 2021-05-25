@@ -56,7 +56,7 @@ function App() {
       })
        
     } 
-  }, [history])
+  }, [])
 
   
 
@@ -80,7 +80,7 @@ api.getCitiesList()
     setIsLogPopupOpen(false)
   }
 
-  /*  пока что jwt всегда тру, даже если не сохранен в localstorage, поэтому всегда открывается страница с акакунтом */
+  
   function handleProfileLogoClick() {
 
     if (isLoggedIn) {
@@ -91,12 +91,13 @@ api.getCitiesList()
   }
 
   function handleLoginSubmit(data) {
-    const {username, password} = data;
+    const {password, username} = data;
     api.auth(username, password)
       .then(res => {
-        if (res.access) {
-          localStorage.setItem('jwt', res.refresh);
-          setIsLoggedIn(true)
+        if (res.data.access) {
+          localStorage.setItem('jwt', res.data.refresh);
+          setIsLoggedIn(true);
+          handlePopupClose ();
           history.push('/account')
         }
       })
