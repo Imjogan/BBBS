@@ -3,8 +3,8 @@ import "../index.css";
 import {ru}  from 'date-fns/locale';
 import { format, compareAsc } from 'date-fns';
 import { useEffect, useState } from "react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { Route, Switch, useHistory } from "react-router-dom";
 import Main from "./Main/Main";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -21,7 +21,7 @@ import  CurrentUserContext  from '../context/CurrentUserContext';
 
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({});
   const [mainPageContent, setMainPageContent] = useState({});
 
