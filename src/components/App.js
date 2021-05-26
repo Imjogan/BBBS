@@ -1,40 +1,53 @@
 import "../index.css";
+import {ru}  from 'date-fns/locale';
+import { format, compareAsc } from 'date-fns';
 import { useEffect, useState } from "react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
-import CurrentListOfEvents from "../context/CurrentListOfEvents";
+import { Helmet } from "react-helmet-async";
+import { Route, Switch, useHistory } from "react-router-dom";
 import Main from "./Main/Main";
 import Footer from "./Footer";
 import Header from "./Header";
 import AuthPopup from "./AuthPopup";
 import AboutUs from "./AboutUs/AboutUs";
 import api from "../utils/api";
-import Account from "./Account/Account";
-import ProtectedRoute from "./ProtectedRoute";
-import CurrentUserContext from "../context/CurrentUserContext";
+import Account from './Account/Account';
+import ProtectedRoute from './ProtectedRoute';
+import  CurrentUserContext  from '../context/CurrentUserContext';
 import Calendar from "./Calendar/calendarPage";
 
 function App() {
-  const [isLogPopupOpen, setIsLogPopupOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [curentUser, setCurrentUser] = useState({});
-  const [listEvents, setListEvents] = useState();
+  const [isLogPopupOpen, setIsLogPopupOpen] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [currentUser, setCurrentUser] = useState({});
+  const [mainPageContent, setMainPageContent] = useState({});
+
+
   useEffect(() => {
-    api.getEvents().then((res) => {
-      setListEvents(res.data);
-    });
-  }, []);
+    api.getMainPage().then(res=> {
+      setMainPageContent(res.data)
+    })
+
+}, [])
+
+
+  const date = format(new Date("2019-10-25T09:10:00Z"),'HH', {locale: ru})
+
+  console.log(date)
+
+
 
   const history = useHistory();
 
   useEffect(() => {
-    if (localStorage.getItem("jwt")) {
-      api.getUserProfile().then((res) => {
-        setCurrentUser(res.data);
-        setIsLoggedIn(true);
-      });
-    }
-  }, [history]);
+    if (localStorage.getItem('jwt')) {
+      api.getUserProfile().then(res => {
+        setCurrentUser(res.data)
+        setIsLoggedIn(true)
+      })
+       
+    } 
+  }, [])
+
 
   /* api.getUserProfile()
 
@@ -54,7 +67,7 @@ api.getCitiesList()
     setIsLogPopupOpen(false);
   }
 
-  /*  пока что jwt всегда тру, даже если не сохранен в localstorage, поэтому всегда открывается страница с акакунтом */
+  
   function handleProfileLogoClick() {
     if (isLoggedIn) {
       history.push("/account");
@@ -64,14 +77,14 @@ api.getCitiesList()
   }
 
   function handleLoginSubmit(data) {
-    const { username, password } = data;
-    api
-      .auth(username, password)
-      .then((res) => {
-        if (res.access) {
-          localStorage.setItem("jwt", res.refresh);
+    const {password, username} = data;
+    api.auth(username, password)
+      .then(res => {
+        if (res.data.access) {
+          localStorage.setItem('jwt', res.data.refresh);
           setIsLoggedIn(true);
-          history.push("/account");
+          handlePopupClose ();
+          history.push('/account')
         }
       })
       .catch((err) => console.log(err));
@@ -88,7 +101,7 @@ api.getCitiesList()
         <title>BBBS</title>
         <link rel="canonical" /* href="https://www.tacobell.com/" */ />
       </Helmet>
-      <CurrentUserContext.Provider value={curentUser}>
+      <CurrentUserContext.Provider value={currentUser}>
         <CurrentListOfEvents.Provider value={listEvents}>
           <div className="body">
             <div className="page">
@@ -99,7 +112,10 @@ api.getCitiesList()
               <main class="content page__content">
                 <Switch>
                   <Route path="/main">
-                    <Main isLoggedIn={isLoggedIn} />
+                    <Main
+                      isLoggedIn={isLoggedIn}
+                      pageContent={mainPageContent}
+                    />
                   </Route>
                   <Route path="/about">
                     <AboutUs />

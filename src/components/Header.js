@@ -1,7 +1,10 @@
+import {Link} from 'react-router-dom';
+
+
 function Header (props) {
   return (
     <header className="header page__header">
-        <a href="./index.html" className="header__logo">наставники.про</a>
+        <Link to="./main" className="header__logo">наставники.про</Link>
         <nav className="navigation navigation_place_header">
           <ul className="navigation__links navigation__links_place_header">
             <li className="navigation__list">

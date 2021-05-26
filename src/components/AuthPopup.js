@@ -15,23 +15,13 @@ function AuthPopup(props) {
     return false;
   }
 
-  /* function handleSubmit(e) {
-    e.preventDefault();
-    
-    props.onSubmit({
-      username,
-      password
-    })
-  }
- */
   const onSubmit = data => {
 
     props.onSubmit({
       username: data.login,
       password: data.password
     })
-  
-    console.log(data) // поменять на запрос к серверу
+
     setRed(false);
   };
 
