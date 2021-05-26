@@ -1,11 +1,12 @@
 import React from 'react';
 
+
 const participants = [] 
 function CalendarBlock(props) {
-const {tags} = props.pageContent.event;  
- tags.map( (obj) => 
+/* const {tags} = props.pageContent.event.tags;  
+ tags.map( (obj) => (
   obj.name
- )
+ )) */
  
 
   return (
