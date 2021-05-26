@@ -4,38 +4,13 @@ import CalendarBlock from "./CalendarBlock";
 import CurrentListOfEvents from "../../context/CurrentListOfEvents";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import {months, day} from "../../utils/constants"
-
+import {} from ""
 export default function Calendar() {
   const events = useContext(CurrentListOfEvents);
   const userData = useContext(CurrentUserContext);
   const [DataFilter, SetDataFilter] = useState();
   const [isMonth, setIsMonth] = useState(false);
   let arrUserEvents;
-
-  function formatTime(timeInUtc) {
-    const arrTimeUtc = timeInUtc.split("T")
-    const arrDate = arrTimeUtc[0].split("-");
-    const arrClock = arrTimeUtc[0].split("-");
-    if (arrDate[1].charAt(0) === '0'){
-      arrDate[1] = arrDate[1].slice(1)
-    }
-    if (arrDate[2].charAt(0) === "0") {
-      arrDate[2] = arrDate[2].slice(1);
-    }
-    if (arrClock[1].charAt(0) === "0") {
-      arrClock[1] = arrClock[1].slice(1);
-    }
-    if (arrClock[0].charAt(0) === "0") {
-      arrClock[0] = arrClock[0].slice(1);
-    }
-      return {
-        year: arrDate[0],
-        month: arrDate[1],
-        day: arrDate[2],
-        hour: arrClock[0],
-        minute: arrClock[1],
-      };
-  }
 
   console.log(formatTime("2021-08-10T21:22:00Z"));
 
