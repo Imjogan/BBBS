@@ -1,9 +1,10 @@
 
 import "../index.css";
+import {ru}  from 'date-fns/locale';
+import { format, compareAsc } from 'date-fns';
 import { useEffect, useState } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
-import CurrentListOfEvents from "../context/CurrentListOfEvents";
 import Main from "./Main/Main";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -12,7 +13,9 @@ import AboutUs from "./AboutUs/AboutUs";
 import api from "../utils/api";
 import Account from './Account/Account';
 import ProtectedRoute from './ProtectedRoute';
-import CurrentUserContext from '../context/CurrentUserContext';
+import  CurrentUserContext  from '../context/CurrentUserContext';
+
+
 
 
 
@@ -20,32 +23,21 @@ function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [listEvents, setListEvents] = useState({
-    address: "",
-    contact: "",
-    description: "",
-    endAt: "",
-    startAt: "",
-    title: "",
-    tags: "",
-    remainSeats: "",
-  });
+  const [mainPageContent, setMainPageContent] = useState({});
+
 
   useEffect(() => {
-    Promise.all([api.getMainPage()])
-      .then((res) => {
-        setListEvents({
-          address: res[0].data.event.address,
-          contact: res[0].data.event.contact,
-          description: res[0].data.event.description,
-          endAt: res[0].data.event.endAt,
-          startAt: res[0].data.event.startAt,
-          title: res[0].data.event.title,
-          tags: `${res[0].data.event.tags[0].name} + ${res[0].data.event.tags[1].name}`,
-          remainSeats: res[0].data.event.remainSeats,
-        });
-      })
-  }, []);
+    api.getMainPage().then(res=> {
+      setMainPageContent(res.data)
+    })
+
+}, [])
+
+  const date = format(new Date("2019-10-25T08:10:00Z"),'EEEE', {locale: ru})
+
+
+
+
 
   const history = useHistory();
 
@@ -117,14 +109,13 @@ api.getCitiesList()
         <link rel="canonical" /* href="https://www.tacobell.com/" */ />
       </Helmet>
       <CurrentUserContext.Provider value={currentUser}>
-      <CurrentListOfEvents.Provider value={listEvents}>
         <div className="body">
           <div className="page">
             <Header isLogged={isLoggedIn} onLogoClick={handleProfileLogoClick} />
             <main class="content page__content">
               <Switch>
                 <Route path="/main">
-                  <Main isLoggedIn={isLoggedIn} />
+                  <Main isLoggedIn={isLoggedIn} pageContent={mainPageContent}/>
                 </Route>
                 <Route path="/about">
                   <AboutUs />
@@ -140,7 +131,6 @@ api.getCitiesList()
           </div>
 
         </div>
-      </CurrentListOfEvents.Provider>
       </CurrentUserContext.Provider>
     </>
   );
