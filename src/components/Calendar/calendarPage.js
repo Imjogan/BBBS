@@ -3,22 +3,31 @@ import FilterButton from "../FilterButton";
 import CalendarBlock from "./CalendarBlock";
 import CurrentListOfEvents from "../../context/CurrentListOfEvents";
 import CurrentUserContext from "../../context/CurrentUserContext";
-import {months, day} from "../../utils/constants"
-import {} from ""
+import { date, month, dayOfTheWeek, time } from "../../utils/formatTime";
+
 export default function Calendar() {
   const events = useContext(CurrentListOfEvents);
   const userData = useContext(CurrentUserContext);
-  const [DataFilter, SetDataFilter] = useState();
   const [isMonth, setIsMonth] = useState(false);
-  let arrUserEvents;
-
-  console.log(formatTime("2021-08-10T21:22:00Z"));
-
+  let userEvents;
   if (events) {
-    arrUserEvents = Array.from(events).filter((item) => item.city === 1)
+    const arrUserEventsForCity = Array.from(events).filter((item) => item.city === 1)
+    userEvents = arrUserEventsForCity.map((item) => ({
+      ...item,
+      startAt: {
+        month: month(item.startAt),
+        data: date(item.startAt),
+        day: dayOfTheWeek(item.startAt),
+        time: time(item.startAt),
+      },
+      endAt: {
+        month: month(item.endAt),
+        data: date(item.endAt),
+        day: dayOfTheWeek(item.endAt),
+        time: time(item.endAt),
+      },
+    }));
   }
-
-  console.log(arrUserEvents);
 
   function chackNum(num) {
     let text;
@@ -45,16 +54,26 @@ export default function Calendar() {
         </section>
         <section className="calendar">
           <ul className="list">
-            <CalendarBlock
-              onCaption={"Events.tags"}
-              onData={""}
-              ontitle={"Events.title"}
-              onNumber={""}
-              onContactTime={""}
-              onPlace={"Events.address"}
-              onContactPerson={"Events.contact"}
-              onPlaceNumber={`Осталось ${"Events.remainSeats"} ${chackNum(1)}`}
-            />
+            {userEvents &&
+              userEvents.map((elem) => (
+                <CalendarBlock
+                  key={elem.id}
+                  onCaption={
+                    elem.tags.length >= 2
+                      ? `${elem.tags[0].name} + ${elem.tags[1].name}`
+                      : elem.tags[0].name
+                  }
+                  onData={`${elem.startAt.month} / ${elem.startAt.day}`}
+                  ontitle={elem.title}
+                  onNumber={elem.startAt.data}
+                  onContactTime={`${elem.startAt.time}-${elem.endAt.time}`}
+                  onPlace={elem.address}
+                  onContactPerson={elem.contact}
+                  onPlaceNumber={`Осталось ${elem.seats} ${chackNum(
+                    elem.seats
+                  )}`}
+                />
+              ))}
           </ul>
         </section>
       </main>

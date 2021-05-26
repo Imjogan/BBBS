@@ -13,6 +13,7 @@ import api from "../utils/api";
 import Account from './Account/Account';
 import ProtectedRoute from './ProtectedRoute';
 import  CurrentUserContext  from '../context/CurrentUserContext';
+import CurrentListOfEvents from '../context/CurrentListOfEvents'
 import Calendar from "./Calendar/calendarPage";
 
 function App() {
@@ -20,13 +21,13 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({});
   const [mainPageContent, setMainPageContent] = useState({});
-
+  const [listEvents, setListEvents] = useState();
 
   useEffect(() => {
-    api.getMainPage().then(res=> {
-      setMainPageContent(res.data)
-    })
-
+    api.getEvents().then((res) => {
+      console.log(res.data)
+      setListEvents(res.data);
+    });
 }, [])
 
 
