@@ -2,6 +2,12 @@ import React from 'react';
 
 
 function CalendarBlock(props) {
+/* const tags = props.pageContent.event.tags;  
+ tags.map((obj( function (obj) {
+  return obj.name;
+ }
+ )) */
+
   return (
     <li className="list__element">
       <div className="list__header">
