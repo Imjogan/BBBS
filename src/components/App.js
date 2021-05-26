@@ -33,9 +33,10 @@ function App() {
 
 }, [])
 
-  const date = format(new Date("2019-10-25T08:10:00Z"),'EEEE', {locale: ru})
 
+  const date = format(new Date("2019-10-25T09:10:00Z"),'HH', {locale: ru})
 
+  console.log(date)
 
 
 
