@@ -1,8 +1,8 @@
 
 import "../index.css";
 import { useEffect, useState } from "react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { Route, Switch, useHistory } from "react-router-dom";
 import CurrentListOfEvents from "../context/CurrentListOfEvents";
 import Main from "./Main/Main";
 import Footer from "./Footer";
@@ -18,7 +18,7 @@ import CurrentUserContext from '../context/CurrentUserContext';
 
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({});
   const [listEvents, setListEvents] = useState({
     address: "",
