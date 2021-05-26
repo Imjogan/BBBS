@@ -1,14 +1,23 @@
 import React from "react";
 import Event from "./Event";
 import './Account.css';
+// import CurrentUserContext from '../../context/CurrentUserContext';
+import api from "../../utils/api";
+import { date, month } from "../../utils/formatTime";
 
 function Account(props) {
-  const events = [
-    {date: '16', month: 'декабрь', about: 'блаблаблабла'}, {date: '16', month: 'декабрь', about: 'блаблаблабла'}, {date: '16', month: 'декабрь', about: 'блаблаблабла'},
-    {date: '16', month: 'декабрь', about: 'блаблаблабла'}, {date: '16', month: 'декабрь', about: 'блаблаблабла'}, {date: '16', month: 'декабрь', about: 'блаблаблабла'},
-  ];
 
-  const city = "Москва"; // будем получать с сервера из контекста пользователя
+  const [events, setEvents] = React.useState([]);
+
+  React.useEffect(() => {
+    api.getEvents()
+      .then((res) => setEvents(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const city = "Москва"; // будем получать с сервера из контекста пользователя, но пока там цифры и нет соотношения цифр с названиями городов
+  // const currentUser = React.useContext(CurrentUserContext);
+  // console.log(currentUser);  пока тут цифры
 
   return (
     <section className="account">
@@ -21,9 +30,14 @@ function Account(props) {
       <div className="account__events">
         <div className="account__scroll">
           { events.length!== 0 
-              && events.map((event) => (
-                <Event date={event.date} month={event.month} about={event.about} />
-              ))
+            && events.map((event) => (
+              <Event 
+                key={event.id} 
+                date={date(event.startAt)} 
+                month={month(event.startAt)} 
+                about={event.title} 
+              />
+            ))
           }
         </div>
       </div>

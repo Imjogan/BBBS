@@ -3,8 +3,6 @@ import './Event.css';
 
 function Event (props) {
 
-  // необходимо добавить нормальный скролл на десктопе
-
   return (
     <div className="event">
       <div className="event__date">

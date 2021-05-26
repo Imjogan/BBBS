@@ -54,15 +54,25 @@
   position: relative;
   padding-bottom: 50px;
   border-bottom:  0.5px solid #464646;
-  /* scrollbar-width: none;
 }
 
 .account__events::-webkit-scrollbar {
-  width: 0; */
+  width: 10px;
+}
+
+.account__events::-webkit-scrollbar-thumb {
+  background-color: #e2e1e1;
+  border-radius: 30px;
 }
 
 .account__scroll {
   display: flex;
+}
+
+@media screen and (max-width: 1024px) {
+  .account__buttons {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -71,12 +81,14 @@
   }
 
   .account__events {
-    margin-top: 20px;
+    scrollbar-width: none;
   }
-}
-
-@media screen and (max-width: 400px) {
-  .account__buttons {
+  
+  .account__events::-webkit-scrollbar {
     display: none;
+  }
+
+  .account__events {
+    margin-top: 20px;
   }
 }

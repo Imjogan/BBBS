@@ -8,13 +8,12 @@
   color: black;
   padding: 30px;
   box-sizing: border-box;
-  cursor: grab;
 }
 
 .event__date {
   display: flex;
   align-items: flex-start;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .event__day {
