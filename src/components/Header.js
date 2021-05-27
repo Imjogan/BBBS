@@ -8,7 +8,7 @@ function Header (props) {
         <nav className="navigation navigation_place_header">
           <ul className="navigation__links navigation__links_place_header">
             <li className="navigation__list">
-              <a href="./calendar.html" className="navigation__link navigation__link_place_header">календарь</a>
+              <Link to="./calendar" onClick={props.onCalendarClick} className="navigation__link navigation__link_place_header">календарь</Link>
             </li>
             <li className="navigation__list">
               <a href="./places.html" className="navigation__link navigation__link_place_header">куда пойти</a>

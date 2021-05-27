@@ -74,8 +74,16 @@ api.getCitiesList()
   function handlePopupClose() {
     setIsLogPopupOpen(false);
   }
+   
 
-  
+  function handleHeaderCalendarClick() {
+    if (isLoggedIn) {
+      history.push("/calendar");
+    } else {
+      handleLogPopupOpen();
+    }
+  }
+
   function handleProfileLogoClick() {
     if (isLoggedIn) {
       history.push("/account");
@@ -117,6 +125,7 @@ api.getCitiesList()
               <Header
                 isLogged={isLoggedIn}
                 onLogoClick={handleProfileLogoClick}
+                onCalendarClick={handleHeaderCalendarClick}
               />
               <main class="content page__content">
                 <Switch>
@@ -127,9 +136,11 @@ api.getCitiesList()
                   <Route path="/about">
                     <AboutUs />
                   </Route>
-                  <Route path="/calendar">
-                    <Calendar />
-                  </Route>
+                  <ProtectedRoute
+                    component={Calendar}
+                    path="/calendar"
+                    isLoggedIn={isLoggedIn} 
+                    />
                   <ProtectedRoute
                     component={Account}
                     path="/account"

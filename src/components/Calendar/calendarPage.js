@@ -5,7 +5,7 @@ import CurrentListOfEvents from "../../context/CurrentListOfEvents";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import { date, month, dayOfTheWeek, time } from "../../utils/formatTime";
 
-export default function Calendar() {
+ function Calendar() {
   const events = useContext(CurrentListOfEvents);
   const userData = useContext(CurrentUserContext);
   const [isMonth, setIsMonth] = useState(false);
@@ -80,3 +80,6 @@ export default function Calendar() {
     </>
   );
 }
+
+
+export default Calendar;
