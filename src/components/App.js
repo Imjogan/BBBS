@@ -1,6 +1,4 @@
 import "../index.css";
-import {ru}  from 'date-fns/locale';
-import { format, compareAsc } from 'date-fns';
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Route, Switch, useHistory } from "react-router-dom";
@@ -13,27 +11,35 @@ import api from "../utils/api";
 import Account from './Account/Account';
 import ProtectedRoute from './ProtectedRoute';
 import  CurrentUserContext  from '../context/CurrentUserContext';
-import CurrentListOfEvents from '../context/CurrentListOfEvents'
+import CurrentListOfEvents from '../context/CurrentListOfEvents';
 import Calendar from "./Calendar/calendarPage";
+
+
+
 
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [mainPageContent, setMainPageContent] = useState({});
   const [listEvents, setListEvents] = useState();
+  const [isContentReady, setIsContentReady] = useState(false)
 
   useEffect(() => {
     api.getEvents().then((res) => {
       console.log(res.data)
       setListEvents(res.data);
     });
+
+
+
+  useEffect(() => {
+    api.getMainPage().then(res=> {
+      setMainPageContent(res.data)
+      setIsContentReady(true)
+    })
+
 }, [])
-
-
-  const date = format(new Date("2019-10-25T09:10:00Z"),'HH', {locale: ru})
-
-  console.log(date)
 
 
 
@@ -97,6 +103,7 @@ api.getCitiesList()
   }
 
   return (
+ 
     <>
       <Helmet>
         <title>BBBS</title>
@@ -113,10 +120,8 @@ api.getCitiesList()
               <main class="content page__content">
                 <Switch>
                   <Route path="/main">
-                    <Main
-                      isLoggedIn={isLoggedIn}
-                      pageContent={mainPageContent}
-                    />
+                    {isContentReady ?
+                  <Main isLoggedIn={isLoggedIn} pageContent={mainPageContent}/> : console.log('погодите')}
                   </Route>
                   <Route path="/about">
                     <AboutUs />

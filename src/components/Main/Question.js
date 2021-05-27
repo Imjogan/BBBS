@@ -1,12 +1,12 @@
-function Question() {
+function Question(props) {
   return (
     <section className='three-columns'>
       <article className='block-questions background-white'>
         <h2 className='block-questions__title'>
-          Я боюсь, что ребёнок ко мне слишком сильно привяжется. Что делать?
+         {props.question.title}
         </h2>
         <a href='/#' className='block-questions__category'>
-          рубрика
+          {props.question.tags[0].name}
         </a>
       </article>
     </section>
