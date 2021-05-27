@@ -17,7 +17,7 @@ function Main(props) {
     <>
       <section className="two-columns two-columns_style_first">
         {props.isLoggedIn ? <CalendarBlock pageContent={content} /> : <Article />}
-        <Link to="#">
+        <Link to="#" className="link">
           <article className="block-photo">
             <h2 className="block-photo__title">{content.history.title}</h2>
           </article>

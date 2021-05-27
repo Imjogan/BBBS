@@ -28,7 +28,6 @@ function App() {
 
   useEffect(() => {
     api.getEvents().then((res) => {
-      console.log(res.data)
       setListEvents(res.data);
     });
 }, [])
@@ -58,7 +57,7 @@ function App() {
   }, [])
 
 
-  /* api.getUserProfile()
+  /* 
 
 api.getCitiesList()
 

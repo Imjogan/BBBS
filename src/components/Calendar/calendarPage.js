@@ -9,6 +9,9 @@ import { date, month, dayOfTheWeek, time } from "../../utils/formatTime";
   const events = useContext(CurrentListOfEvents);
   const userData = useContext(CurrentUserContext);
   const [isMonth, setIsMonth] = useState(false);
+  const [eventsMonth, setEventsMonth] = useState([])
+
+
   let userEvents;
   if (events) {
     const arrUserEventsForCity = Array.from(events).filter((item) => item.city === 1)
@@ -27,7 +30,25 @@ import { date, month, dayOfTheWeek, time } from "../../utils/formatTime";
         time: time(item.endAt),
       },
     }));
+
   }
+
+  
+
+
+ /* if (userEvents) {
+     userEvents.map((item) => {
+     setEventsMonth(item.startAt.month)
+     })
+  } 
+  
+
+const sortArr = arr.filter((it, index) => index === arr.indexOf(it)); эта функция работает, я проверял
+
+*/
+
+  
+  
 
   function chackNum(num) {
     let text;
@@ -48,7 +69,12 @@ import { date, month, dayOfTheWeek, time } from "../../utils/formatTime";
           <h1 className="title">Календарь</h1>
           <section className="menu">
             <ul className="menu__list menu__list_center">
-              <FilterButton nameMonth={"Декабрь"} />
+              {
+                userEvents.map((item) => (
+                  <FilterButton nameMonth={item.startAt.month} />
+                ))
+              }
+              
             </ul>
           </section>
         </section>
