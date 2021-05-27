@@ -229,7 +229,7 @@ export const getEventRes = [
     endAt: "2021-05-10T08:00:00Z",
     seats: 5,
     takenSeats: 0,
-    city: 1,
+    city: 2,
   },
   {
     id: 2,
@@ -251,11 +251,11 @@ export const getEventRes = [
     title: "Субботний meet up: учимся проходить интевью",
     description:
       'Наконец-то наступила весна и мы пережили эту долгую зиму! И возможно, что внутренних сил и ресурса сейчас не так много, а до окончания учебного года ещё целых несколько месяцев. Поэтому приглашаем вас на встречу нашего ресурсного клуба "Наставник PRO", которую мы хотим посвятить теме поиска моральных сил, смыслов и внутреннего ресурса для общения и взаимодействия с нашими подопечными.',
-    startAt: "2021-05-12T06:00:00Z",
-    endAt: "2021-05-12T08:00:00Z",
+    startAt: "2021-09-12T06:00:00Z",
+    endAt: "2021-09-12T08:00:00Z",
     seats: 4,
     takenSeats: 0,
-    city: 1,
+    city: 2,
   },
   {
     id: 3,
@@ -281,7 +281,7 @@ export const getEventRes = [
     endAt: "2021-06-11T08:00:00Z",
     seats: 1,
     takenSeats: 0,
-    city: 1,
+    city: 2,
   },
   {
     id: 4,
@@ -302,7 +302,7 @@ export const getEventRes = [
     endAt: "2021-05-10T08:00:00Z",
     seats: 100,
     takenSeats: 0,
-    city: 1,
+    city: 2,
   },
   {
     id: 5,
@@ -323,7 +323,7 @@ export const getEventRes = [
     endAt: "2021-11-10T08:00:00Z",
     seats: 100,
     takenSeats: 0,
-    city: 1,
+    city: 2,
   },
   {
     id: 6,

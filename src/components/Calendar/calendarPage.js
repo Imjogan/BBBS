@@ -5,16 +5,17 @@ import CurrentListOfEvents from "../../context/CurrentListOfEvents";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import { date, month, dayOfTheWeek, time } from "../../utils/formatTime";
 
+let userEvents;
  function Calendar() {
   const events = useContext(CurrentListOfEvents);
   const userData = useContext(CurrentUserContext);
-  const [isMonth, setIsMonth] = useState(false);
+  const [isMonth, setIsMonth] = useState();
   const [eventsMonth, setEventsMonth] = useState([])
-
-
-  let userEvents;
+  const [buttonActive, setButtonActive] = useState(false)
+  const [isId, setIsId] = useState('')
+  
   if (events) {
-    const arrUserEventsForCity = Array.from(events).filter((item) => item.city === 1)
+    const arrUserEventsForCity = Array.from(events).filter((item) => item.city === userData.city)
     userEvents = arrUserEventsForCity.map((item) => ({
       ...item,
       startAt: {
@@ -30,25 +31,21 @@ import { date, month, dayOfTheWeek, time } from "../../utils/formatTime";
         time: time(item.endAt),
       },
     }));
-
   }
+  useEffect(async () => {
+    const test = await userEvents;
+    setEventsMonth(test.filter((item) => item.startAt.month === isMonth));
+  }, [isMonth]);
 
-  
+const arrMouths = userEvents.map((i) => i.startAt.month)
+const sortArr = arrMouths.filter(
+  (it, index) => index === arrMouths.indexOf(it)
+);
 
+useEffect(()=>{
+  setIsMonth(sortArr[0]);
+},[])
 
- /* if (userEvents) {
-     userEvents.map((item) => {
-     setEventsMonth(item.startAt.month)
-     })
-  } 
-  
-
-const sortArr = arr.filter((it, index) => index === arr.indexOf(it)); эта функция работает, я проверял
-
-*/
-
-  
-  
 
   function chackNum(num) {
     let text;
@@ -62,6 +59,11 @@ const sortArr = arr.filter((it, index) => index === arr.indexOf(it)); эта ф�
     return text;
   }
 
+  function handlerID(e, id){
+    setIsMonth(e.target.innerText);
+    setIsId(id)
+  }
+
   return (
     <>
       <main className="content page__content">
@@ -69,19 +71,28 @@ const sortArr = arr.filter((it, index) => index === arr.indexOf(it)); эта ф�
           <h1 className="title">Календарь</h1>
           <section className="menu">
             <ul className="menu__list menu__list_center">
-              {
-                userEvents.map((item) => (
-                  <FilterButton nameMonth={item.startAt.month} />
-                ))
-              }
-              
+              {sortArr.map((item, index) => (
+                isId === index? <FilterButton
+                  key={index}
+                  id={index}
+                  nameMonth={item}
+                  onActive={true}
+                  onClick={handlerID}
+                /> : <FilterButton
+                  key={index}
+                  id={index}
+                  nameMonth={item}
+                  onActive={false}
+                  onClick={handlerID}
+                />
+                ))}
             </ul>
           </section>
         </section>
         <section className="calendar">
           <ul className="list">
-            {userEvents &&
-              userEvents.map((elem) => (
+            {eventsMonth &&
+              eventsMonth.map((elem) => (
                 <CalendarBlock
                   key={elem.id}
                   onCaption={
