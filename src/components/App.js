@@ -1,7 +1,5 @@
 
 import "../index.css";
-import {ru}  from 'date-fns/locale';
-import { format, compareAsc } from 'date-fns';
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Route, Switch, useHistory } from "react-router-dom";
@@ -17,26 +15,21 @@ import  CurrentUserContext  from '../context/CurrentUserContext';
 
 
 
-
-
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [mainPageContent, setMainPageContent] = useState({});
+  const [isContentReady, setIsContentReady] = useState(false)
 
 
   useEffect(() => {
     api.getMainPage().then(res=> {
       setMainPageContent(res.data)
+      setIsContentReady(true)
     })
 
 }, [])
-
-
-  const date = format(new Date("2019-10-25T09:10:00Z"),'HH', {locale: ru})
-
-  console.log(date)
 
 
 
@@ -104,6 +97,7 @@ api.getCitiesList()
   }
 
   return (
+ 
     <>
       <Helmet>
         <title>BBBS</title>
@@ -115,8 +109,8 @@ api.getCitiesList()
             <Header isLogged={isLoggedIn} onLogoClick={handleProfileLogoClick} />
             <main class="content page__content">
               <Switch>
-                <Route path="/main">
-                  <Main isLoggedIn={isLoggedIn} pageContent={mainPageContent}/>
+                <Route path="/main">{isContentReady ?
+                  <Main isLoggedIn={isLoggedIn} pageContent={mainPageContent}/> : console.log('погодите')}
                 </Route>
                 <Route path="/about">
                   <AboutUs />
