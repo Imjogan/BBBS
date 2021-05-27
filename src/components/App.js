@@ -1,5 +1,5 @@
 import "../index.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { Route, Switch, useHistory } from "react-router-dom";
 import Main from "./Main/Main";
@@ -18,7 +18,7 @@ import Calendar from "./Calendar/calendarPage";
 
 
 function App() {
-  const [isLogPopupOpen, setIsLogPopupOpen] = useState(false)
+  const [isLogPopupOpen, setIsLogPopupOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [mainPageContent, setMainPageContent] = useState({});
@@ -103,6 +103,29 @@ api.getCitiesList()
     setIsLoggedIn(false);
   }
 
+    // при обратном скролле показываем header с display: fixed. При возврщании к началу страницы скрываем класс с фиксом
+    const [fixed, setFixed] = useState(false);
+
+    const offsetRef = useRef();
+    offsetRef.current = 0;
+    const offset = 50;  
+
+    const checkScroll = useCallback(() => {
+      if (window.pageYOffset < offsetRef.current && window.pageYOffset > offset && !isLogPopupOpen) {
+        setFixed(true);
+      } else {
+        setFixed(false);
+      }
+      offsetRef.current = window.pageYOffset;
+    },  [isLogPopupOpen]);
+    
+    useEffect(() => {
+      window.onscroll = () => {
+        checkScroll();
+      }
+    }, [checkScroll]);
+  
+
   return (
  
     <>
@@ -117,6 +140,7 @@ api.getCitiesList()
               <Header
                 isLogged={isLoggedIn}
                 onLogoClick={handleProfileLogoClick}
+                fixed={fixed}
               />
               <main class="content page__content">
                 <Switch>

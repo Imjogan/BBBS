@@ -1,29 +1,31 @@
+import React from 'react';
 import {Link} from 'react-router-dom';
 
 
 function Header (props) {
+
   return (
-    <header className="header page__header">
-        <Link to="./main" className="header__logo">наставники.про</Link>
+    <header className={props.fixed ? "header page__header header_type_position-fixed" : "header page__header"}>
+        <Link to="/main" className="header__logo">наставники.про</Link>
         <nav className="navigation navigation_place_header">
           <ul className="navigation__links navigation__links_place_header">
             <li className="navigation__list">
-              <a href="./calendar.html" className="navigation__link navigation__link_place_header">календарь</a>
+              <Link to="/calendar" className="navigation__link navigation__link_place_header">календарь</Link>
             </li>
             <li className="navigation__list">
-              <a href="./places.html" className="navigation__link navigation__link_place_header">куда пойти</a>
+              <Link to="#" className="navigation__link navigation__link_place_header">куда пойти</Link>
             </li>
             <li className="navigation__list">
-              <a href="#" className="navigation__link navigation__link_place_header">вопросы</a>
+              <Link to="#" className="navigation__link navigation__link_place_header">вопросы</Link>
             </li>
             <li className="navigation__list">
-              <a href="#" className="navigation__link navigation__link_place_header">читать и смотреть</a>
+              <Link to="#" className="navigation__link navigation__link_place_header">читать и смотреть</Link>
             </li>
             <li className="navigation__list">
-              <a href="#" className="navigation__link navigation__link_place_header">права детей</a>
+              <Link to="#" className="navigation__link navigation__link_place_header">права детей</Link>
             </li>
             <li className="navigation__list">
-              <a href="#" className="navigation__link navigation__link_place_header">истории</a>
+              <Link to="#" className="navigation__link navigation__link_place_header">истории</Link>
             </li>
           </ul>
         </nav>
