@@ -19,6 +19,7 @@ import Calendar from "./Calendar/calendarPage";
 
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false);
+  const [isHeaderMobileOpen, setHeaderMobileOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [mainPageContent, setMainPageContent] = useState({});
@@ -67,6 +68,33 @@ api.getCitiesList()
     
  */
 
+  // при обратном скролле показываем header с display: fixed. При возврщании к началу страницы скрываем класс с фиксом
+  const [fixed, setFixed] = useState(false);
+
+  const offsetRef = useRef();
+  offsetRef.current = 0;
+  const offset = 50;  
+
+  const checkScroll = useCallback(() => {
+    if (window.pageYOffset < offsetRef.current && window.pageYOffset > offset && !isLogPopupOpen) {
+      setFixed(true);
+    } else {
+      setFixed(false);
+    }
+    offsetRef.current = window.pageYOffset;
+  },  [isLogPopupOpen]);
+  
+  useEffect(() => {
+    window.onscroll = () => {
+      checkScroll();
+    }
+  }, [checkScroll]);
+
+  function handleHeaderMobileClick() {
+    setHeaderMobileOpen(!isHeaderMobileOpen);
+    setFixed(false);
+  }
+
   function handleLogPopupOpen() {
     setIsLogPopupOpen(true);
   }
@@ -103,29 +131,7 @@ api.getCitiesList()
     setIsLoggedIn(false);
   }
 
-    // при обратном скролле показываем header с display: fixed. При возврщании к началу страницы скрываем класс с фиксом
-    const [fixed, setFixed] = useState(false);
-
-    const offsetRef = useRef();
-    offsetRef.current = 0;
-    const offset = 50;  
-
-    const checkScroll = useCallback(() => {
-      if (window.pageYOffset < offsetRef.current && window.pageYOffset > offset && !isLogPopupOpen) {
-        setFixed(true);
-      } else {
-        setFixed(false);
-      }
-      offsetRef.current = window.pageYOffset;
-    },  [isLogPopupOpen]);
-    
-    useEffect(() => {
-      window.onscroll = () => {
-        checkScroll();
-      }
-    }, [checkScroll]);
   
-
   return (
  
     <>
@@ -141,6 +147,8 @@ api.getCitiesList()
                 isLogged={isLoggedIn}
                 onLogoClick={handleProfileLogoClick}
                 fixed={fixed}
+                onMobileHeaderClick={handleHeaderMobileClick}
+                isHeaderMobileOpen={isHeaderMobileOpen}
               />
               <main class="content page__content">
                 <Switch>
