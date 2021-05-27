@@ -14,7 +14,7 @@ const headers = {
   },
 };
 
-function auth({ username, password }) {
+function auth(username, password) {
   return instance
     .post(
       "/token",

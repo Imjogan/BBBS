@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 function Footer() {
   return (
     <footer className='footer page__footer'>
@@ -25,9 +27,9 @@ function Footer() {
         <nav className='navigation navigation_place_footer'>
           <ul className='navigation__links navigation__links_place_footer'>
             <li className='navigation__list navigation__list_place_footer'>
-              <a href='./about.html' className='navigation__link navigation__link_place_footer'>
+              <Link to="/about" className='navigation__link navigation__link_place_footer'>
                 о проекте
-              </a>
+              </Link>
             </li>
             <li className='navigation__list navigation__list_place_footer'>
               <a href='./calendar.html' className='navigation__link navigation__link_place_footer'>

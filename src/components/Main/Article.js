@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Article(props) {
   return(
-  <Link to="#">
+  <Link to="#" className="link">
     <article className="block-guest background-green">
       <div className="block-guest__container-header">
         <div className="block-guest__logo"></div>

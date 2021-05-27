@@ -3,14 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
 // import reportWebVitals from './reportWebVitals';
+import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from 'react-router-dom';
 import App from './components/App';
+
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+        <HelmetProvider>
           <App />
-      </BrowserRouter>
+        </HelmetProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
