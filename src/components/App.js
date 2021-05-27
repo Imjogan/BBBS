@@ -1,4 +1,3 @@
-
 import "../index.css";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
@@ -12,6 +11,9 @@ import api from "../utils/api";
 import Account from './Account/Account';
 import ProtectedRoute from './ProtectedRoute';
 import  CurrentUserContext  from '../context/CurrentUserContext';
+import CurrentListOfEvents from '../context/CurrentListOfEvents';
+import Calendar from "./Calendar/calendarPage";
+
 
 
 
@@ -20,7 +22,15 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [mainPageContent, setMainPageContent] = useState({});
+  const [listEvents, setListEvents] = useState();
   const [isContentReady, setIsContentReady] = useState(false)
+
+  useEffect(() => {
+    api.getEvents().then((res) => {
+      console.log(res.data)
+      setListEvents(res.data);
+    });
+
 
 
   useEffect(() => {
@@ -45,7 +55,6 @@ function App() {
     } 
   }, [])
 
-  
 
   /* api.getUserProfile()
 
@@ -57,23 +66,20 @@ api.getCitiesList()
     
  */
 
-
-  
   function handleLogPopupOpen() {
-    setIsLogPopupOpen(true)
+    setIsLogPopupOpen(true);
   }
 
-  function handlePopupClose () {
-    setIsLogPopupOpen(false)
+  function handlePopupClose() {
+    setIsLogPopupOpen(false);
   }
 
   
   function handleProfileLogoClick() {
-
     if (isLoggedIn) {
-      history.push('/account')
+      history.push("/account");
     } else {
-      handleLogPopupOpen()
+      handleLogPopupOpen();
     }
   }
 
@@ -88,12 +94,12 @@ api.getCitiesList()
           history.push('/account')
         }
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err));
   }
 
-  function handleSignOut () {
-    localStorage.removeItem('jwt');
-    setIsLoggedIn(false)
+  function handleSignOut() {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
   }
 
   return (
@@ -104,32 +110,45 @@ api.getCitiesList()
         <link rel="canonical" /* href="https://www.tacobell.com/" */ />
       </Helmet>
       <CurrentUserContext.Provider value={currentUser}>
-        <div className="body">
-          <div className="page">
-            <Header isLogged={isLoggedIn} onLogoClick={handleProfileLogoClick} />
-            <main class="content page__content">
-              <Switch>
-                <Route path="/main">{isContentReady ?
+        <CurrentListOfEvents.Provider value={listEvents}>
+          <div className="body">
+            <div className="page">
+              <Header
+                isLogged={isLoggedIn}
+                onLogoClick={handleProfileLogoClick}
+              />
+              <main class="content page__content">
+                <Switch>
+                  <Route path="/main">
+                    {isContentReady ?
                   <Main isLoggedIn={isLoggedIn} pageContent={mainPageContent}/> : console.log('погодите')}
-                </Route>
-                <Route path="/about">
-                  <AboutUs />
-                </Route>
-                <ProtectedRoute
-                  component={Account}
-                  path="/account" isLoggedIn={isLoggedIn} 
-                  signOut={handleSignOut} />
-              </Switch>
-            </main>
-            <Footer />
-            <AuthPopup isOpen={isLogPopupOpen} onClose={handlePopupClose} onSubmit={handleLoginSubmit} />
+                  </Route>
+                  <Route path="/about">
+                    <AboutUs />
+                  </Route>
+                  <Route path="/calendar">
+                    <Calendar />
+                  </Route>
+                  <ProtectedRoute
+                    component={Account}
+                    path="/account"
+                    isLoggedIn={isLoggedIn}
+                    signOut={handleSignOut}
+                  />
+                </Switch>
+              </main>
+              <Footer />
+              <AuthPopup
+                isOpen={isLogPopupOpen}
+                onClose={handlePopupClose}
+                onSubmit={handleLoginSubmit}
+              />
+            </div>
           </div>
-
-        </div>
+        </CurrentListOfEvents.Provider>
       </CurrentUserContext.Provider>
     </>
   );
-
 }
 
 export default App;

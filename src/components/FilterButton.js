@@ -1,7 +1,7 @@
-function FilterButton(props) {
+function FilterButton({nameMonth}) {
   return (
     <li className="menu__item">
-      <button type="button" className="menu__button">{props.name}</button>
+      <button type="button" className="menu__button">{nameMonth}</button>
     </li>
   )
 }
