@@ -23,13 +23,14 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [mainPageContent, setMainPageContent] = useState({});
   const [listEvents, setListEvents] = useState();
-  const [isContentReady, setIsContentReady] = useState(false)
+  const [isContentReady, setIsContentReady] = useState(false);
 
   useEffect(() => {
     api.getEvents().then((res) => {
       console.log(res.data)
       setListEvents(res.data);
     });
+}, [])
 
 
 
@@ -150,5 +151,6 @@ api.getCitiesList()
     </>
   );
 }
+
 
 export default App;
