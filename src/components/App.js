@@ -1,7 +1,7 @@
 import "../index.css";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { Helmet } from "react-helmet-async";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, Redirect, useLocation } from "react-router-dom";
 import Main from "./Main/Main";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -10,7 +10,7 @@ import AboutUs from "./AboutUs/AboutUs";
 import api from "../utils/api";
 import Account from './Account/Account';
 import ProtectedRoute from './ProtectedRoute';
-import  CurrentUserContext  from '../context/CurrentUserContext';
+import CurrentUserContext from '../context/CurrentUserContext';
 import CurrentListOfEvents from '../context/CurrentListOfEvents';
 import Calendar from "./Calendar/calendarPage";
 
@@ -25,35 +25,40 @@ function App() {
   const [mainPageContent, setMainPageContent] = useState({});
   const [listEvents, setListEvents] = useState();
   const [isContentReady, setIsContentReady] = useState(false);
+  const [isJwtChecked, setIsJwtCheked] = useState(false);
+
+  const history = useHistory();
 
   useEffect(() => {
     api.getEvents().then((res) => {
       setListEvents(res.data);
     });
-}, [])
+  }, [])
 
-
+  console.log(isLoggedIn);
 
   useEffect(() => {
-    api.getMainPage().then(res=> {
+    api.getMainPage().then(res => {
       setMainPageContent(res.data)
       setIsContentReady(true)
     })
 
-}, [])
+  }, [])
 
 
-
-  const history = useHistory();
-
+const loc = useLocation();
   useEffect(() => {
+   const jwt =  localStorage.getItem('jwt');
+   const path =  loc.pathname;
     if (localStorage.getItem('jwt')) {
       api.getUserProfile().then(res => {
         setCurrentUser(res.data)
         setIsLoggedIn(true)
+        setIsJwtCheked(true)
+        history.push(path)
       })
-       
-    } 
+
+    }
   }, [])
 
 
@@ -72,7 +77,7 @@ api.getCitiesList()
 
   const offsetRef = useRef();
   offsetRef.current = 0;
-  const offset = 50;  
+  const offset = 50;
 
   const checkScroll = useCallback(() => {
     if (window.pageYOffset < offsetRef.current && window.pageYOffset > offset && !isLogPopupOpen) {
@@ -81,8 +86,8 @@ api.getCitiesList()
       setFixed(false);
     }
     offsetRef.current = window.pageYOffset;
-  },  [isLogPopupOpen]);
-  
+  }, [isLogPopupOpen]);
+
   useEffect(() => {
     window.onscroll = () => {
       checkScroll();
@@ -101,7 +106,7 @@ api.getCitiesList()
   function handlePopupClose() {
     setIsLogPopupOpen(false);
   }
-   
+
 
   function handleHeaderCalendarClick() {
     if (isLoggedIn) {
@@ -120,13 +125,13 @@ api.getCitiesList()
   }
 
   function handleLoginSubmit(data) {
-    const {password, username} = data;
+    const { password, username } = data;
     api.auth(username, password)
       .then(res => {
         if (res.data.access) {
           localStorage.setItem('jwt', res.data.refresh);
           setIsLoggedIn(true);
-          handlePopupClose ();
+          handlePopupClose();
           history.push('/account')
         }
       })
@@ -138,9 +143,9 @@ api.getCitiesList()
     setIsLoggedIn(false);
   }
 
-  
+
   return (
- 
+
     <>
       <Helmet>
         <title>BBBS</title>
@@ -162,7 +167,7 @@ api.getCitiesList()
                 <Switch>
                   <Route path="/main">
                     {isContentReady ?
-                  <Main isLoggedIn={isLoggedIn} pageContent={mainPageContent}/> : console.log('погодите')}
+                      <Main isLoggedIn={isLoggedIn} pageContent={mainPageContent} /> : console.log('погодите')}
                   </Route>
                   <Route path="/about">
                     <AboutUs />
@@ -170,14 +175,17 @@ api.getCitiesList()
                   <ProtectedRoute
                     component={Calendar}
                     path="/calendar"
-                    isLoggedIn={isLoggedIn} 
-                    />
+                    isLoggedIn={isLoggedIn}
+                  />
                   <ProtectedRoute
                     component={Account}
                     path="/account"
                     isLoggedIn={isLoggedIn}
                     signOut={handleSignOut}
                   />
+                  <Route exact path="/">
+                    <Redirect to="/main" />
+                  </Route>
                 </Switch>
               </main>
               <Footer />

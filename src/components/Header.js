@@ -11,7 +11,7 @@ function Header (props) {
         <nav className="navigation navigation_place_header">
           <ul className="navigation__links navigation__links_place_header">
             <li className="navigation__list">
-              <Link to="./calendar" onClick={props.onCalendarClick} className="navigation__link navigation__link_place_header">календарь</Link>
+              <a href="#" onClick={props.onCalendarClick} className="navigation__link navigation__link_place_header">календарь</a>
             </li>
             <li className="navigation__list">
               <Link to="#" className="navigation__link navigation__link_place_header">куда пойти</Link>
@@ -57,11 +57,11 @@ function Header (props) {
         />
       </header>
 
-      <div class={props.isHeaderMobileOpen ? "popup-menu visible-block" : "popup-menu"}>
+      {<div class={props.isHeaderMobileOpen ? "popup-menu visible-block" : "popup-menu"}>
         <div class="popup-menu__header">
           <button type="button" class="popup-menu__search" />
-          <button type="button" class="popup-menu__account" />
-          <Link to="/main" class="popup-menu__logo">наставники.про</Link>
+          <button type="button" onClick={props.onLogoClick} class="popup-menu__account" />
+          <Link class="popup-menu__logo">наставники.про</Link>
           <button 
             type="button" 
             aria-label="close popup"
@@ -75,7 +75,7 @@ function Header (props) {
               <Link to="/about" class="popup-menu__link">о проекте</Link>
             </li>
             <li class="popup-menu__list">
-              <Link to="/calendar" class="popup-menu__link">календарь</Link>
+              <Link to="/calendar" class="popup-menu__link" onClick={props.onCalendarClick}>календарь</Link>
             </li>
             <li class="popup-menu__list">
               <Link to="#" class="popup-menu__link">куда пойти</Link>
@@ -113,7 +113,7 @@ function Header (props) {
           <button type="button" class="popup-menu__change-city">Изменить город</button>
           <button type="button" class="popup-menu__exit">Выйти</button>
         </div>
-      </div>
+      </div>}
     </>
   )
 }
