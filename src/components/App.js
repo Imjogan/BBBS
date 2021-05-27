@@ -15,8 +15,6 @@ import CurrentListOfEvents from '../context/CurrentListOfEvents';
 import Calendar from "./Calendar/calendarPage";
 
 
-
-
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false);
   const [isHeaderMobileOpen, setHeaderMobileOpen] = useState(false);
