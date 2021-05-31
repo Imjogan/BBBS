@@ -11,7 +11,6 @@ let userEvents;
   const userData = useContext(CurrentUserContext);
   const [isMonth, setIsMonth] = useState();
   const [eventsMonth, setEventsMonth] = useState([])
-  const [buttonActive, setButtonActive] = useState(false)
   const [isId, setIsId] = useState('')
   
   if (events) {

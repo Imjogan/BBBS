@@ -23,7 +23,6 @@ function App() {
   const [mainPageContent, setMainPageContent] = useState({});
   const [listEvents, setListEvents] = useState();
   const [isContentReady, setIsContentReady] = useState(false);
-  const [isJwtChecked, setIsJwtCheked] = useState(false);
 
   const history = useHistory();
 
@@ -33,7 +32,7 @@ function App() {
     });
   }, [])
 
-  console.log(isLoggedIn);
+
 
   useEffect(() => {
     api.getMainPage().then(res => {
@@ -46,13 +45,11 @@ function App() {
 
 const loc = useLocation();
   useEffect(() => {
-   const jwt =  localStorage.getItem('jwt');
    const path =  loc.pathname;
     if (localStorage.getItem('jwt')) {
       api.getUserProfile().then(res => {
         setCurrentUser(res.data)
         setIsLoggedIn(true)
-        setIsJwtCheked(true)
         history.push(path)
       })
 
@@ -133,7 +130,6 @@ api.getCitiesList()
           history.push('/account')
         }
       })
-      .catch((err) => console.log(err));
   }
 
   function handleSignOut() {
@@ -161,7 +157,7 @@ api.getCitiesList()
                 onMobileHeaderClick={handleHeaderMobileClick}
                 isHeaderMobileOpen={isHeaderMobileOpen}
               />
-              <main class="content page__content">
+              <main className="content page__content">
                 <Switch>
                   <Route path="/main">
                     {isContentReady ?

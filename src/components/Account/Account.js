@@ -12,7 +12,6 @@ function Account(props) {
   React.useEffect(() => {
     api.getEvents()
       .then((res) => setEvents(res.data))
-      .catch((err) => console.log(err));
   }, []);
 
   const city = "Москва"; // будем получать с сервера из контекста пользователя, но пока там цифры и нет соотношения цифр с названиями городов
