@@ -224,6 +224,7 @@ api.getCitiesList()
                     path="/account"
                     isLoggedIn={isLoggedIn}
                     signOut={handleSignOut}
+                    enroll={enrollMechanism}
                   />
                   <Route exact path="/">
                     <Redirect to="/main" />

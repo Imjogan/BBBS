@@ -14,12 +14,14 @@ function CalendarBlock(props) {
   ));
   const monthName = month(mainEvent.startAt);
   const dayName = dayOfTheWeek(mainEvent.startAt);
+  const dayNumber = date(mainEvent.startAt);
   const startsAt = time(mainEvent.startAt);
   const endsAt = time(mainEvent.endAt);
 
   const dateAndTime = {
     monthName,
     dayName,
+    dayNumber,
     startsAt,
     endsAt
   }
@@ -28,13 +30,9 @@ function CalendarBlock(props) {
   const { enroll } = props;
   
   function handleRegisterBtn() {
-    if (mainEvent.booked) {
       enroll.toggleConfirmPopup();
-    } 
-    // else открыть попап отмены
   }
   
-
 
   return (
     <>
@@ -48,7 +46,7 @@ function CalendarBlock(props) {
         </div>
         <div className="list__theme">   
           <h2 className="list__title">{mainEvent.title}</h2>
-          <p className="list__number">{date(mainEvent.startAt)}</p>
+          <p className="list__number">{dayNumber}</p>
         </div>
         <div className="list__contacts">
           <p className="list__contact">{`${startsAt}-${endsAt}`}</p>
@@ -75,6 +73,7 @@ function CalendarBlock(props) {
         enroll={enroll}
         event={mainEvent}
         dateAndTime={ dateAndTime }
+        participants={participants}
       /> 
       <ConfirmPopup 
         enroll={enroll}
