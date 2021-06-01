@@ -39,7 +39,7 @@ function Main(props) {
       <ArticleBlock className={'background-blue'} text={content.articles[0].title} />
       <section className='four-columns'>
         {content.movies.map((movie, index) => (
-          <VideoCard index={index} movies={movie}/>
+          <VideoCard index={index} key={index} movies={movie}/>
         ))}
       </section>
       <section className="two-columns two-columns_style_video-header">
@@ -63,7 +63,7 @@ function Main(props) {
         </article>
         <section className='three-columns'>
           {content.questions.map(question=>(
-            <Question question={question}/>
+            <Question key={question.id} question={question}/>
             ))}
         </section>
       </section>
