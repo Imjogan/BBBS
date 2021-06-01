@@ -3,7 +3,7 @@ function VideoCard(props) {
   const movie = props.movies
   return (
     <>
-      <article key={props.index} className='block-video'>
+      <article className='block-video'>
         <iframe className='block-video__iframe' title="This is a unique title"></iframe>
         <h2 className='block-video__title'>{movie.title}</h2>
         <p className='block-video__caption'>{movie.info}</p>
