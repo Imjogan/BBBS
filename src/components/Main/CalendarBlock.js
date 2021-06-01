@@ -3,6 +3,7 @@ import { date, month, time, dayOfTheWeek } from '../../utils/formatTime'
 import EnrollPopup from "../EnrollPopup";
 import ConfirmPopup from "../ConfirmPopup";
 import SuccessPopup from "../SuccessPopup";
+import addPlus from '../../utils/commonFunctions'
 
 
 function CalendarBlock(props) {
@@ -34,17 +35,14 @@ function CalendarBlock(props) {
   }
   
 
+
   return (
     <>
         <li className="list__element">
         <div className="list__header">
-          <p className="list__caption">{participants.map((obj) => {
-            if (participants.length > 1) {
-              if (participants.indexOf(obj) !== participants.length - 1) {
-                return `${obj} + `
-              }  return obj
-            } return obj
-          })}
+          <p className="list__caption">{participants.map((obj) => (
+            addPlus(participants, obj)
+          ))}
           </p>
           <p className="list__date">{`${monthName} / ${dayName}`}</p>
         </div>
