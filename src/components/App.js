@@ -13,6 +13,7 @@ import ProtectedRoute from './ProtectedRoute';
 import CurrentUserContext from '../context/CurrentUserContext';
 import CurrentListOfEvents from '../context/CurrentListOfEvents';
 import Calendar from "./Calendar/calendarPage";
+import NotFoundPage from "./NotFoundPage";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
   const [mainPageContent, setMainPageContent] = useState({});
   const [listEvents, setListEvents] = useState();
   const [isContentReady, setIsContentReady] = useState(false);
+  const [path, setPath] = useState('');
 
   const history = useHistory();
 
@@ -43,14 +45,13 @@ function App() {
   }, [])
 
 
-const loc = useLocation();
+  const loc = useLocation();
   useEffect(() => {
-   const path =  loc.pathname;
     if (localStorage.getItem('jwt')) {
       api.getUserProfile().then(res => {
         setCurrentUser(res.data)
         setIsLoggedIn(true)
-        history.push(path)
+        history.push(loc.pathname)
       })
 
     }
@@ -94,20 +95,22 @@ api.getCitiesList()
     setFixed(false);
   }
 
-  function handleLogPopupOpen() {
-    setIsLogPopupOpen(true);
-  }
+
 
   function handlePopupClose() {
     setIsLogPopupOpen(false);
   }
 
+  function handleLogPopupOpen(data) {
+    setIsLogPopupOpen(true);
+    setPath(data)
+  }
 
   function handleHeaderCalendarClick() {
     if (isLoggedIn) {
       history.push("/calendar");
     } else {
-      handleLogPopupOpen();
+      handleLogPopupOpen("/calendar");
     }
   }
 
@@ -115,7 +118,7 @@ api.getCitiesList()
     if (isLoggedIn) {
       history.push("/account");
     } else {
-      handleLogPopupOpen();
+      handleLogPopupOpen("/account");
     }
   }
 
@@ -127,7 +130,7 @@ api.getCitiesList()
           localStorage.setItem('jwt', res.data.refresh);
           setIsLoggedIn(true);
           handlePopupClose();
-          history.push('/account')
+          history.push(path)
         }
       })
   }
@@ -179,6 +182,9 @@ api.getCitiesList()
                   />
                   <Route exact path="/">
                     <Redirect to="/main" />
+                  </Route>
+                  <Route path="*">
+                    <NotFoundPage />
                   </Route>
                 </Switch>
               </main>

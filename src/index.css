@@ -209,4 +209,9 @@
 @import url(./blocks/about/about__circle-square.css);
 @import url(./blocks/about/about__accent.css);
 @import url(./blocks/MIX/visible-block.css);
-@import url(./blocks/link/link.css)
+@import url(./blocks/link/link.css);
+@import url(./blocks/not-found/not-found.css);
+@import url(./blocks/not-found/__image/not-found__image.css);
+@import url(./blocks/not-found/__title/not-found__title.css);
+@import url(./blocks/not-found/__info/not-found__info.css);
+@import url(./blocks/not-found/__button/not-found__button.css);
