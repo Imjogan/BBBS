@@ -137,6 +137,45 @@ api.getCitiesList()
     setIsLoggedIn(false);
   }
 
+  // попапы календаря и запись
+  const [isEnrollPopupOpen, setIsEnrollPopupOpen] = useState(false);
+  const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
+  const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
+
+  function toggleEnrollPopup() {
+    setIsEnrollPopupOpen(!isEnrollPopupOpen);
+  }
+
+  function toggleConfirmPopup() {
+    setIsConfirmPopupOpen(!isConfirmPopupOpen);
+  }
+
+  function toggleSuccessPopup() {
+    setIsSuccessPopupOpen(!isSuccessPopupOpen);
+  }
+
+  function handleEnroll(id) {
+    api.takePartInEvent({ 'event': id })
+      .then((res) => {
+        console.log(res);
+        toggleSuccessPopup();
+      })
+      .catch((e) => console.log(e))
+      .finally(() => {
+        setIsEnrollPopupOpen(false);
+        setIsConfirmPopupOpen(false);
+      })
+  }
+
+  const enrollMechanism = {
+    handleEnroll, 
+    toggleEnrollPopup, 
+    isEnrollPopupOpen,
+    toggleConfirmPopup,
+    isConfirmPopupOpen,
+    toggleSuccessPopup,
+    isSuccessPopupOpen
+  }
 
   return (
 
@@ -161,7 +200,13 @@ api.getCitiesList()
                 <Switch>
                   <Route path="/main">
                     {isContentReady ?
-                      <Main isLoggedIn={isLoggedIn} pageContent={mainPageContent} /> : console.log('погодите')}
+                      <Main 
+                        isLoggedIn={isLoggedIn} 
+                        pageContent={mainPageContent} 
+                        enroll={enrollMechanism}
+                        history={history}
+                      />
+                    : console.log('погодите')}
                   </Route>
                   <Route path="/about">
                     <AboutUs />

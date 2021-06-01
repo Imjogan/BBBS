@@ -10,13 +10,19 @@ import Question from './Question';
 
 function Main(props) {
  
-
   const content = props.pageContent;
   
   return (
     <>
       <section className="two-columns two-columns_style_first">
-        {props.isLoggedIn ? <CalendarBlock pageContent={content} /> : <Article />}
+        { props.isLoggedIn ? 
+          <CalendarBlock 
+            pageContent={content} 
+            enroll={props.enroll}
+            history={props.history}
+          /> 
+          : <Article /> 
+        }
         <Link to="#" className="link">
           <article className="block-photo">
             <h2 className="block-photo__title">{content.history.title}</h2>
