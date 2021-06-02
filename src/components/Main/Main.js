@@ -18,6 +18,7 @@ function Main(props) {
             pageContent={content} 
             enroll={props.enroll}
             history={props.history}
+            main={true}
           /> 
           : <Article /> 
         }

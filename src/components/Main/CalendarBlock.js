@@ -33,9 +33,12 @@ function CalendarBlock(props) {
     enroll.rememberEnrollPopupOpen();
   }
 
+  // управление шириной элемента
+  const mainPage = props.mainPage ? "list__element_main-page" : '';
+
   return (
     <>
-        <li className={ mainEvent.booked ? "list__element_is-registered list__element" : "list__element" }>
+        <li className={ mainEvent.booked ?  `list__element_is-registered list__element ${mainPage}` : "list__element list__element_main-page" }>
         <div className="list__header">
           <p className="list__caption">{participants.map((obj) => (
             addPlus(participants, obj)
