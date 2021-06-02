@@ -1,10 +1,9 @@
 import React from 'react';
-import { date, month, time, dayOfTheWeek } from '../../../utils/formatTime'
-import EnrollPopup from "../../EnrollPopup/EnrollPopup";
-import ConfirmPopup from "../../ConfirmPopup";
-import SuccessPopup from "../../SuccessPopup";
-import addPlus from '../../../utils/commonFunctions'
-import './CalendarBlock.css';  // перекинуть потом в один общий цсс файл
+import { date, month, time, dayOfTheWeek } from '../../utils/formatTime'
+import EnrollPopup from "../EnrollPopup/EnrollPopup";
+import ConfirmPopup from "../ConfirmPopup";
+import SuccessPopup from "../SuccessPopup";
+import addPlus from '../../utils/commonFunctions'
 
 
 function CalendarBlock(props) {
