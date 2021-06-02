@@ -1,5 +1,5 @@
 import React from 'react';
-import { date, month, time, dayOfTheWeek } from '../../utils/formatTime'
+import { getDateAndTime } from '../../utils/formatTime'
 import EnrollPopup from "../EnrollPopup";
 import ConfirmPopup from "../ConfirmPopup";
 import SuccessPopup from "../SuccessPopup";
@@ -12,19 +12,8 @@ function CalendarBlock(props) {
   const participants = mainEvent.tags.map((obj) => (
    obj.name
   ));
-  const monthName = month(mainEvent.startAt);
-  const dayName = dayOfTheWeek(mainEvent.startAt);
-  const dayNumber = date(mainEvent.startAt);
-  const startsAt = time(mainEvent.startAt);
-  const endsAt = time(mainEvent.endAt);
 
-  const dateAndTime = {
-    monthName,
-    dayName,
-    dayNumber,
-    startsAt,
-    endsAt
-  }
+  const dateAndTime = getDateAndTime(mainEvent);
   
   // запись на мероприятие
   const { enroll } = props;
@@ -36,7 +25,6 @@ function CalendarBlock(props) {
       enroll.handleCancell(mainEvent.id);
     }
   }
-  
 
   return (
     <>
@@ -46,14 +34,14 @@ function CalendarBlock(props) {
             addPlus(participants, obj)
           ))}
           </p>
-          <p className="list__date">{`${monthName} / ${dayName}`}</p>
+          <p className="list__date">{`${dateAndTime.monthName} / ${dateAndTime.dayName}`}</p>
         </div>
         <div className="list__theme">   
           <h2 className="list__title">{mainEvent.title}</h2>
-          <p className="list__number">{dayNumber}</p>
+          <p className="list__number">{dateAndTime.dayNumber}</p>
         </div>
         <div className="list__contacts">
-          <p className="list__contact">{`${startsAt}-${endsAt}`}</p>
+          <p className="list__contact">{`${dateAndTime.startsAt}-${dateAndTime.endsAt}`}</p>
           <p className="list__contact list__contact_center">{mainEvent.address}
           </p>
           <p className="list__contact">{mainEvent.contact}</p>
