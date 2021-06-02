@@ -27,7 +27,9 @@ function ConfirmPopup(props) {
           <button 
             type="submit" 
             className="list__submit list__submit_cancel"
-            onClick={ () => enroll.toggleConfirmPopup() }
+            onClick={ () => {
+              enroll.toggleConfirmPopup()
+            } }
           >Отменить</button>
         </div>
       </div>

@@ -58,17 +58,6 @@ function App() {
     }
   }, [])
 
-
-  /* 
-
-api.getCitiesList()
-
-  api.getEvents()
-
-  api.takePartInEvent({ 'event': 1 })
-    
- */
-
   // при обратном скролле показываем header с display: fixed. При возврщании к началу страницы скрываем класс с фиксом
   const [fixed, setFixed] = useState(false);
 
@@ -95,8 +84,6 @@ api.getCitiesList()
     setHeaderMobileOpen(!isHeaderMobileOpen);
     setFixed(false);
   }
-
-
 
   function handlePopupClose() {
     setIsLogPopupOpen(false);
@@ -143,8 +130,22 @@ api.getCitiesList()
 
   // попапы календаря и запись
   const [isEnrollPopupOpen, setIsEnrollPopupOpen] = useState(false);
+  const [wasEnrollPopupOpened, setWasEnrollPopupOpened] = useState(false);
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
+  const [isErrorPopupOpen, setIsErrorPopupOpen] = useState(false);
+
+  useEffect(() => {
+    setIsErrorPopupOpen(false);
+  }, [history]);
+
+  function rememberEnrollPopupOpen(remember) {
+    if (remember === false) {
+      setWasEnrollPopupOpened(false);
+    } else {
+      setWasEnrollPopupOpened(true);
+    }
+  }
 
   function toggleEnrollPopup() {
     setIsEnrollPopupOpen(!isEnrollPopupOpen);
@@ -158,23 +159,42 @@ api.getCitiesList()
     setIsSuccessPopupOpen(!isSuccessPopupOpen);
   }
 
+  function toggleErrorPopup() {
+    setIsErrorPopupOpen(!isErrorPopupOpen);
+  }
+
   function handleEnroll(id) {
     api.takePartInEvent({ 'event': id })
       .then((res) => {
         console.log(res);
         toggleSuccessPopup();
+        setWasEnrollPopupOpened(false);
       })
-      .catch((e) => console.log(e))
+      .catch((e) => {
+        console.log(e);
+        toggleErrorPopup();
+      })
       .finally(() => {
         setIsEnrollPopupOpen(false);
         setIsConfirmPopupOpen(false);
       })
   }
 
+  function handleCancell(id) {
+    // тут будет апи запрос для отмены записи
+    console.log(`отменить мероприятие ${id}`);
+    setIsEnrollPopupOpen(false);
+  }
+
   const enrollMechanism = {
     handleEnroll, 
+    handleCancell,
     toggleEnrollPopup, 
     isEnrollPopupOpen,
+    rememberEnrollPopupOpen,
+    wasEnrollPopupOpened,
+    isErrorPopupOpen,
+    toggleErrorPopup,
     toggleConfirmPopup,
     isConfirmPopupOpen,
     toggleSuccessPopup,

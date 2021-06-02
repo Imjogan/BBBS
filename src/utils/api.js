@@ -44,7 +44,7 @@ function getEvents() {
 
 function takePartInEvent(event) {
   return instance
-    .post("/afisha/event-participants/", event, headers)
+    .post("/afisha/event-participant/", event, headers)
     .then((res) => checkResponse(res));
 }
 

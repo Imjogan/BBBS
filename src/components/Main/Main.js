@@ -6,8 +6,6 @@ import VideoCard from './VideoCard';
 import Question from './Question';
 
 
-
-
 function Main(props) {
  
   const content = props.pageContent;
