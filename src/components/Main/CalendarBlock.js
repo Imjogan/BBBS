@@ -30,7 +30,11 @@ function CalendarBlock(props) {
   const { enroll } = props;
   
   function handleRegisterBtn() {
+    if (!mainEvent.booked) {
       enroll.toggleConfirmPopup();
+    } else {
+      enroll.handleCancell(mainEvent.id);
+    }
   }
   
 
