@@ -1,5 +1,4 @@
 import React from "react";
-import './Event.css';
 import { date, month, time, dayOfTheWeek } from '../../utils/formatTime'
 
 

@@ -1,5 +1,5 @@
 import React from "react";
-import addPlus from '../../utils/commonFunctions'
+import addPlus from '../utils/commonFunctions'
 
 
 function EnrollPopup(props) {
