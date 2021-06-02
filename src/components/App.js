@@ -14,6 +14,7 @@ import CurrentUserContext from '../context/CurrentUserContext';
 import CurrentListOfEvents from '../context/CurrentListOfEvents';
 import Calendar from "./Calendar/calendarPage";
 import NotFoundPage from "./NotFoundPage";
+import Loader from './Loader';
 
 
 function App() {
@@ -209,7 +210,7 @@ api.getCitiesList()
                         enroll={enrollMechanism}
                         history={history}
                       />
-                    : console.log('погодите')}
+                    : <Loader />}
                   </Route>
                   <Route path="/about">
                     <AboutUs />

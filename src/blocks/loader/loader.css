@@ -1,0 +1,6 @@
+.loader {
+  min-width: 137px;
+  min-height: 149px;
+  margin: 30px auto;
+  background-image: url('../../images/loader.png');
+}
