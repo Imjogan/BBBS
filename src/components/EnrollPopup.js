@@ -39,9 +39,8 @@ function EnrollPopup(props) {
         <div className="list__footer">
           <button 
             type="submit" 
-            className="list__submit list__submit_type_register-popup"
-            onClick={ !event.booked ? () => enroll.handleEnroll(id) : () => console.log('добавить функцию для отмены записи') }
-            // добавить функцию для отмены записи
+            className={ event.booked ? "list__submit_is-registered list__submit list__submit_type_register-popup" : "list__submit list__submit_type_register-popup" }
+            onClick={ !event.booked ? () => enroll.handleEnroll(id) : () => enroll.handleCancell(id) }
           >
             { !event.booked ? "Записаться" : "Отменить запись" } 
           </button>
