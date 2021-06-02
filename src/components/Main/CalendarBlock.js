@@ -3,6 +3,7 @@ import { getDateAndTime } from '../../utils/formatTime'
 import EnrollPopup from "../EnrollPopup";
 import ConfirmPopup from "../ConfirmPopup";
 import SuccessPopup from "../SuccessPopup";
+import ErrorPopup from "../ErrorPopup";
 import addPlus from '../../utils/commonFunctions'
 
 
@@ -19,11 +20,17 @@ function CalendarBlock(props) {
   const { enroll } = props;
   
   function handleRegisterBtn() {
+    enroll.rememberEnrollPopupOpen(false);
     if (!mainEvent.booked) {
       enroll.toggleConfirmPopup();
     } else {
       enroll.handleCancell(mainEvent.id);
     }
+  }
+
+  function handleMoreInfoBtn() {
+    enroll.toggleEnrollPopup();
+    enroll.rememberEnrollPopupOpen();
   }
 
   return (
@@ -57,7 +64,7 @@ function CalendarBlock(props) {
           <p className="list__place-number">{`Осталось ${mainEvent.remainSeats} мест`}</p>
           <button 
             type="button" className={ mainEvent.booked ? "list__button-view_is-registered list__button-view" : "list__button-view"}
-            onClick={ () => enroll.toggleEnrollPopup() }
+            onClick={ () =>  handleMoreInfoBtn() }
           />
         </div>
       </li> 
@@ -75,6 +82,9 @@ function CalendarBlock(props) {
         enroll={enroll}
         event={mainEvent}
         history={props.history}
+      />
+      <ErrorPopup 
+        enroll={enroll}
       />
     </>
   )
