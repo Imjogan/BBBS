@@ -173,6 +173,7 @@ api.getCitiesList()
   function handleCancell(id) {
     // тут будет апи запрос для отмены записи
     console.log(`отменить мероприятие ${id}`);
+    setIsEnrollPopupOpen(false);
   }
 
   const enrollMechanism = {

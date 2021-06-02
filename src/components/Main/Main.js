@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import CalendarBlock from './CalendarBlock';
+import CalendarBlock from './CalendarBlock/CalendarBlock';
 import Article from './Article';
 import ArticleBlock from './ArticleBlock';
 import VideoCard from './VideoCard';

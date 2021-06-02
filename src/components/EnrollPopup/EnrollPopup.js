@@ -1,5 +1,5 @@
 import React from "react";
-import addPlus from '../utils/commonFunctions'
+import addPlus from '../../utils/commonFunctions'
 
 
 function EnrollPopup(props) {
@@ -39,7 +39,7 @@ function EnrollPopup(props) {
         <div className="list__footer">
           <button 
             type="submit" 
-            className="list__submit list__submit_type_register-popup"
+            className={ event.booked ? "list__submit_is-registered list__submit list__submit_type_register-popup" : "list__submit list__submit_type_register-popup" }
             onClick={ !event.booked ? () => enroll.handleEnroll(id) : () => enroll.handleCancell(id) }
           >
             { !event.booked ? "Записаться" : "Отменить запись" } 

@@ -1,9 +1,10 @@
 import React from 'react';
-import { date, month, time, dayOfTheWeek } from '../../utils/formatTime'
-import EnrollPopup from "../EnrollPopup";
-import ConfirmPopup from "../ConfirmPopup";
-import SuccessPopup from "../SuccessPopup";
-import addPlus from '../../utils/commonFunctions'
+import { date, month, time, dayOfTheWeek } from '../../../utils/formatTime'
+import EnrollPopup from "../../EnrollPopup/EnrollPopup";
+import ConfirmPopup from "../../ConfirmPopup";
+import SuccessPopup from "../../SuccessPopup";
+import addPlus from '../../../utils/commonFunctions'
+import './CalendarBlock.css';  // перекинуть потом в один общий цсс файл
 
 
 function CalendarBlock(props) {
@@ -40,7 +41,7 @@ function CalendarBlock(props) {
 
   return (
     <>
-        <li className="list__element">
+        <li className={ mainEvent.booked ? "list__element_is-registered list__element" : "list__element" }>
         <div className="list__header">
           <p className="list__caption">{participants.map((obj) => (
             addPlus(participants, obj)
@@ -61,14 +62,14 @@ function CalendarBlock(props) {
         <div className="list__footer">
           <button 
             type="submit" 
-            className="list__submit list__submit_type_register"
+            className={ mainEvent.booked ? "list__submit_is-registered list__submit list__submit_type_register" : "list__submit list__submit_type_register" }
             onClick={ () => handleRegisterBtn() }
           >
-            { mainEvent.booked ? "Записаться" : "Отменить запись" }
+            { !mainEvent.booked ? "Записаться" : "Отменить запись" }
           </button>
           <p className="list__place-number">{`Осталось ${mainEvent.remainSeats} мест`}</p>
           <button 
-            type="button" className="list__button-view"
+            type="button" className={ mainEvent.booked ? "list__button-view_is-registered list__button-view" : "list__button-view"}
             onClick={ () => enroll.toggleEnrollPopup() }
           />
         </div>

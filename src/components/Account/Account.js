@@ -3,7 +3,7 @@ import Event from "./Event";
 import './Account.css';
 // import CurrentUserContext from '../../context/CurrentUserContext';
 import api from "../../utils/api";
-import EnrollPopup from "../EnrollPopup";
+import EnrollPopup from "../EnrollPopup/EnrollPopup";
 
 
 function Account(props) {

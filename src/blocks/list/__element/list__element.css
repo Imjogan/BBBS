@@ -10,10 +10,10 @@
     box-sizing: border-box;
 }
 
-.list__element:hover {
+/* .list__element:hover {
   background: #C8D1FF;
   cursor: pointer;
-}
+} */
 
 @media (max-width: 1024px) {
     .list__element{
