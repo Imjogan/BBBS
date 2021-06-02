@@ -2,7 +2,7 @@ import React from "react";
 import Event from "./Event";
 // import CurrentUserContext from '../../context/CurrentUserContext';
 import api from "../../utils/api";
-import EnrollPopup from "../EnrollPopup/EnrollPopup";
+import EnrollPopup from "../EnrollPopup";
 
 
 function Account(props) {

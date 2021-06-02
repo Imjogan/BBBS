@@ -1,6 +1,6 @@
 import React from 'react';
 import { date, month, time, dayOfTheWeek } from '../../utils/formatTime'
-import EnrollPopup from "../EnrollPopup/EnrollPopup";
+import EnrollPopup from "../EnrollPopup";
 import ConfirmPopup from "../ConfirmPopup";
 import SuccessPopup from "../SuccessPopup";
 import addPlus from '../../utils/commonFunctions'
