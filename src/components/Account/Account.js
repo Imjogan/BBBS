@@ -1,19 +1,16 @@
 import React from "react";
 import Event from "./Event";
 import CurrentUserContext from '../../context/CurrentUserContext';
+import CurrentListOfEvents from '../../context/CurrentListOfEvents';
 import api from "../../utils/api";
 import EnrollPopup from "../EnrollPopup";
 
 
 function Account(props) {
   const userData = React.useContext(CurrentUserContext);
-  const [events, setEvents] = React.useState([]);
+  const events = React.useContext(CurrentListOfEvents);
   const [city, setCity] = React.useState([]);
 
-  React.useEffect(() => {
-    api.getEvents()
-      .then((res) => setEvents(res.data))
-  }, []);
 
   React.useEffect(() => {
     api.getCitiesList()
@@ -48,7 +45,7 @@ function Account(props) {
           <div className="account__scroll">
             { events.length!== 0 
               && events.map((event) => (
-                
+                event.booked &&
                 <Event 
                   key={event.id} 
                   event={event}
