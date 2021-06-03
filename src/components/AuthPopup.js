@@ -26,7 +26,6 @@ function AuthPopup(props) {
   };
 
   const onError = (errs) => {
-    console.log(errs);
     if (!isEmpty(errs)) {
       setRed(true);
     }
@@ -56,7 +55,7 @@ function AuthPopup(props) {
               placeholder="Пароль"
               className={red ? "popup__input popup__input_error" : "popup__input"}
               type="password"
-              onChange={() => setRed(false)}/>
+              onChange={() => setRed(false)}  autoComplete="off"/>
           </label>
           <p className="popup__help">Забыли пароль?</p>
           <button

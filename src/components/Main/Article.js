@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 
-function Article(props) {
+function Article() {
   return(
   <Link to="#" className="link">
     <article className="block-guest background-green">

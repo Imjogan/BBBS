@@ -1,0 +1,14 @@
+.list__submit_type_error {
+  color: #000;
+  border-color: #000;
+  background-color: #F2E5E5;
+  width: 234px;
+  height: 48px;
+  box-sizing: border-box;
+  font-size: 15px;
+  line-height: 19px;
+}
+
+.list__submit_type_error:hover {
+  background-color: #E0E0E0;
+}

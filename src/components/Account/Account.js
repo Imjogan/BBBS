@@ -1,47 +1,68 @@
 import React from "react";
 import Event from "./Event";
-import './Account.css';
-// import CurrentUserContext from '../../context/CurrentUserContext';
+import CurrentUserContext from '../../context/CurrentUserContext';
+import CurrentListOfEvents from '../../context/CurrentListOfEvents';
 import api from "../../utils/api";
-import { date, month } from "../../utils/formatTime";
+import EnrollPopup from "../EnrollPopup";
+
 
 function Account(props) {
+  const userData = React.useContext(CurrentUserContext);
+  const events = React.useContext(CurrentListOfEvents);
+  const [city, setCity] = React.useState([]);
 
-  const [events, setEvents] = React.useState([]);
 
   React.useEffect(() => {
-    api.getEvents()
-      .then((res) => setEvents(res.data))
-      .catch((err) => console.log(err));
+    api.getCitiesList()
+      .then((res) => res.data.map((el)=> (
+        el.id === userData.city && setCity(el.name)
+      )))
   }, []);
 
-  const city = "Москва"; // будем получать с сервера из контекста пользователя, но пока там цифры и нет соотношения цифр с названиями городов
-  // const currentUser = React.useContext(CurrentUserContext);
-  // console.log(currentUser);  пока тут цифры
+ 
+
+ 
+
+
+  // данные из карточки для попапа
+  const [eventData, setEventData] = React.useState({})
+
+  function handleEventData(obj) {
+    setEventData(obj)
+  }
+
 
   return (
-    <section className="account">
-      <div className="account__buttons">
-        <button type="button" className="account__button">{city}. Изменить ваш город</button>
-        <button type="button" onClick={props.signOut} className="account__button">Выйти</button>
-      </div>      
-      <p className="account__events-text">{events.length!== 0 ? "Вы записаны на мероприятия:" : "У вас нет записи на мероприятие"}
-      </p>
-      <div className="account__events">
-        <div className="account__scroll">
-          { events.length!== 0 
-            && events.map((event) => (
-              <Event 
-                key={event.id} 
-                date={date(event.startAt)} 
-                month={month(event.startAt)} 
-                about={event.title} 
-              />
-            ))
-          }
+    <>
+      <section className="account">
+        <div className="account__buttons">
+          <button type="button" className="account__button">{city}. Изменить ваш город</button>
+          <button type="button" onClick={props.signOut} className="account__button">Выйти</button>
+        </div>      
+        <p className="account__events-text">{events.length!== 0 ? "Вы записаны на мероприятия:" : "У вас нет записи на мероприятие"}
+        </p>
+        <div className="account__events">
+          <div className="account__scroll">
+            { events.length!== 0 
+              && events.map((event) => (
+                event.booked &&
+                <Event 
+                  key={event.id} 
+                  event={event}
+                  enroll={props.enroll}
+                  onData={handleEventData}
+                />
+              ))
+            }
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <EnrollPopup 
+        enroll={props.enroll}
+        event={eventData.event || ''}
+        dateAndTime={eventData.dateAndTime || ''}
+      /> 
+    </>
   )
 }
 

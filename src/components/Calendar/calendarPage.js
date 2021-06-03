@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import FilterButton from "../FilterButton";
-import CalendarBlock from "./CalendarBlock";
+import CalendarBlock from "../CalendarBlock";
 import CurrentListOfEvents from "../../context/CurrentListOfEvents";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import {
@@ -12,7 +12,8 @@ import {
 } from "../../utils/formatTime";
 
 let userEvents;
-function Calendar() {
+
+function Calendar(props) {
   const events = useContext(CurrentListOfEvents);
   const userData = useContext(CurrentUserContext);
   const [isMonth, setIsMonth] = useState();
@@ -129,6 +130,9 @@ function Calendar() {
                       ? `Осталось ${elem.seats} ${checkNum(elem.seats)}`
                       : "Запись закрыта"
                   }
+                  event={elem}
+                  enroll={props.enroll}
+                  history={props.history}
                 />
               ))}
           </ul>

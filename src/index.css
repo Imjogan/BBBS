@@ -118,6 +118,7 @@
 @import url(./blocks/popup/__container/popup__container.css);
 @import url(./blocks/popup/__container/_type/popup__container_type_popup-city.css);
 @import url(./blocks/popup/__container/_type/popup__container_type_advice.css);
+@import url(./blocks/popup/__container/_type/popup__container_type_error.css);
 @import url(./blocks/popup/__close/popup__close.css);
 @import url(./blocks/popup/__button-submit/popup__button-submit.css);
 @import url(./blocks/popup/__button-submit/_type/popup__button-submit_type_advice.css);
@@ -174,11 +175,13 @@
 @import url(./blocks/calendar/calendar.css);
 @import url(./blocks/list/list.css);
 @import url(./blocks/list/__element/list__element.css);
+@import url(./blocks/list/__element/_main-page/list__element_main-page.css);
 @import url(./blocks/list/__date/list__date.css);
 @import url(./blocks/list/__date/_right/list__date_right.css);
 @import url(./blocks/list/__caption/list__caption.css);
 @import url(./blocks/list/__header/list__header.css);
 @import url(./blocks/list/__title/list__title.css);
+@import url(./blocks/list/__title/_error/list__title_error.css);
 @import url(./blocks/list/__number/list__number.css);
 @import url(./blocks/list/__contacts/list__contacts.css);
 @import url(./blocks/list/__contact/list__contact.css);
@@ -189,6 +192,7 @@
 @import url(./blocks/list/__place-number/list__place-number.css);
 @import url(./blocks/list/__button-view/list__button-view.css);
 @import url(./blocks/list/__submit/_inactive/list__submit_inactive.css);
+@import url(./blocks/list/__submit/_error/list__submit_type_error.css);
 @import url(./blocks/list/__element/_is-registered/list__element_is-registered.css);
 @import url(./blocks/list/__submit/_is-registered/list__submit_is-registered.css);
 @import url(./blocks/list/__button-view/_is-registered/list__button-view_is-registered.css);
@@ -209,4 +213,14 @@
 @import url(./blocks/about/about__circle-square.css);
 @import url(./blocks/about/about__accent.css);
 @import url(./blocks/MIX/visible-block.css);
-@import url(./blocks/link/link.css)
+@import url(./blocks/link/link.css);
+@import url(./blocks/not-found/not-found.css);
+@import url(./blocks/not-found/__image/not-found__image.css);
+@import url(./blocks/not-found/__title/not-found__title.css);
+@import url(./blocks/not-found/__info/not-found__info.css);
+@import url(./blocks/not-found/__button/not-found__button.css);
+@import url(./blocks/loader/loader.css);
+@import url(./blocks/rotation/rotation.css);
+@import url(./blocks/account/Account.css);
+@import url(./blocks/event/Event.css);
+

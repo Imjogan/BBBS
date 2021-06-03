@@ -12,8 +12,10 @@
   font-weight: 300;
   font-size: 15px;
   line-height: 19px;
+  justify-content: center;
+  align-items: center;
   letter-spacing: 0.2px;
-  color: inherit;
+  color: #F3F2F2;
   cursor: pointer;
   transition: opacity 0.2s ease-out;
   box-sizing: border-box;
@@ -26,7 +28,7 @@
 
 @media (max-width: 1440px) {
   .footer__donation {
-margin-top: 2px;
+    margin-top: 2px;
   }
 }
 

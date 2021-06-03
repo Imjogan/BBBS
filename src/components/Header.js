@@ -11,7 +11,7 @@ function Header (props) {
         <nav className="navigation navigation_place_header">
           <ul className="navigation__links navigation__links_place_header">
             <li className="navigation__list">
-              <a href="#" onClick={props.onCalendarClick} className="navigation__link navigation__link_place_header">календарь</a>
+              <Link to="/calendar" onClick={props.onCalendarClick} className="navigation__link navigation__link_place_header">календарь</Link>
             </li>
             <li className="navigation__list">
               <Link to="#" className="navigation__link navigation__link_place_header">куда пойти</Link>
@@ -50,70 +50,70 @@ function Header (props) {
         </form>
         <button type="button" className="header__search" />
         <div className="header__divisor" />
-        <button type="button" onClick={props.onLogoClick} className={props.isLogged? "header__account" : "header__account"} />
+        <button type="button" onClick={props.onLogoClick} className={props.isLogged? "header__account header__account_authorized" : "header__account"} />
         <button 
           type="button" className="header__menu" 
           onClick={props.onMobileHeaderClick} 
         />
       </header>
 
-      {<div class={props.isHeaderMobileOpen ? "popup-menu visible-block" : "popup-menu"}>
-        <div class="popup-menu__header">
-          <button type="button" class="popup-menu__search" />
-          <button type="button" onClick={props.onLogoClick} class="popup-menu__account" />
-          <Link class="popup-menu__logo">наставники.про</Link>
+      <div className={props.isHeaderMobileOpen ? "popup-menu visible-block" : "popup-menu"}>
+        <div className="popup-menu__header">
+          <button type="button" className="popup-menu__search" />
+          <button type="button" onClick={props.onLogoClick} className="popup-menu__account" />
+          <Link to="#" className="popup-menu__logo">наставники.про</Link>
           <button 
             type="button" 
             aria-label="close popup"
-            class="popup-menu__close" 
+            className="popup-menu__close" 
             onClick={props.onMobileHeaderClick}
           />
         </div>
-        <nav class="popup-menu__navigation">
-          <ul class="popup-menu__links">
-            <li class="popup-menu__list">
-              <Link to="/about" class="popup-menu__link">о проекте</Link>
+        <nav className="popup-menu__navigation">
+          <ul className="popup-menu__links">
+            <li className="popup-menu__list">
+              <Link to="/about" className="popup-menu__link">о проекте</Link>
             </li>
-            <li class="popup-menu__list">
-              <Link to="/calendar" class="popup-menu__link" onClick={props.onCalendarClick}>календарь</Link>
+            <li className="popup-menu__list">
+              <Link to="/calendar" className="popup-menu__link" onClick={props.onCalendarClick}>календарь</Link>
             </li>
-            <li class="popup-menu__list">
-              <Link to="#" class="popup-menu__link">куда пойти</Link>
+            <li className="popup-menu__list">
+              <Link to="#" className="popup-menu__link">куда пойти</Link>
             </li>
-            <li class="popup-menu__list">
-              <Link to="#" class="popup-menu__link">вопросы</Link>
+            <li className="popup-menu__list">
+              <Link to="#" className="popup-menu__link">вопросы</Link>
             </li>
-            <li class="popup-menu__list">
-              <Link to="#" class="popup-menu__link">читать и смотреть</Link>
+            <li className="popup-menu__list">
+              <Link to="#" className="popup-menu__link">читать и смотреть</Link>
             </li>
-            <li class="popup-menu__list">
-              <Link to="#" class="popup-menu__link">права детей</Link>
+            <li className="popup-menu__list">
+              <Link to="#" className="popup-menu__link">права детей</Link>
             </li>
-            <li class="popup-menu__list">
-              <Link to="#" class="popup-menu__link">истории</Link>
+            <li className="popup-menu__list">
+              <Link to="#" className="popup-menu__link">истории</Link>
             </li>
           </ul>
-          <ul class="popup-menu__links">
-            <li class="popup-menu__list">
-              <a href="http://facebook.com" class="popup-menu__link">facebook</a>
+          <ul className="popup-menu__links">
+            <li className="popup-menu__list">
+              <a href="http://facebook.com" className="popup-menu__link">facebook</a>
             </li>
-            <li class="popup-menu__list">
-              <a href="http://vk.com" class="popup-menu__link">vkontakte</a>
+            <li className="popup-menu__list">
+              <a href="http://vk.com" className="popup-menu__link">vkontakte</a>
             </li>
-            <li class="popup-menu__list">
-              <a href="http://instagram.com" class="popup-menu__link">instagram</a>
+            <li className="popup-menu__list">
+              <a href="http://instagram.com" className="popup-menu__link">instagram</a>
             </li>
-            <li class="popup-menu__list">
-              <a href="http://youtube.com" class="popup-menu__link">youtube</a>
+            <li className="popup-menu__list">
+              <a href="http://youtube.com" className="popup-menu__link">youtube</a>
             </li>
           </ul>
         </nav>
-        <div class="popup-menu__footer">
-          <p class="popup_menu__city">Москва.</p>
-          <button type="button" class="popup-menu__change-city">Изменить город</button>
-          <button type="button" class="popup-menu__exit">Выйти</button>
+        <div className="popup-menu__footer">
+          <p className="popup_menu__city">Москва.</p>
+          <button type="button" className="popup-menu__change-city">Изменить город</button>
+          <button type="button" className="popup-menu__exit">Выйти</button>
         </div>
-      </div>}
+      </div>
     </>
   )
 }

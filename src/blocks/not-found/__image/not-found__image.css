@@ -1,0 +1,9 @@
+.not-found__image {
+  min-width: 570px;
+  min-height: 199px;
+  padding: 0;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: url('../../../images/not-found-image.svg');
+}

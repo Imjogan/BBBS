@@ -13,6 +13,8 @@ import ProtectedRoute from './ProtectedRoute';
 import CurrentUserContext from '../context/CurrentUserContext';
 import CurrentListOfEvents from '../context/CurrentListOfEvents';
 import Calendar from "./Calendar/calendarPage";
+import NotFoundPage from "./NotFoundPage";
+import Loader from './Loader';
 
 
 function App() {
@@ -23,7 +25,7 @@ function App() {
   const [mainPageContent, setMainPageContent] = useState({});
   const [listEvents, setListEvents] = useState();
   const [isContentReady, setIsContentReady] = useState(false);
-  const [isJwtChecked, setIsJwtCheked] = useState(false);
+  const [path, setPath] = useState('');
 
   const history = useHistory();
 
@@ -33,7 +35,7 @@ function App() {
     });
   }, [])
 
-  console.log(isLoggedIn);
+
 
   useEffect(() => {
     api.getMainPage().then(res => {
@@ -44,31 +46,17 @@ function App() {
   }, [])
 
 
-const loc = useLocation();
+  const loc = useLocation();
   useEffect(() => {
-   const jwt =  localStorage.getItem('jwt');
-   const path =  loc.pathname;
     if (localStorage.getItem('jwt')) {
       api.getUserProfile().then(res => {
         setCurrentUser(res.data)
         setIsLoggedIn(true)
-        setIsJwtCheked(true)
-        history.push(path)
+        history.push(loc.pathname)
       })
 
     }
   }, [])
-
-
-  /* 
-
-api.getCitiesList()
-
-  api.getEvents()
-
-  api.takePartInEvent({ 'event': 1 })
-    
- */
 
   // при обратном скролле показываем header с display: fixed. При возврщании к началу страницы скрываем класс с фиксом
   const [fixed, setFixed] = useState(false);
@@ -97,20 +85,20 @@ api.getCitiesList()
     setFixed(false);
   }
 
-  function handleLogPopupOpen() {
-    setIsLogPopupOpen(true);
-  }
-
   function handlePopupClose() {
     setIsLogPopupOpen(false);
   }
 
+  function handleLogPopupOpen(data) {
+    setIsLogPopupOpen(true);
+    setPath(data)
+  }
 
   function handleHeaderCalendarClick() {
     if (isLoggedIn) {
       history.push("/calendar");
     } else {
-      handleLogPopupOpen();
+      handleLogPopupOpen("/calendar");
     }
   }
 
@@ -118,7 +106,7 @@ api.getCitiesList()
     if (isLoggedIn) {
       history.push("/account");
     } else {
-      handleLogPopupOpen();
+      handleLogPopupOpen("/account");
     }
   }
 
@@ -130,10 +118,9 @@ api.getCitiesList()
           localStorage.setItem('jwt', res.data.refresh);
           setIsLoggedIn(true);
           handlePopupClose();
-          history.push('/account')
+          history.push(path)
         }
       })
-      .catch((err) => console.log(err));
   }
 
   function handleSignOut() {
@@ -141,6 +128,78 @@ api.getCitiesList()
     setIsLoggedIn(false);
   }
 
+  // попапы календаря и запись
+  const [isEnrollPopupOpen, setIsEnrollPopupOpen] = useState(false);
+  const [wasEnrollPopupOpened, setWasEnrollPopupOpened] = useState(false);
+  const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
+  const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
+  const [isErrorPopupOpen, setIsErrorPopupOpen] = useState(false);
+
+  useEffect(() => {
+    setIsErrorPopupOpen(false);
+  }, [history]);
+
+  function rememberEnrollPopupOpen(remember) {
+    if (remember === false) {
+      setWasEnrollPopupOpened(false);
+    } else {
+      setWasEnrollPopupOpened(true);
+    }
+  }
+
+  function toggleEnrollPopup() {
+    setIsEnrollPopupOpen(!isEnrollPopupOpen);
+  }
+
+  function toggleConfirmPopup() {
+    setIsConfirmPopupOpen(!isConfirmPopupOpen);
+  }
+
+  function toggleSuccessPopup() {
+    setIsSuccessPopupOpen(!isSuccessPopupOpen);
+  }
+
+  function toggleErrorPopup() {
+    setIsErrorPopupOpen(!isErrorPopupOpen);
+  }
+
+  function handleEnroll(id) {
+    api.takePartInEvent({ 'event': id })
+      .then((res) => {
+        console.log(res);
+        toggleSuccessPopup();
+        setWasEnrollPopupOpened(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        toggleErrorPopup();
+      })
+      .finally(() => {
+        setIsEnrollPopupOpen(false);
+        setIsConfirmPopupOpen(false);
+      })
+  }
+
+  function handleCancell(id) {
+    // тут будет апи запрос для отмены записи
+    console.log(`отменить мероприятие ${id}`);
+    setIsEnrollPopupOpen(false);
+  }
+
+  const enrollMechanism = {
+    handleEnroll, 
+    handleCancell,
+    toggleEnrollPopup, 
+    isEnrollPopupOpen,
+    rememberEnrollPopupOpen,
+    wasEnrollPopupOpened,
+    isErrorPopupOpen,
+    toggleErrorPopup,
+    toggleConfirmPopup,
+    isConfirmPopupOpen,
+    toggleSuccessPopup,
+    isSuccessPopupOpen
+  }
 
   return (
 
@@ -161,11 +220,17 @@ api.getCitiesList()
                 onMobileHeaderClick={handleHeaderMobileClick}
                 isHeaderMobileOpen={isHeaderMobileOpen}
               />
-              <main class="content page__content">
+              <main className="content page__content">
                 <Switch>
                   <Route path="/main">
                     {isContentReady ?
-                      <Main isLoggedIn={isLoggedIn} pageContent={mainPageContent} /> : console.log('погодите')}
+                      <Main 
+                        isLoggedIn={isLoggedIn} 
+                        pageContent={mainPageContent} 
+                        enroll={enrollMechanism}
+                        history={history}
+                      />
+                    : <Loader />}
                   </Route>
                   <Route path="/about">
                     <AboutUs />
@@ -174,15 +239,21 @@ api.getCitiesList()
                     component={Calendar}
                     path="/calendar"
                     isLoggedIn={isLoggedIn}
+                    enroll={enrollMechanism}
+                    history={history}
                   />
                   <ProtectedRoute
                     component={Account}
                     path="/account"
                     isLoggedIn={isLoggedIn}
                     signOut={handleSignOut}
+                    enroll={enrollMechanism}
                   />
                   <Route exact path="/">
                     <Redirect to="/main" />
+                  </Route>
+                  <Route path="*">
+                    <NotFoundPage />
                   </Route>
                 </Switch>
               </main>

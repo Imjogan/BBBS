@@ -1,32 +1,50 @@
 import React from "react";
+import addPlus from '../utils/commonFunctions'
+
 
 function EnrollPopup(props) {
+
+  const { enroll, event, dateAndTime } = props;
+  const { id } = event;
+  const participants = (event.tags && event.tags.map((obj) => (obj.name))) || [];
+
   return (
-    <div className="popup popup-calendar popup-calendar_type_event">
+    <div className={ enroll.isEnrollPopupOpen ? "visible-block popup popup-calendar popup-calendar_type_event" : "popup popup-calendar popup-calendar_type_event" }>
       <div className="popup-calendar__content">
-        <button type="button" aria-label="close popup" className="popup__close popup__close_type_calendar" />
+        <button 
+          type="button" 
+          aria-label="close popup" 
+          className="popup__close popup__close_type_calendar" 
+          onClick={() => enroll.toggleEnrollPopup()}
+        />
         <div className="list__header">
-          <p className="list__caption">Волонтёры</p>
-          <p className="list__date">декабрь / суббота</p>
+          <p className="list__caption">
+            {participants.map((obj) => (
+              addPlus(participants, obj)
+            ))}
+          </p>
+          <p className="list__date">{`${dateAndTime.monthName} / ${dateAndTime.dayName}`}</p>
         </div>
         <div className="list__theme">
-          <h2 className="list__title">Субботний meet up: учимся проходить интервью</h2>
-          <p className="list__number">05</p>
+          <h2 className="list__title">{event.title}</h2>
+          <p className="list__number">{dateAndTime.dayNumber}</p>
         </div>
         <div className="list__contacts">
-          <p className="list__contact">12:00–14:00</p>
-          <p className="list__contact list__contact_center">Садовническая наб., д. 77 стр. 1 (офис компании Ernst&amp;Young)
+          <p className="list__contact">{`${dateAndTime.startsAt}-${dateAndTime.endsAt}`}</p>
+          <p className="list__contact list__contact_center">{event.address}
           </p>
-          <p className="list__contact">Александра, +7 926 356-78-90</p>
+          <p className="list__contact">{event.contact}</p>
         </div>
-        <p className="list__event">Наконец-то наступила весна и мы пережили эту долгую зиму!
-          И возможно, что внутренних сил и ресурса сейчас не так много, а до окончания учебного года
-          ещё целых несколько месяцев. Поэтому приглашаем вас на встречу нашего ресурсного клуба
-          "Наставник PRO", которую мы хотим посвятить теме поиска моральных сил,
-          смыслов и внутреннего ресурса для общения и взаимодействия с нашими подопечными. </p>
+        <p className="list__event">{event.description}</p>
         <div className="list__footer">
-          <button type="submit" className="list__submit list__submit_type_register-popup">Записаться</button>
-          <p className="list__place-number">Осталось 5 мест</p>
+          <button 
+            type="submit" 
+            className={ event.booked ? "list__submit_is-registered list__submit list__submit_type_register-popup" : "list__submit list__submit_type_register-popup" }
+            onClick={ !event.booked ? () => enroll.handleEnroll(id) : () => enroll.handleCancell(id) }
+          >
+            { !event.booked ? "Записаться" : "Отменить запись" } 
+          </button>
+          <p className="list__place-number">{`Осталось ${event.remainSeats || (event.seats - event.takenSeats)} мест`}</p>
         </div>
       </div>
     </div>
