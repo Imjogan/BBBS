@@ -14,15 +14,13 @@ function getDateAndTime(event) {
   const startsAt = time(event.startAt);
   const endsAt = time(event.endAt);
   
-  const dateAndTime = {
+  return  {
     monthName,
     dayName,
     dayNumber,
     startsAt,
     endsAt
-  }
-
-  return dateAndTime;
+  };
 }
 
 
