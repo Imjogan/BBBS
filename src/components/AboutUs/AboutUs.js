@@ -5,7 +5,9 @@ function AboutUs () {
           Наставники.про – цифоровая информационная платформа огрганизации «Старшие Братья Старшие Сестры».
           Созданная для поддержки наставников программы.
         </h1>
-        <div className="about__logo" />
+        <a href="https://www.nastavniki.org/o-nas/ob-organizaczii/">
+          <div className="about__logo" />
+        </a>
         <div className="about__circle-square">
           <div className="about__circle">
             <h2 className="about__circle-title">Об организации</h2>

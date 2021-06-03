@@ -4,15 +4,15 @@ function Footer() {
   return (
     <footer className='footer page__footer'>
       <div className='footer__three-columns'>
-        <a href='/#' className='footer__logo'></a>
-        <button type='button' className='footer__donation'>
-          Помочь деньгами
-        </button>
+        <a href='https://www.nastavniki.org/' className='footer__logo'></a>
+        <a href="https://www.nastavniki.org/campaign/pomoch-dengami/" type='button' className='footer__donation link'>
+            Помочь деньгами
+        </a>
         <div className='footer__info'>
           <p className='footer__copyright'>&copy; Старшие Братья Старшие Сестры</p>
           <p className='footer__about'>
             Разработка – студенты{' '}
-            <a href='/#' className='footer__link'>
+            <a href='https://praktikum.yandex.ru/' className='footer__link'>
               Яндекс.Практикум
             </a>
           </p>
@@ -32,9 +32,9 @@ function Footer() {
               </Link>
             </li>
             <li className='navigation__list navigation__list_place_footer'>
-              <a href='./calendar.html' className='navigation__link navigation__link_place_footer'>
+              <Link to='/calendar' className='navigation__link navigation__link_place_footer'>
                 календарь
-              </a>
+              </Link>
             </li>
             <li className='navigation__list navigation__list_place_footer'>
               <a href='./places.html' className='navigation__link navigation__link_place_footer'>
