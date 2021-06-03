@@ -1,3 +1,5 @@
+import './FilterButton.css';
+
 function FilterButton({ nameMonth, id, onActive, onClick }) {
   
   return (

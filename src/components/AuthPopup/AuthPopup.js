@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import './AuthPopup.css';
 
 function AuthPopup(props) {
 

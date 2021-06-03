@@ -1,9 +1,9 @@
 import React from 'react';
 import { getDateAndTime } from '../../utils/formatTime'
-import EnrollPopup from "../EnrollPopup";
-import ConfirmPopup from "../ConfirmPopup";
-import SuccessPopup from "../SuccessPopup";
-import ErrorPopup from "../ErrorPopup";
+import EnrollPopup from "../EnrollPopup/EnrollPopup";
+import ConfirmPopup from "../ConfirmPopup/ConfirmPopup";
+import SuccessPopup from "../SuccessPopup/SuccessPopup";
+import ErrorPopup from "../ErrorPopup/ErrorPopup";
 import addPlus from '../../utils/commonFunctions'
 
 

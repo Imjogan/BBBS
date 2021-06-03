@@ -1,4 +1,5 @@
 import React from "react";
+import './SuccessPopup.css';
 
 function SuccessPopup(props) {
 

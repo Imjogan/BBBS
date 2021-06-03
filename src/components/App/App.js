@@ -1,20 +1,21 @@
-import "../index.css";
+
 import { useEffect, useState, useCallback, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { Route, Switch, useHistory, Redirect, useLocation } from "react-router-dom";
-import Main from "./Main/Main";
-import Footer from "./Footer";
-import Header from "./Header";
-import AuthPopup from "./AuthPopup";
-import AboutUs from "./AboutUs/AboutUs";
-import api from "../utils/api";
-import Account from './Account/Account';
-import ProtectedRoute from './ProtectedRoute';
-import CurrentUserContext from '../context/CurrentUserContext';
-import CurrentListOfEvents from '../context/CurrentListOfEvents';
-import Calendar from "./Calendar/calendarPage";
-import NotFoundPage from "./NotFoundPage";
-import Loader from './Loader';
+import Main from "../MainPage/Main";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
+import AuthPopup from "../AuthPopup/AuthPopup";
+import AboutUs from "../AboutUsPage/AboutUs";
+import api from "../../utils/api";
+import Account from '../AccountPage/Account';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import CurrentUserContext from '../../context/CurrentUserContext';
+import CurrentListOfEvents from '../../context/CurrentListOfEvents';
+import Calendar from "../CalendarPage/calendarPage";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
+import Loader from '../Loader/Loader';
+import './App.css';
 
 
 function App() {

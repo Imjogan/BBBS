@@ -1,4 +1,5 @@
 import React from "react";
+import './ErrorPopup.css';
 
 function ErrorPopup(props) {
   const { isErrorPopupOpen, wasEnrollPopupOpened, toggleErrorPopup, toggleEnrollPopup } = props.enroll;
