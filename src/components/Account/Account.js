@@ -1,22 +1,27 @@
 import React from "react";
 import Event from "./Event";
-// import CurrentUserContext from '../../context/CurrentUserContext';
+import CurrentUserContext from '../../context/CurrentUserContext';
+import CurrentListOfEvents from '../../context/CurrentListOfEvents';
 import api from "../../utils/api";
 import EnrollPopup from "../EnrollPopup";
 
 
 function Account(props) {
+  const userData = React.useContext(CurrentUserContext);
+  const events = React.useContext(CurrentListOfEvents);
+  const [city, setCity] = React.useState([]);
 
-  const [events, setEvents] = React.useState([]);
 
   React.useEffect(() => {
-    api.getEvents()
-      .then((res) => setEvents(res.data))
+    api.getCitiesList()
+      .then((res) => res.data.map((el)=> (
+        el.id === userData.city && setCity(el.name)
+      )))
   }, []);
 
-  const city = "Москва"; // будем получать с сервера из контекста пользователя, но пока там цифры и нет соотношения цифр с названиями городов
-  // const currentUser = React.useContext(CurrentUserContext);
-  // console.log(currentUser);  пока тут цифры
+ 
+
+ 
 
 
   // данные из карточки для попапа
@@ -40,6 +45,7 @@ function Account(props) {
           <div className="account__scroll">
             { events.length!== 0 
               && events.map((event) => (
+                event.booked &&
                 <Event 
                   key={event.id} 
                   event={event}
