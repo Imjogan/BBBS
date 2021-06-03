@@ -175,6 +175,7 @@
 @import url(./blocks/calendar/calendar.css);
 @import url(./blocks/list/list.css);
 @import url(./blocks/list/__element/list__element.css);
+@import url(./blocks/list/__element/_main-page/list__element_main-page.css);
 @import url(./blocks/list/__date/list__date.css);
 @import url(./blocks/list/__date/_right/list__date_right.css);
 @import url(./blocks/list/__caption/list__caption.css);

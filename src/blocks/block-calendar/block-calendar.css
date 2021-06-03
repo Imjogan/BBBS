@@ -2,12 +2,13 @@
   background-color: #fff;
   border-radius: 30px;
   width: 100%;
-min-height: 520px;
-padding: 30px;
-box-sizing: border-box;
-display: flex;
-flex-wrap: wrap;
-display: none;
+  min-height: 520px;
+  padding: 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  display: none;
+  max-width: none;
 }
 
 @media (max-width: 1440px) {

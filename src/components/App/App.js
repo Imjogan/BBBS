@@ -12,7 +12,7 @@ import Account from '../AccountPage/Account';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import CurrentUserContext from '../../context/CurrentUserContext';
 import CurrentListOfEvents from '../../context/CurrentListOfEvents';
-import Calendar from "../CalendarPage/calendarPage";
+import Calendar from '../CalendarPage/calendarPage';
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import Loader from '../Loader/Loader';
 import './App.css';
@@ -240,6 +240,8 @@ function App() {
                     component={Calendar}
                     path="/calendar"
                     isLoggedIn={isLoggedIn}
+                    enroll={enrollMechanism}
+                    history={history}
                   />
                   <ProtectedRoute
                     component={Account}

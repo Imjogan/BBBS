@@ -1,7 +1,9 @@
+
 import './FilterButton.css';
 
 function FilterButton({ nameMonth, id, onActive, onClick }) {
   
+
   return (
     <li className="menu__item">
       <button
