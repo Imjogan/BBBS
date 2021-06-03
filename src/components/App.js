@@ -239,6 +239,8 @@ function App() {
                     component={Calendar}
                     path="/calendar"
                     isLoggedIn={isLoggedIn}
+                    enroll={enrollMechanism}
+                    history={history}
                   />
                   <ProtectedRoute
                     component={Account}

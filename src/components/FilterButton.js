@@ -1,5 +1,6 @@
-function FilterButton({ nameMonth, id, onActive, onClick }) {
-  
+function FilterButton({ nameMonth, id, onActive, onClick }) 
+
+{
   return (
     <li className="menu__item">
       <button
