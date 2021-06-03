@@ -6,6 +6,7 @@ function SuccessPopup(props) {
 
   function goToCalendar() {
     history.push('/calendar');
+    enroll.toggleSuccessPopup();
   }
 
   return (

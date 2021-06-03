@@ -7,25 +7,24 @@ const time = (dd) => format(new Date(dd),'p', {locale: ru});
 const dayOfTheWeek = (dd) => format(new Date(dd), "iiii", { locale: ru });
 
 function getDateAndTime(event) {
+
   const monthName = month(event.startAt);
   const dayName = dayOfTheWeek(event.startAt);
   const dayNumber = date(event.startAt);
   const startsAt = time(event.startAt);
   const endsAt = time(event.endAt);
   
-  const dateAndTime = {
+  return  {
     monthName,
     dayName,
     dayNumber,
     startsAt,
     endsAt
-  }
-
-  return dateAndTime;
+  };
 }
 
 
-export { date, month, time, dayOfTheWeek, getDateAndTime }; // не убираю предыдущие экспорты, чтобы не сломать ничего у Эдуарда
+export { date, month, time, dayOfTheWeek, getDateAndTime }; 
 
 
 
