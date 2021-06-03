@@ -3,20 +3,35 @@ import FilterButton from "../FilterButton";
 import CalendarBlock from "./CalendarBlock";
 import CurrentListOfEvents from "../../context/CurrentListOfEvents";
 import CurrentUserContext from "../../context/CurrentUserContext";
-import { date, month, dayOfTheWeek, time } from "../../utils/formatTime";
+import {
+  date,
+  month,
+  dayOfTheWeek,
+  time,
+  dateUnixFormat,
+} from "../../utils/formatTime";
 
 let userEvents;
- function Calendar() {
+function Calendar() {
   const events = useContext(CurrentListOfEvents);
   const userData = useContext(CurrentUserContext);
   const [isMonth, setIsMonth] = useState();
-  const [eventsMonth, setEventsMonth] = useState([])
-  const [buttonActive, setButtonActive] = useState(false)
-  const [isId, setIsId] = useState('')
-  
+  const [eventsMonth, setEventsMonth] = useState([]);
+  const [isId, setIsId] = useState("");
+
+  function formatTimeArr(arr) {
+    return arr.sort(
+      (first, last) =>
+        dateUnixFormat(first.startAt) - dateUnixFormat(last.startAt)
+    );
+  }
+
   if (events) {
-    const arrUserEventsForCity = Array.from(events).filter((item) => item.city === userData.city)
-    userEvents = arrUserEventsForCity.map((item) => ({
+    const arrUserEventsForCity = Array.from(events).filter(
+      async (item) => item.city === userData.city
+    );
+
+    userEvents = formatTimeArr(arrUserEventsForCity).map((item) => ({
       ...item,
       startAt: {
         month: month(item.startAt),
@@ -32,36 +47,35 @@ let userEvents;
       },
     }));
   }
-  useEffect(async () => {
-    const test = await userEvents;
-    setEventsMonth(test.filter((item) => item.startAt.month === isMonth));
+
+  const arrMouths = userEvents.map((i) => i.startAt.month);
+  const sortArr = arrMouths.filter(
+    (it, index) => index === arrMouths.indexOf(it)
+  );
+
+  useEffect(() => {
+    setIsMonth(sortArr[0]);
+    setIsId(0);
+  }, []);
+
+  useEffect(() => {
+    setEventsMonth(userEvents.filter((item) => item.startAt.month === isMonth));
   }, [isMonth]);
 
-const arrMouths = userEvents.map((i) => i.startAt.month)
-const sortArr = arrMouths.filter(
-  (it, index) => index === arrMouths.indexOf(it)
-);
-
-useEffect(()=>{
-  setIsMonth(sortArr[0]);
-},[])
-
-
-  function chackNum(num) {
-    let text;
-    if (num === 1) {
-      text = "место";
-    } else if (num >= 10 || num % 2 !== 0) {
-      text = "мест";
-    } else {
-      text = "места";
+  function checkNum(num) {
+    switch (true) {
+      case num === 1:
+        return "место";
+      case num >= 5:
+        return "мест";
+      default:
+        return "места";
     }
-    return text;
   }
 
-  function handlerID(e, id){
+  function handlerID(e, id) {
     setIsMonth(e.target.innerText);
-    setIsId(id)
+    setIsId(id);
   }
 
   return (
@@ -71,21 +85,25 @@ useEffect(()=>{
           <h1 className="title">Календарь</h1>
           <section className="menu">
             <ul className="menu__list menu__list_center">
-              {sortArr.map((item, index) => (
-                isId === index? <FilterButton
-                  key={index}
-                  id={index}
-                  nameMonth={item}
-                  onActive={true}
-                  onClick={handlerID}
-                /> : <FilterButton
-                  key={index}
-                  id={index}
-                  nameMonth={item}
-                  onActive={false}
-                  onClick={handlerID}
-                />
-                ))}
+              {sortArr.map((item, index) =>
+                isId === index ? (
+                  <FilterButton
+                    key={index}
+                    id={index}
+                    nameMonth={item}
+                    onActive={true}
+                    onClick={handlerID}
+                  />
+                ) : (
+                  <FilterButton
+                    key={index}
+                    id={index}
+                    nameMonth={item}
+                    onActive={false}
+                    onClick={handlerID}
+                  />
+                )
+              )}
             </ul>
           </section>
         </section>
@@ -106,9 +124,11 @@ useEffect(()=>{
                   onContactTime={`${elem.startAt.time}-${elem.endAt.time}`}
                   onPlace={elem.address}
                   onContactPerson={elem.contact}
-                  onPlaceNumber={`Осталось ${elem.seats} ${chackNum(
+                  onPlaceNumber={
                     elem.seats
-                  )}`}
+                      ? `Осталось ${elem.seats} ${checkNum(elem.seats)}`
+                      : "Запись закрыта"
+                  }
                 />
               ))}
           </ul>
@@ -117,6 +137,5 @@ useEffect(()=>{
     </>
   );
 }
-
 
 export default Calendar;
