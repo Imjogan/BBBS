@@ -1,6 +1,5 @@
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
-import fromUnixTime from "date-fns/fromUnixTime";
 import getUnixTime from "date-fns/getUnixTime";
 
 const dateUnixFormat = (dd) => getUnixTime(new Date(dd));
@@ -9,13 +8,13 @@ const month = (dd) => format(new Date(dd),'LLLL', {locale: ru});
 const time = (dd) => format(new Date(dd),'p', {locale: ru});
 const dayOfTheWeek = (dd) => format(new Date(dd), "iiii", { locale: ru });
 
-function getDateAndTime(event) {
+function getDateAndTime({startAt, endAt}) {
 
-  const monthName = month(event.startAt);
-  const dayName = dayOfTheWeek(event.startAt);
-  const dayNumber = date(event.startAt);
-  const startsAt = time(event.startAt);
-  const endsAt = time(event.endAt);
+  const monthName = month(startAt);
+  const dayName = dayOfTheWeek(startAt);
+  const dayNumber = date(startAt);
+  const startsAt = time(startAt);
+  const endsAt = time(endAt);
   
   return  {
     monthName,

@@ -17,8 +17,7 @@ function Main(props) {
           <CalendarBlock 
             event={content.event} 
             enroll={props.enroll}
-            history={props.history}
-            main={true}
+            mainPage={true}
           /> 
           : <Article /> 
         }
@@ -73,7 +72,6 @@ function Main(props) {
         </section>
       </section>
       <ArticleBlock className={'background-green'} text={content.articles[1].title} />;
-
     </>
   );
 }
