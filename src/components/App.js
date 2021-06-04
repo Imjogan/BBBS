@@ -281,27 +281,22 @@ function App() {
                 onClose={handlePopupClose}
                 onSubmit={handleLoginSubmit}
               />
-              { clickedEvent && 
-                <>
-                  <EnrollPopup 
-                    enroll={enrollMechanism}
-                    event={clickedEvent}
-                  /> 
-                  <ConfirmPopup 
-                    enroll={enrollMechanism}
-                    title={clickedEvent.title}
-                    id={clickedEvent.id}
-                  /> 
-                  <SuccessPopup 
-                    enroll={enrollMechanism}
-                    title={clickedEvent.title}
-                    history={history}
-                  />
-                  <ErrorPopup 
-                    enroll={enrollMechanism}
-                  /> 
-                </>
-              }
+              <EnrollPopup 
+                enroll={enrollMechanism}
+                event={clickedEvent}
+              /> 
+              <ConfirmPopup 
+                enroll={enrollMechanism}
+                event={clickedEvent}
+              /> 
+              <SuccessPopup 
+                enroll={enrollMechanism}
+                event={clickedEvent}
+                history={history}
+              />
+              <ErrorPopup 
+                enroll={enrollMechanism}
+              /> 
             </div>
           </div>
         </CurrentListOfEvents.Provider>
