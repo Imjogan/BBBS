@@ -3,7 +3,7 @@ import './SuccessPopup.css';
 
 function SuccessPopup(props) {
 
-  const { enroll, event, history } = props;
+  const { enroll, title, history } = props;
 
   function goToCalendar() {
     history.push('/calendar');
@@ -23,7 +23,7 @@ function SuccessPopup(props) {
         </div>
         <p className="list__done">
           Вы записаны на мероприятие<br />
-          {event.title}
+          {title}
         </p>
         <p className="list__done">
           Если у вас не получится прийти — отмените, пожалуйста, запись.

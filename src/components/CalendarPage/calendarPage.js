@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import FilterButton from "../FilterButton/FilterButton";
-import CalendarBlock from "../CalendarBlock";
+import CalendarBlock from "../CalendarBlock/CalendarBlock";
 import CurrentListOfEvents from "../../context/CurrentListOfEvents";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import {
@@ -18,7 +18,7 @@ function Calendar(props) {
   const userData = useContext(CurrentUserContext);
   const [isMonth, setIsMonth] = useState();
   const [eventsMonth, setEventsMonth] = useState([]);
-  const [isId, setIsId] = useState("");
+  const [isId, setIsId] = useState(""); // кнопка
 
   function formatTimeArr(arr) {
     return arr.sort(
@@ -63,17 +63,6 @@ function Calendar(props) {
     setEventsMonth(userEvents.filter((item) => item.startAt.month === isMonth));
   }, [isMonth]);
 
-  function checkNum(num) {
-    switch (true) {
-      case num === 1:
-        return "место";
-      case num >= 5:
-        return "мест";
-      default:
-        return "места";
-    }
-  }
-
   function handlerID(e, id) {
     setIsMonth(e.target.innerText);
     setIsId(id);
@@ -114,22 +103,6 @@ function Calendar(props) {
               eventsMonth.map((elem) => (
                 <CalendarBlock
                   key={elem.id}
-                  onCaption={
-                    elem.tags.length >= 2
-                      ? `${elem.tags[0].name} + ${elem.tags[1].name}`
-                      : elem.tags[0].name
-                  }
-                  onData={`${elem.startAt.month} / ${elem.startAt.day}`}
-                  ontitle={elem.title}
-                  onNumber={elem.startAt.data}
-                  onContactTime={`${elem.startAt.time}-${elem.endAt.time}`}
-                  onPlace={elem.address}
-                  onContactPerson={elem.contact}
-                  onPlaceNumber={
-                    elem.seats
-                      ? `Осталось ${elem.seats} ${checkNum(elem.seats)}`
-                      : "Запись закрыта"
-                  }
                   event={elem}
                   enroll={props.enroll}
                   history={props.history}

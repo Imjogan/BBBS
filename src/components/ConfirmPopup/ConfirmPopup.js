@@ -3,8 +3,7 @@ import './ConfirmPopup.css'
 
 function ConfirmPopup(props) {
 
-  const { enroll, event } = props;
-  const { id } = event;
+  const { enroll, title, id } = props;
 
   return (
     <div className={ enroll.isConfirmPopupOpen ? "visible-block popup popup-calendar popup-calendar_type_confirm" : "popup popup-calendar popup-calendar_type_confirm" }>
@@ -17,7 +16,7 @@ function ConfirmPopup(props) {
         />
         <p className="list__confirm">
           Подтвердить запись на мероприятие <br />
-          { event.title }
+          { title }
         </p>
         <div className="list__buttons">
           <button 

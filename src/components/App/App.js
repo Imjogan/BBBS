@@ -15,7 +15,12 @@ import CurrentListOfEvents from '../../context/CurrentListOfEvents';
 import Calendar from '../CalendarPage/calendarPage';
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import Loader from '../Loader/Loader';
+import EnrollPopup from "../EnrollPopup/EnrollPopup";
+import ConfirmPopup from "../ConfirmPopup/ConfirmPopup";
+import SuccessPopup from "../SuccessPopup/SuccessPopup";
+import ErrorPopup from "../ErrorPopup/ErrorPopup";
 import './App.css';
+
 
 
 function App() {
@@ -135,6 +140,7 @@ function App() {
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [isErrorPopupOpen, setIsErrorPopupOpen] = useState(false);
+  const [clickedEvent, setClickedEvent] = useState(null);
 
   useEffect(() => {
     setIsErrorPopupOpen(false);
@@ -187,6 +193,10 @@ function App() {
     setIsEnrollPopupOpen(false);
   }
 
+  function handleEventClick(event) {
+    setClickedEvent(event);
+  }
+
   const enrollMechanism = {
     handleEnroll, 
     handleCancell,
@@ -199,11 +209,11 @@ function App() {
     toggleConfirmPopup,
     isConfirmPopupOpen,
     toggleSuccessPopup,
-    isSuccessPopupOpen
+    isSuccessPopupOpen,
+    handleEventClick
   }
 
   return (
-
     <>
       <Helmet>
         <title>BBBS</title>
@@ -229,7 +239,6 @@ function App() {
                         isLoggedIn={isLoggedIn} 
                         pageContent={mainPageContent} 
                         enroll={enrollMechanism}
-                        history={history}
                       />
                     : <Loader />}
                   </Route>
@@ -241,7 +250,6 @@ function App() {
                     path="/calendar"
                     isLoggedIn={isLoggedIn}
                     enroll={enrollMechanism}
-                    history={history}
                   />
                   <ProtectedRoute
                     component={Account}
@@ -264,6 +272,27 @@ function App() {
                 onClose={handlePopupClose}
                 onSubmit={handleLoginSubmit}
               />
+              { clickedEvent && 
+                <>
+                  <EnrollPopup 
+                    enroll={enrollMechanism}
+                    event={clickedEvent}
+                  /> 
+                  <ConfirmPopup 
+                    enroll={enrollMechanism}
+                    title={clickedEvent.title}
+                    id={clickedEvent.id}
+                  /> 
+                  <SuccessPopup 
+                    enroll={enrollMechanism}
+                    title={clickedEvent.title}
+                    history={history}
+                  />
+                  <ErrorPopup 
+                    enroll={enrollMechanism}
+                  /> 
+                </>
+              }
             </div>
           </div>
         </CurrentListOfEvents.Provider>

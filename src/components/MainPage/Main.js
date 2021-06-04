@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import CalendarBlock from '../CalendarBlock';
+import CalendarBlock from '../CalendarBlock/CalendarBlock';
 import Article from './Article';
 import ArticleBlock from './ArticleBlock';
 import VideoCard from './VideoCard';
@@ -17,8 +17,7 @@ function Main(props) {
           <CalendarBlock 
             event={content.event} 
             enroll={props.enroll}
-            history={props.history}
-            main={true}
+            mainPage={true}
           /> 
           : <Article /> 
         }
@@ -73,7 +72,6 @@ function Main(props) {
         </section>
       </section>
       <ArticleBlock className={'background-green'} text={content.articles[1].title} />;
-
     </>
   );
 }

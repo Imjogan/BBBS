@@ -1,7 +1,4 @@
-.visible-block {
-  opacity: 1;
-  visibility: visible;
-}
+
 
 .popup {
   opacity: 0;
@@ -14,6 +11,11 @@
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, .3);
+}
+
+.visible-block {
+  opacity: 1;
+  visibility: visible;
 }
 
 .list__title{
@@ -87,4 +89,10 @@ outline: none;
 
 .list__submit_type_error:hover {
   background-color: #E0E0E0;
+}
+
+.list__submit_is-registered {
+  color: white;
+  background: #224CFF;
+  width: 168px;
 }

@@ -1,7 +1,4 @@
-.visible-block {
-  opacity: 1;
-  visibility: visible;
-}
+
 
 .popup {
   opacity: 0;
@@ -14,6 +11,11 @@
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, .3);
+}
+
+.visible-block {
+  opacity: 1;
+  visibility: visible;
 }
 
 .popup:hover {

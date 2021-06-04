@@ -1,3 +1,4 @@
+/* @import url(./blocks/list/__submit/_is-registered/list__submit_is-registered.css); */
 @import url(./vendor/normalize.css);
 @import url(./fonts/Proto-Grotesk-Light-Web.css);
 @import url(./fonts/PT-Root-UI_Regular.css);
@@ -174,7 +175,7 @@
 
 @import url(./blocks/calendar/calendar.css);
 @import url(./blocks/list/list.css);
-@import url(./blocks/list/__element/list__element.css);
+/* @import url(./blocks/list/__element/list__element.css); */
 @import url(./blocks/list/__element/_main-page/list__element_main-page.css);
 @import url(./blocks/list/__date/list__date.css);
 @import url(./blocks/list/__date/_right/list__date_right.css);
@@ -188,13 +189,12 @@
 @import url(./blocks/list/__contact/_center/list__contact_center.css);
 @import url(./blocks/list/__theme/list__theme.css);
 @import url(./blocks/list/__footer/list__footer.css);
-@import url(./blocks/list/__submit/list__submit.css);
+/* @import url(./blocks/list/__submit/list__submit.css); */
 @import url(./blocks/list/__place-number/list__place-number.css);
 @import url(./blocks/list/__button-view/list__button-view.css);
 @import url(./blocks/list/__submit/_inactive/list__submit_inactive.css);
 @import url(./blocks/list/__submit/_error/list__submit_type_error.css);
-@import url(./blocks/list/__element/_is-registered/list__element_is-registered.css);
-@import url(./blocks/list/__submit/_is-registered/list__submit_is-registered.css);
+/* @import url(./blocks/list/__element/_is-registered/list__element_is-registered.css); */
 @import url(./blocks/list/__button-view/_is-registered/list__button-view_is-registered.css);
 @import url(./blocks/popup-calendar/popup-calendar.css);
 @import url(./blocks/popup-calendar/__content/popup-calendar__content.css);
@@ -212,7 +212,7 @@
 @import url(./blocks/about/about__subtitle.css);
 @import url(./blocks/about/about__circle-square.css);
 @import url(./blocks/about/about__accent.css);
-@import url(./blocks/MIX/visible-block.css);
+/* @import url(./blocks/MIX/visible-block.css); */
 @import url(./blocks/link/link.css);
 @import url(./blocks/not-found/not-found.css);
 @import url(./blocks/not-found/__image/not-found__image.css);
