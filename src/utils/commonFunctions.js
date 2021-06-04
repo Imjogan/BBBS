@@ -1,7 +1,13 @@
-export default function addPlus(array, obj) {
+function addPlus(array, obj) {
   if (array.length > 1) {
     if (array.indexOf(obj) !== array.length - 1) {
       return `${obj} + `
     }  return obj
   } return obj
 }
+
+function getParticipants(array) {
+  return array.map((obj) => (addPlus(array, obj))).join('');
+}
+
+export default getParticipants;
