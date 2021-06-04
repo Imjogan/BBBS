@@ -19,6 +19,7 @@ import EnrollPopup from "./EnrollPopup";
 import ConfirmPopup from "./ConfirmPopup";
 import SuccessPopup from "./SuccessPopup";
 import ErrorPopup from "./ErrorPopup";
+import { getParticipants } from '../utils/commonFunctions'
 
 
 function App() {
@@ -191,8 +192,18 @@ function App() {
     setIsEnrollPopupOpen(false);
   }
 
-  function handleEventClick(event) {
-    setClickedEvent(event);
+  function handleEventClick(event, seats, dateAndTime, participants) {
+    setClickedEvent({
+      id: event.id,
+      booked: event.booked,
+      title: event.title,
+      participants: participants || getParticipants(event.tags.map((obj) => (obj.name))),
+      contact: event.contact,
+      adress: event.address,
+      description: event.description,
+      remainSeats: seats,
+      dateAndTime,
+    });
   }
 
   const enrollMechanism = {

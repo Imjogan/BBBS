@@ -39,7 +39,7 @@ function EnrollPopup(props) {
           >
             { !event.booked ? "Записаться" : "Отменить запись" } 
           </button>
-          <p className="list__place-number">{event.seats}</p>
+          <p className="list__place-number">{event.remainSeats}</p>
         </div>
       </div>
     </div>

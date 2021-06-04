@@ -1,6 +1,6 @@
 import React from 'react';
 import { getDateAndTime } from '../utils/formatTime'
-import getParticipants from '../utils/commonFunctions'
+import { getParticipants, seats } from '../utils/commonFunctions'
 
 
 function CalendarBlock(props) {
@@ -21,30 +21,7 @@ function CalendarBlock(props) {
         endsAt: event.endAt.time,
       };
 
-  function checkNum(num) {
-    switch (true) {
-      case num === 1:
-        return "место";
-      case num >= 5:
-        return "мест";
-      default:
-        return "места";
-    }
-  }
-
-  function seats() {
-    if (event.remainSeats && event.remainSeats > 0) {
-      return `Осталось ${event.remainSeats} ${checkNum(event.remainSeats)}`;
-    }
-
-    const remainSeats = event.seats - event.takenSeats;
-
-    if (remainSeats > 0) {
-      return `Осталось ${remainSeats} ${checkNum(remainSeats)}`;
-    }
-
-    return 'Запись закрыта';
-  }  
+  const remainSeats = seats(event);
   
   // запись на мероприятие  
   function handleRegisterBtn() {
@@ -69,17 +46,12 @@ function CalendarBlock(props) {
         <li 
           className={ 
             event.booked ?  `list__element_is-registered list__element ${mainPage}` : "list__element list__element_main-page"}
-          onClick={() => enroll.handleEventClick({
-            id: event.id,
-            booked: event.booked,
-            title: event.title,
-            participants,
-            contact: event.contact,
-            adress: event.address,
-            description: event.description,
-            seats: seats(),
-            dateAndTime
-          })}
+          onClick={() => enroll.handleEventClick(
+            event,
+            remainSeats,
+            dateAndTime,
+            participants
+          )}
         >
         <div className="list__header">
           <p className="list__caption">{participants}</p>
@@ -103,7 +75,7 @@ function CalendarBlock(props) {
           >
             { !event.booked ? "Записаться" : "Отменить запись" }
           </button>
-          <p className="list__place-number">{seats()}</p>
+          <p className="list__place-number">{remainSeats}</p>
           <button 
             type="button" className={ event.booked ? "list__button-view_is-registered list__button-view" : "list__button-view"}
             onClick={ () =>  handleMoreInfoBtn() }

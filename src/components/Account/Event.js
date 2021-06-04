@@ -1,26 +1,21 @@
 import React from "react";
 import { getDateAndTime } from '../../utils/formatTime'
-
+import { seats } from '../../utils/commonFunctions'
 
 function Event (props) {
 
-  const { event, enroll, onData } = props;
+  const { event, enroll } = props;
 
   const dateAndTime = getDateAndTime(event);
 
-  const eventData = {
-    dateAndTime,
-    event
-  }
-
-  React.useEffect(() => {
-    onData(eventData)
-  }, [])
 
   return (
     <>
       <div className="event"
-        onClick={ () => enroll.toggleEnrollPopup() }
+        onClick={ () => {
+          enroll.toggleEnrollPopup()
+          enroll.handleEventClick(event, seats(event), dateAndTime);
+        }}
       >
         <div className="event__date">
           <p className="event__day">{dateAndTime.dayNumber}</p>
