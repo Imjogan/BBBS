@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import FilterButton from "../FilterButton/FilterButton";
-import CalendarBlock from "./CalendarBlock";
+import CalendarBlock from "../CalendarBlock";
 import CurrentListOfEvents from "../../context/CurrentListOfEvents";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import {
