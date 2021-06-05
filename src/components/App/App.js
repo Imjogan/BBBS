@@ -14,7 +14,6 @@ import CurrentUserContext from '../../context/CurrentUserContext';
 import CurrentListOfEvents from '../../context/CurrentListOfEvents';
 import Calendar from '../CalendarPage/calendarPage';
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import Loader from '../Loader/Loader';
 import EnrollPopup from "../EnrollPopup/EnrollPopup";
 import ConfirmPopup from "../ConfirmPopup/ConfirmPopup";
 import SuccessPopup from "../SuccessPopup/SuccessPopup";
@@ -29,28 +28,11 @@ function App() {
   const [isHeaderMobileOpen, setHeaderMobileOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  /* const [mainPageContent, setMainPageContent] = useState({}); */
   const [listEvents, setListEvents] = useState();
-  /* const [isContentReady, setIsContentReady] = useState(false); */
   const [path, setPath] = useState('');
 
   const history = useHistory();
 
-  /* useEffect(() => {
-    api.getEvents().then((res) => {
-      setListEvents(res.data);
-    });
-  }, []) */
-
-
-
-  /* useEffect(() => {
-    api.getMainPage().then(res => {
-      setMainPageContent(res.data)
-      setIsContentReady(true)
-    })
-
-  }, []) */
 
 
   const loc = useLocation();

@@ -25,6 +25,21 @@ function getDateAndTime({startAt, endAt}) {
   };
 }
 
-export { date, month, time, dayOfTheWeek, dateUnixFormat, getDateAndTime };
+  function sortingArrayOrderByDate(arr) {
+    return arr.sort(
+      (first, last) =>
+        dateUnixFormat(first.startAt) - dateUnixFormat(last.startAt)
+    );
+  }
+
+export {
+  date,
+  month,
+  time,
+  dayOfTheWeek,
+  dateUnixFormat,
+  getDateAndTime,
+  sortingArrayOrderByDate,
+};
 
 
