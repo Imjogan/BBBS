@@ -6,8 +6,15 @@ import api from "../../utils/api";
 
 function Account(props) {
   const userData = React.useContext(CurrentUserContext);
-  const events = React.useContext(CurrentListOfEvents);
+  const [events, setEvents] = React.useState([]);
   const [city, setCity] = React.useState([]);
+
+  React.useEffect(() => {
+    api.getEvents().then((res) => {
+      setEvents(res.data);
+    });
+  }, [])
+
 
 
   React.useEffect(() => {

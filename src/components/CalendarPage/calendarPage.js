@@ -3,6 +3,7 @@ import FilterButton from "../FilterButton/FilterButton";
 import CalendarBlock from "../CalendarBlock/CalendarBlock";
 import CurrentListOfEvents from "../../context/CurrentListOfEvents";
 import CurrentUserContext from "../../context/CurrentUserContext";
+import api from '../../utils/api';
 import {
   date,
   month,
@@ -14,11 +15,18 @@ import {
 let userEvents;
 
 function Calendar(props) {
-  const events = useContext(CurrentListOfEvents);
+  const [events, setEvents] = useState([]);
   const userData = useContext(CurrentUserContext);
   const [isMonth, setIsMonth] = useState();
   const [eventsMonth, setEventsMonth] = useState([]);
   const [isId, setIsId] = useState(""); // кнопка
+  
+
+  useEffect(() => {
+    api.getEvents().then((res) => {
+      setEvents(res.data);
+    });
+  }, [])
 
   function formatTimeArr(arr) {
     return arr.sort(

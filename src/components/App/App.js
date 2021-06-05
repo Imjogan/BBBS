@@ -29,28 +29,28 @@ function App() {
   const [isHeaderMobileOpen, setHeaderMobileOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [mainPageContent, setMainPageContent] = useState({});
+  /* const [mainPageContent, setMainPageContent] = useState({}); */
   const [listEvents, setListEvents] = useState();
-  const [isContentReady, setIsContentReady] = useState(false);
+  /* const [isContentReady, setIsContentReady] = useState(false); */
   const [path, setPath] = useState('');
 
   const history = useHistory();
 
-  useEffect(() => {
+  /* useEffect(() => {
     api.getEvents().then((res) => {
       setListEvents(res.data);
     });
-  }, [])
+  }, []) */
 
 
 
-  useEffect(() => {
+  /* useEffect(() => {
     api.getMainPage().then(res => {
       setMainPageContent(res.data)
       setIsContentReady(true)
     })
 
-  }, [])
+  }, []) */
 
 
   const loc = useLocation();
@@ -245,13 +245,10 @@ function App() {
               <main className="content page__content">
                 <Switch>
                   <Route path="/main">
-                    {isContentReady ?
                       <Main 
                         isLoggedIn={isLoggedIn} 
-                        pageContent={mainPageContent} 
                         enroll={enrollMechanism}
                       />
-                    : <Loader />}
                   </Route>
                   <Route path="/about">
                     <AboutUs />
