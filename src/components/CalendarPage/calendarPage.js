@@ -8,7 +8,7 @@ import {
   month,
   dayOfTheWeek,
   time,
-  dateUnixFormat,
+  sortingArrayOrderByDate,
 } from "../../utils/formatTime";
 
 let userEvents;
@@ -20,19 +20,12 @@ function Calendar(props) {
   const [eventsMonth, setEventsMonth] = useState([]);
   const [isId, setIsId] = useState(""); // кнопка
 
-  function formatTimeArr(arr) {
-    return arr.sort(
-      (first, last) =>
-        dateUnixFormat(first.startAt) - dateUnixFormat(last.startAt)
-    );
-  }
-
   if (events) {
     const arrUserEventsForCity = Array.from(events).filter(
       async (item) => item.city === userData.city
     );
 
-    userEvents = formatTimeArr(arrUserEventsForCity).map((item) => ({
+    userEvents = sortingArrayOrderByDate(arrUserEventsForCity).map((item) => ({
       ...item,
       startAt: {
         month: month(item.startAt),
