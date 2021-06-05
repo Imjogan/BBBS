@@ -8,7 +8,7 @@ import Header from "../Header/Header";
 import AuthPopup from "../AuthPopup/AuthPopup";
 import AboutUs from "../AboutUsPage/AboutUs";
 import api from "../../utils/api";
-import Account from '../AccountPage/Account';
+import Account from '../AccountPage/Account'
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import CurrentUserContext from '../../context/CurrentUserContext';
 import CurrentListOfEvents from '../../context/CurrentListOfEvents';
@@ -20,6 +20,7 @@ import ConfirmPopup from "../ConfirmPopup/ConfirmPopup";
 import SuccessPopup from "../SuccessPopup/SuccessPopup";
 import ErrorPopup from "../ErrorPopup/ErrorPopup";
 import './App.css';
+import { getParticipants } from '../../utils/commonFunctions';
 
 
 
@@ -193,8 +194,18 @@ function App() {
     setIsEnrollPopupOpen(false);
   }
 
-  function handleEventClick(event) {
-    setClickedEvent(event);
+  function handleEventClick(event, seats, dateAndTime, participants) {
+    setClickedEvent({
+      id: event.id,
+      booked: event.booked,
+      title: event.title,
+      participants: participants || getParticipants(event.tags.map((obj) => (obj.name))),
+      contact: event.contact,
+      adress: event.address,
+      description: event.description,
+      remainSeats: seats,
+      dateAndTime,
+    });
   }
 
   const enrollMechanism = {
@@ -272,27 +283,22 @@ function App() {
                 onClose={handlePopupClose}
                 onSubmit={handleLoginSubmit}
               />
-              { clickedEvent && 
-                <>
-                  <EnrollPopup 
-                    enroll={enrollMechanism}
-                    event={clickedEvent}
-                  /> 
-                  <ConfirmPopup 
-                    enroll={enrollMechanism}
-                    title={clickedEvent.title}
-                    id={clickedEvent.id}
-                  /> 
-                  <SuccessPopup 
-                    enroll={enrollMechanism}
-                    title={clickedEvent.title}
-                    history={history}
-                  />
-                  <ErrorPopup 
-                    enroll={enrollMechanism}
-                  /> 
-                </>
-              }
+              <EnrollPopup 
+                enroll={enrollMechanism}
+                event={clickedEvent}
+              /> 
+              <ConfirmPopup 
+                enroll={enrollMechanism}
+                event={clickedEvent}
+              /> 
+              <SuccessPopup 
+                enroll={enrollMechanism}
+                event={clickedEvent}
+                history={history}
+              />
+              <ErrorPopup 
+                enroll={enrollMechanism}
+              /> 
             </div>
           </div>
         </CurrentListOfEvents.Provider>

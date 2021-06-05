@@ -3,8 +3,6 @@ import Event from "./Event";
 import CurrentUserContext from '../../context/CurrentUserContext';
 import CurrentListOfEvents from '../../context/CurrentListOfEvents';
 import api from "../../utils/api";
-import EnrollPopup from "../EnrollPopup/EnrollPopup";
-
 
 function Account(props) {
   const userData = React.useContext(CurrentUserContext);
@@ -18,19 +16,6 @@ function Account(props) {
         el.id === userData.city && setCity(el.name)
       )))
   }, []);
-
- 
-
- 
-
-
-  // данные из карточки для попапа
-  const [eventData, setEventData] = React.useState({})
-
-  function handleEventData(obj) {
-    setEventData(obj)
-  }
-
 
   return (
     <>
@@ -50,18 +35,12 @@ function Account(props) {
                   key={event.id} 
                   event={event}
                   enroll={props.enroll}
-                  onData={handleEventData}
                 />
               ))
             }
           </div>
         </div>
       </section>
-      <EnrollPopup 
-        enroll={props.enroll}
-        event={eventData.event || ''}
-        dateAndTime={eventData.dateAndTime || ''}
-      /> 
     </>
   )
 }
