@@ -1,3 +1,6 @@
+import './ArticleBlock.css'
+
+
 function ArticleBlock(props) {
   return (
     <section className='one-column'>
