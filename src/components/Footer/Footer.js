@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer className='footer page__footer'>
       <div className='footer__three-columns'>
-        <a href='https://www.nastavniki.org/' className='footer__logo'></a>
+        <a href='https://www.nastavniki.org/' className='footer__logo'>сайт наставники</a>
         <a href="https://www.nastavniki.org/campaign/pomoch-dengami/" type='button' className='footer__donation link'>
             Помочь деньгами
         </a>

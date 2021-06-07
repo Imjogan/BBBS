@@ -1,3 +1,5 @@
+import './VideoCard.css'
+
 function VideoCard(props) {
 
   const movie = props.movies
