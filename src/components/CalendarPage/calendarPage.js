@@ -1,10 +1,10 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext} from "react";
 import FilterButton from "../FilterButton/FilterButton";
 import CalendarBlock from "../CalendarBlock/CalendarBlock";
-import CurrentListOfEvents from "../../context/CurrentListOfEvents";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import api from '../../utils/api';
 import Loader from '../Loader/Loader';
+import './CalendarPage.css';
 import {
   date,
   month,
@@ -14,7 +14,8 @@ import {
 } from "../../utils/formatTime";
 
 let userEvents;
-
+let arrMouths;
+let sortArr;
 function Calendar(props) {
   const [events, setEvents] = useState([]);
   const userData = useContext(CurrentUserContext);
@@ -22,41 +23,40 @@ function Calendar(props) {
   const [eventsMonth, setEventsMonth] = useState([]);
   const [isContentReady, setIsContentReady] = useState(false);
   const [isId, setIsId] = useState(""); // кнопка
-  
+  const [firstMonth, setFirstMonth] = useState("")
+  useEffect(()=>{
+      const arrUserEventsForCity = Array.from(events).filter(
+        (item) => item.city === userData.city
+      );
 
-  
-
-  if (events) {
-    const arrUserEventsForCity = Array.from(events).filter(
-      async (item) => item.city === userData.city
+      userEvents = sortingArrayOrderByDate(arrUserEventsForCity).map(
+        (item) => ({
+          ...item,
+          startAt: {
+            month: month(item.startAt),
+            data: date(item.startAt),
+            day: dayOfTheWeek(item.startAt),
+            time: time(item.startAt),
+          },
+          endAt: {
+            month: month(item.endAt),
+            data: date(item.endAt),
+            day: dayOfTheWeek(item.endAt),
+            time: time(item.endAt),
+          },
+        })
+      );
+    arrMouths = userEvents.map((i) => i.startAt.month);
+    sortArr = arrMouths.filter(
+      (it, index) => index === arrMouths.indexOf(it)
     );
-
-    userEvents = sortingArrayOrderByDate(arrUserEventsForCity).map((item) => ({
-      ...item,
-      startAt: {
-        month: month(item.startAt),
-        data: date(item.startAt),
-        day: dayOfTheWeek(item.startAt),
-        time: time(item.startAt),
-      },
-      endAt: {
-        month: month(item.endAt),
-        data: date(item.endAt),
-        day: dayOfTheWeek(item.endAt),
-        time: time(item.endAt),
-      },
-    }));
-  }
-
-  const arrMouths = userEvents.map((i) => i.startAt.month);
-  const sortArr = arrMouths.filter(
-    (it, index) => index === arrMouths.indexOf(it)
-  );
-
+    setFirstMonth(sortArr[0]);
+  })
+  
   useEffect(() => {
     setIsMonth(sortArr[0]);
     setIsId(0);
-  }, []);
+  }, [firstMonth]);
 
   useEffect(() => {
     setEventsMonth(userEvents.filter((item) => item.startAt.month === isMonth));
@@ -72,9 +72,9 @@ function Calendar(props) {
       setEvents(res.data);
       setIsContentReady(true);
     });
-  }, [])
+  }, []);
 
-  if(isContentReady) {
+  if (isContentReady) {
     return (
       <>
         <main className="content page__content">
@@ -120,8 +120,8 @@ function Calendar(props) {
         </main>
       </>
     );
-  } return <Loader />;
-  
+  }
+  return <Loader />;
 }
 
 export default Calendar;

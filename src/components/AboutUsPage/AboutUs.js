@@ -1,3 +1,6 @@
+import './AboutUs.css';
+
+
 function AboutUs () {
   return (
 <section className="about">

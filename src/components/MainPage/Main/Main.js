@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import CalendarBlock from '../CalendarBlock/CalendarBlock';
-import Article from './Article/Article';
-import ArticleBlock from './ArticleBlock/ArticleBlock';
-import VideoCard from './VideoCard/VideoCard';
-import Question from './Question';
-import api from '../../utils/api';
-import Loader from '../Loader/Loader';
-
+import CalendarBlock from '../../CalendarBlock/CalendarBlock';
+import Article from '../Article/Article';
+import ArticleBlock from '../ArticleBlock/ArticleBlock';
+import VideoCard from '../VideoCard/VideoCard';
+import Question from '../Question/Question';
+import api from '../../../utils/api';
+import Loader from '../../Loader/Loader';
+import './Main.css';
 
 
 function Main(props) {
