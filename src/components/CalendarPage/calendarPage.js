@@ -2,8 +2,9 @@ import { useEffect, useState, useContext} from "react";
 import FilterButton from "../FilterButton/FilterButton";
 import CalendarBlock from "../CalendarBlock/CalendarBlock";
 import CurrentUserContext from "../../context/CurrentUserContext";
-import api from "../../utils/api";
-import Loader from "../Loader/Loader";
+import api from '../../utils/api';
+import Loader from '../Loader/Loader';
+import './CalendarPage.css';
 import {
   date,
   month,
