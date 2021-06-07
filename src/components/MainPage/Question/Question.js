@@ -1,3 +1,5 @@
+import './Question.css';
+
 function Question(props) {
   return (
     <section className='three-columns'>
