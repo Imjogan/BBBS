@@ -1,10 +1,10 @@
 import React from "react";
 import Event from "./Event";
 import CurrentUserContext from "../../context/CurrentUserContext";
-import CurrentListOfEvents from "../../context/CurrentListOfEvents";
 import api from "../../utils/api";
 import { sortingArrayOrderByDate } from "../../utils/formatTime";
-import Loader from '../Loader/Loader'
+import Loader from '../Loader/Loader';
+import './Account.css';
 
 function Account(props) {
   const userData = React.useContext(CurrentUserContext);

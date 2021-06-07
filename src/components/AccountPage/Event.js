@@ -1,6 +1,7 @@
 import React from "react";
 import { getDateAndTime } from '../../utils/formatTime'
 import { seats } from '../../utils/commonFunctions'
+import './Event.css';
 
 function Event (props) {
 

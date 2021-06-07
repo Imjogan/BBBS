@@ -2,7 +2,7 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { Route, Switch, useHistory, Redirect, useLocation } from "react-router-dom";
-import Main from "../MainPage/Main";
+import Main from "../MainPage/Main/Main";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import AuthPopup from "../AuthPopup/AuthPopup";
