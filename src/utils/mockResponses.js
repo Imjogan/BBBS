@@ -13,7 +13,22 @@ export const getCityListRes = [
   },
   {
     id: 2,
-    name: 'Воронеж',
+    name: 'Санкт-Петербург',
+    isPrimary: true,
+  },
+  {
+    id: 3,
+    name: 'Калиниград',
+    isPrimary: false,
+  },
+  {
+    id: 4,
+    name: 'Тула',
+    isPrimary: false,
+  },
+  {
+    id: 5,
+    name: 'Тверь',
     isPrimary: false,
   },
 ];
