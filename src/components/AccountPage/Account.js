@@ -5,11 +5,14 @@ import api from "../../utils/api";
 import { sortingArrayOrderByDate } from "../../utils/formatTime";
 import Loader from '../Loader/Loader';
 import './Account.css';
+import CityPopup from "../CityPopup/CityPopup";
+
 
 function Account(props) {
   const userData = React.useContext(CurrentUserContext);
   const [events, setEvents] = React.useState([]);
-  const [city, setCity] = React.useState([]);
+  const [city, setCity] = React.useState('');
+  const [citiesArray, setCitiesArray] = React.useState([]);
   const [isContentReady, setIsContentReady] = React.useState(false)
 
   React.useEffect(() => {
@@ -19,13 +22,13 @@ function Account(props) {
     });
   }, [])
 
-
-
-  React.useEffect(() => {
+  React.useEffect(() => { // попросить бек высылать имя города
     api
       .getCitiesList()
-      .then((res) =>
+      .then((res) => {
+        setCitiesArray(res)
         res.data.map((el) => el.id === userData.city && setCity(el.name))
+      }
       );
   }, []);
 
@@ -63,6 +66,11 @@ if(isContentReady) {
           </div>
         </div>
       </section>
+      <CityPopup 
+        enroll={props.enroll}
+        onUserData={props.onUserData}
+        cities={citiesArray}
+      />
     </>
   );
 }  return <Loader />
