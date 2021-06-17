@@ -48,6 +48,11 @@ function takePartInEvent(event) {
     .then((res) => checkResponse(res));
 }
 
+function changeCity(cityId) {
+  return instance
+    .patch("/profile", {city: cityId}, headers);
+}
+
 export default {
   auth,
   getCitiesList,
@@ -55,4 +60,5 @@ export default {
   getMainPage,
   getEvents,
   takePartInEvent,
+  changeCity
 };

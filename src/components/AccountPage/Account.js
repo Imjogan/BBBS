@@ -32,7 +32,6 @@ function Account(props) {
 
 if(isContentReady) {
   return (
-    <>
       <section className="account">
         <div className="account__buttons">
           <button type="button" className="account__button">
@@ -63,7 +62,6 @@ if(isContentReady) {
           </div>
         </div>
       </section>
-    </>
   );
 }  return <Loader />
   

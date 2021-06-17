@@ -85,7 +85,7 @@ function Main(props) {
               ))}
           </section>
         </section>
-        <ArticleBlock className={'background-green'} text={mainPageContent.articles[1].title} />;
+        <ArticleBlock className={'background-green'} text={mainPageContent.articles[1].title} />
       </>
     ) 
   } 
