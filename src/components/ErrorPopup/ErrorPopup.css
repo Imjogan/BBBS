@@ -1,5 +1,3 @@
-
-
 .popup {
   opacity: 0;
   visibility: hidden;
@@ -30,6 +28,31 @@
   line-height: 30px;
   color: #000000;
 }
+
+.popup__container {
+  position: fixed;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%, -50%);
+  max-width: 770px;
+  min-height: 559px;
+  background-color: #fff;
+  z-index: 2;
+  border-radius: 30px;
+  box-sizing: border-box;
+}
+
+.popup__container:hover {
+  cursor: auto;
+}
+
+@media screen and (max-width: 800px) {
+  .popup__container {
+    min-width: 290px;
+    min-height: 546px;
+  }
+}
+
 @media (max-width: 1024px) {
   .list__title{
       font-size: 19px;

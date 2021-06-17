@@ -31,15 +31,17 @@ function App() {
   const [listEvents, setListEvents] = useState();
   const [path, setPath] = useState('');
 
+  function updateUserData(data) {
+    setCurrentUser(data);
+  }
+
   const history = useHistory();
-
-
-
   const loc = useLocation();
+
   useEffect(() => {
     if (localStorage.getItem('jwt')) {
       api.getUserProfile().then(res => {
-        setCurrentUser(res.data)
+        updateUserData(res.data)
         setIsLoggedIn(true)
         history.push(loc.pathname)
       })
@@ -123,6 +125,7 @@ function App() {
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [isErrorPopupOpen, setIsErrorPopupOpen] = useState(false);
+  const [isCityPopupOpen, setIsCityPopupOpen] = useState(false);
   const [clickedEvent, setClickedEvent] = useState(null);
 
   useEffect(() => {
@@ -152,6 +155,11 @@ function App() {
   function toggleErrorPopup() {
     setIsErrorPopupOpen(!isErrorPopupOpen);
   }
+
+  function toggleCityPopup() {
+    setIsCityPopupOpen(!isCityPopupOpen);
+  }
+
 
   function handleEnroll(id) {
     api.takePartInEvent({ 'event': id })
@@ -203,7 +211,9 @@ function App() {
     isConfirmPopupOpen,
     toggleSuccessPopup,
     isSuccessPopupOpen,
-    handleEventClick
+    handleEventClick,
+    isCityPopupOpen,
+    toggleCityPopup
   }
 
   return (
@@ -223,6 +233,8 @@ function App() {
                 fixed={fixed}
                 onMobileHeaderClick={handleHeaderMobileClick}
                 isHeaderMobileOpen={isHeaderMobileOpen}
+                onChangeCity={toggleCityPopup}
+                signOut={handleSignOut}
               />
               <main className="content page__content">
                 <Switch>
@@ -247,6 +259,7 @@ function App() {
                     isLoggedIn={isLoggedIn}
                     signOut={handleSignOut}
                     enroll={enrollMechanism}
+                    onUserData={updateUserData}
                   />
                   <Route exact path="/">
                     <Redirect to="/main" />
