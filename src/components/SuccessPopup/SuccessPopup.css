@@ -1,5 +1,3 @@
-
-
 .popup {
   opacity: 0;
   visibility: hidden;
@@ -109,19 +107,18 @@
   }
 }
 
-.popup-calendar__logo{
-  background: url(../../images/calendar-success.svg) no-repeat 100%/contain;
-    margin: 0 auto;
-    margin-top: 30px;
-    padding: 0;
-    width: 400px;
-    min-height: 169px;
+.popup-calendar__img {
+	margin: 0 auto;
+	width: 100%;
+	min-height: 169px;
+	background-size: contain;
+	background-position: center;
 }
 
-@media screen and (max-width: 450px) {
-  .popup-calendar__logo {
-    width: 270px;
-  }
+@media screen and (max-width: 768px) {
+	.popup-calendar__img {
+		margin-bottom: 15px;
+	}
 }
 
 .list__done{
