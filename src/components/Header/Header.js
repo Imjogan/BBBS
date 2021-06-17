@@ -111,8 +111,26 @@ function Header (props) {
         </nav>
         <div className="popup-menu__footer">
           <p className="popup_menu__city">Москва.</p>
-          <button type="button" className="popup-menu__change-city">Изменить город</button>
-          <button type="button" className="popup-menu__exit">Выйти</button>
+          <button 
+            type="button" 
+            className="popup-menu__change-city" 
+            onClick={() => {
+              props.onMobileHeaderClick(); 
+              props.onChangeCity()
+            }}
+          >
+              Изменить город
+          </button>
+          <button 
+            type="button" 
+            className="popup-menu__exit"
+            onClick={() => {
+              props.onMobileHeaderClick(); 
+              props.signOut()
+            }}
+          >
+            Выйти
+          </button>
         </div>
       </div>
     </>

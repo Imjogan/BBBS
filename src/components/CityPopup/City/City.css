@@ -6,12 +6,5 @@
   font-weight: 300;
   font-size: 15px;
   line-height: 1.27;
-}
-
-.cities-list__input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  -o-appearance: none;
-  appearance: none;
+  text-transform: capitalize;
 }

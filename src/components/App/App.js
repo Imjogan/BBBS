@@ -233,6 +233,8 @@ function App() {
                 fixed={fixed}
                 onMobileHeaderClick={handleHeaderMobileClick}
                 isHeaderMobileOpen={isHeaderMobileOpen}
+                onChangeCity={toggleCityPopup}
+                signOut={handleSignOut}
               />
               <main className="content page__content">
                 <Switch>

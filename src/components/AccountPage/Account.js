@@ -26,7 +26,7 @@ function Account(props) {
     api
       .getCitiesList()
       .then((res) => {
-        setCitiesArray(res)
+        setCitiesArray(res.data)
         res.data.map((el) => el.id === userData.city && setCity(el.name))
       }
       );
@@ -38,7 +38,7 @@ if(isContentReady) {
     <>
       <section className="account">
         <div className="account__buttons">
-          <button type="button" className="account__button">
+          <button type="button" className="account__button" onClick={() => props.enroll.toggleCityPopup()}>
             {city}. Изменить ваш город
           </button>
           <button

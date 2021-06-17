@@ -1,16 +1,17 @@
 import './CityPopup.css';
 import City from './City/City';
+import api from "../../utils/api";
 
 
 function CityPopup({ enroll, onUserData, cities }) {
- // ВОЗМОЖНО, ЗНАЧЕНИЕ ВЭЛЬЮ ПРИДЕТСЯ ПОМЕНЯТЬ НА АЙДИ ГОРОДА, НАДО УТОЧНИТЬ У БЕКА
 
- const {isCityPopupOpen, toggleCityPopup} = enroll;
+  const {isCityPopupOpen, toggleCityPopup} = enroll;
 
-  function handleCityChange(e) {
-    console.log(e.target.value);
-    // patch запрос к апи для изменения города в профиле юзера => res
-    // onUserData(res);
+  function handleCityChange(id) {
+    api.changeCity(id)
+      .then((res) => onUserData(res.data))
+      .catch((err) => console.log(err))
+
     toggleCityPopup();
   }
 
@@ -21,15 +22,15 @@ function CityPopup({ enroll, onUserData, cities }) {
     };
 
     array.map((city) => {
-      if (city.name.toLowerCase() === 'москва') {
-        citiesObj.main.unshift(city);
-      } else 
-      if (city.name.toLowerCase() === 'санкт-петербург') {
+
+      if (city.isPrimary === true) {
         citiesObj.main.push(city);
-      } else {
+      } 
+      else {
         citiesObj.other.push(city);
       }
 
+      citiesObj.main.sort();
       citiesObj.other.sort();
 
       return citiesObj;
@@ -38,9 +39,7 @@ function CityPopup({ enroll, onUserData, cities }) {
     return citiesObj;
   }
 
-  const a = [{name: 'москва', id: 1}, {name: 'санкт-петербург', id: 2}, {name: 'а', id: 3}, {name: 'б', id: 4}, {name: 'в', id: 5}, {name: 'г', id: 6}, {name: 'д', id: 7}]; // типа список городов
-
-  const citiesToRender = filterCities(a); // поменять на cities
+  const citiesToRender = filterCities(cities);
 
   return (
     <div className={ isCityPopupOpen ? "visible-block popup" : "popup" }>
@@ -48,12 +47,14 @@ function CityPopup({ enroll, onUserData, cities }) {
         <h2 className="list__title">
           Выберите ваш город
         </h2>
-        <ul className="cities-list" onChange={ handleCityChange }>
+        <ul className="cities-list">
           <div className="cities-list__main">
             {citiesToRender.main.map((city) => (
               <City
                 key={city.id}
+                id={city.id}
                 city={city.name}
+                handleChange={handleCityChange}
               />
             ))}
           </div>
@@ -62,6 +63,7 @@ function CityPopup({ enroll, onUserData, cities }) {
               key={city.id}
               id={city.id}
               city={city.name}
+              handleChange={handleCityChange}
             />
           ))}
         </ul>
