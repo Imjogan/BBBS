@@ -3,7 +3,7 @@ import City from './City/City';
 import api from "../../utils/api";
 
 
-function CityPopup({ enroll, onUserData, cities }) {
+function CityPopup({ enroll, onUserData, onUserCity, cities }) {
 
   const {isCityPopupOpen, toggleCityPopup} = enroll;
 
@@ -11,7 +11,8 @@ function CityPopup({ enroll, onUserData, cities }) {
     api.changeCity(id)
       .then((res) => onUserData(res.data))
       .catch((err) => console.log(err))
-
+    
+    onUserCity();
     toggleCityPopup();
   }
 
