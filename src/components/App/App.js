@@ -18,6 +18,7 @@ import EnrollPopup from "../EnrollPopup/EnrollPopup";
 import ConfirmPopup from "../ConfirmPopup/ConfirmPopup";
 import SuccessPopup from "../SuccessPopup/SuccessPopup";
 import ErrorPopup from "../ErrorPopup/ErrorPopup";
+import CityPopup from "../CityPopup/CityPopup";
 import './App.css';
 import { getParticipants } from '../../utils/commonFunctions';
 
@@ -28,13 +29,34 @@ function App() {
   const [isHeaderMobileOpen, setHeaderMobileOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [citiesArray, setCitiesArray] = useState([]);
   const [listEvents, setListEvents] = useState();
   const [path, setPath] = useState('');
 
+  // определение данных пользователя
   function updateUserData(data) {
     setCurrentUser(data);
   }
 
+  // функция добавление названия города в объект данных пользователя и получения списка городов (вызывается при логиине и изменении города)
+  function getCities() {
+    api
+      .getCitiesList()
+      .then((res) => {
+        setCitiesArray(res.data);
+
+        function findCity(el) {
+          if (el.id !== currentUser.city) {
+            return false;
+          }
+          return el;
+        }
+        const city = res.data.find((findCity)).name;
+        updateUserData({...currentUser, cityName: city});
+      });
+  }
+ 
+  
   const history = useHistory();
   const loc = useLocation();
 
@@ -109,6 +131,7 @@ function App() {
           localStorage.setItem('jwt', res.data.refresh);
           setIsLoggedIn(true);
           handlePopupClose();
+          getCities();
           history.push(path)
         }
       })
@@ -117,6 +140,7 @@ function App() {
   function handleSignOut() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
+    setCitiesArray([]);
   }
 
   // попапы календаря и запись
@@ -191,7 +215,7 @@ function App() {
       title: event.title,
       participants: participants || getParticipants(event.tags.map((obj) => (obj.name))),
       contact: event.contact,
-      adress: event.address,
+      address: event.address,
       description: event.description,
       remainSeats: seats,
       dateAndTime,
@@ -260,6 +284,7 @@ function App() {
                     signOut={handleSignOut}
                     enroll={enrollMechanism}
                     onUserData={updateUserData}
+                    onUserCity={getCities}
                   />
                   <Route exact path="/">
                     <Redirect to="/main" />
@@ -291,6 +316,12 @@ function App() {
               <ErrorPopup 
                 enroll={enrollMechanism}
               /> 
+              <CityPopup 
+                enroll={enrollMechanism}
+                onUserData={updateUserData}
+                onUserCity={getCities}
+                cities={citiesArray}
+              />
             </div>
           </div>
         </CurrentListOfEvents.Provider>

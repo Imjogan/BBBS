@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import CurrentUserContext from "../../context/CurrentUserContext";
 
 
 function Header (props) {
+  const userData = React.useContext(CurrentUserContext);
 
   return (
     <>
@@ -109,8 +111,8 @@ function Header (props) {
             </li>
           </ul>
         </nav>
-        <div className="popup-menu__footer">
-          <p className="popup_menu__city">Москва.</p>
+        {props.isLogged && <div className="popup-menu__footer">
+          <p className="popup_menu__city">{userData.cityName}.</p>
           <button 
             type="button" 
             className="popup-menu__change-city" 
@@ -131,7 +133,7 @@ function Header (props) {
           >
             Выйти
           </button>
-        </div>
+        </div>}
       </div>
     </>
   )
