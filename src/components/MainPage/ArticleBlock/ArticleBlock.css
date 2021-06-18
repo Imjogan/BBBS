@@ -37,6 +37,7 @@
   line-height: 19px;
   letter-spacing: 0.2px;
   color: #224CFF;
+  cursor: pointer;
 }
   
 @media (max-width: 1024px) {

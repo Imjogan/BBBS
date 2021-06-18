@@ -34,7 +34,7 @@
 }
 
 .page__content {
-  margin-bottom: 119px;
+  /* margin-bottom: 119px; */
   padding: calc(34px + 40px + 76px) 75px 0 75px;
 }
 
@@ -57,7 +57,7 @@
 @media (max-width: 1024px) {
   .page__content {
     padding: calc(30px + 40px * 2) 127px;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
   }
 }
 
@@ -69,6 +69,6 @@
 
   .page__content {
     padding: calc(30px + 40px + 10px) 15px;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
   }
 }
