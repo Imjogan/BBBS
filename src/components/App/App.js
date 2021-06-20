@@ -1,28 +1,32 @@
-
 import { useEffect, useState, useCallback, useRef } from "react";
 import { Helmet } from "react-helmet-async";
-import { Route, Switch, useHistory, Redirect, useLocation } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  useHistory,
+  Redirect,
+  useLocation,
+} from "react-router-dom";
 import Main from "../MainPage/Main/Main";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import AuthPopup from "../AuthPopup/AuthPopup";
 import AboutUs from "../AboutUsPage/AboutUs";
 import api from "../../utils/api";
-import Account from '../AccountPage/Account'
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import CurrentUserContext from '../../context/CurrentUserContext';
-import CurrentListOfEvents from '../../context/CurrentListOfEvents';
-import Calendar from '../CalendarPage/calendarPage';
+import Account from "../AccountPage/Account";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import CurrentUserContext from "../../context/CurrentUserContext";
+import CurrentListOfEvents from "../../context/CurrentListOfEvents";
+import Calendar from "../CalendarPage/calendarPage";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import EnrollPopup from "../EnrollPopup/EnrollPopup";
 import ConfirmPopup from "../ConfirmPopup/ConfirmPopup";
 import SuccessPopup from "../SuccessPopup/SuccessPopup";
 import ErrorPopup from "../ErrorPopup/ErrorPopup";
 import CityPopup from "../CityPopup/CityPopup";
-import './App.css';
-import { getParticipants } from '../../utils/commonFunctions';
-
-
+import "./App.css";
+import { getParticipants } from "../../utils/commonFunctions";
+import PlacesPage from "../PlacesPage/PlacesPage";
 
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false);
@@ -31,7 +35,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [citiesArray, setCitiesArray] = useState([]);
   const [listEvents, setListEvents] = useState();
-  const [path, setPath] = useState('');
+  const [path, setPath] = useState("");
 
   // определение данных пользователя
   function updateUserData(data) {
@@ -40,36 +44,32 @@ function App() {
 
   // функция добавление названия города в объект данных пользователя и получения списка городов (вызывается при логиине и изменении города)
   function getCities() {
-    api
-      .getCitiesList()
-      .then((res) => {
-        setCitiesArray(res.data);
+    api.getCitiesList().then((res) => {
+      setCitiesArray(res.data);
 
-        function findCity(el) {
-          if (el.id !== currentUser.city) {
-            return false;
-          }
-          return el;
+      function findCity(el) {
+        if (el.id !== currentUser.city) {
+          return false;
         }
-        const city = res.data.find((findCity)).name;
-        updateUserData({...currentUser, cityName: city});
-      });
+        return el;
+      }
+      const city = res.data.find(findCity).name;
+      updateUserData({ ...currentUser, cityName: city });
+    });
   }
- 
-  
+
   const history = useHistory();
   const loc = useLocation();
 
   useEffect(() => {
-    if (localStorage.getItem('jwt')) {
-      api.getUserProfile().then(res => {
-        updateUserData(res.data)
-        setIsLoggedIn(true)
-        history.push(loc.pathname)
-      })
-
+    if (localStorage.getItem("jwt")) {
+      api.getUserProfile().then((res) => {
+        updateUserData(res.data);
+        setIsLoggedIn(true);
+        history.push(loc.pathname);
+      });
     }
-  }, [])
+  }, []);
 
   // при обратном скролле показываем header с display: fixed. При возврщании к началу страницы скрываем класс с фиксом
   const [fixed, setFixed] = useState(false);
@@ -79,7 +79,11 @@ function App() {
   const offset = 50;
 
   const checkScroll = useCallback(() => {
-    if (window.pageYOffset < offsetRef.current && window.pageYOffset > offset && !isLogPopupOpen) {
+    if (
+      window.pageYOffset < offsetRef.current &&
+      window.pageYOffset > offset &&
+      !isLogPopupOpen
+    ) {
       setFixed(true);
     } else {
       setFixed(false);
@@ -90,7 +94,7 @@ function App() {
   useEffect(() => {
     window.onscroll = () => {
       checkScroll();
-    }
+    };
   }, [checkScroll]);
 
   function handleHeaderMobileClick() {
@@ -104,7 +108,7 @@ function App() {
 
   function handleLogPopupOpen(data) {
     setIsLogPopupOpen(true);
-    setPath(data)
+    setPath(data);
   }
 
   function handleHeaderCalendarClick() {
@@ -125,16 +129,15 @@ function App() {
 
   function handleLoginSubmit(data) {
     const { password, username } = data;
-    api.auth(username, password)
-      .then(res => {
-        if (res.data.access) {
-          localStorage.setItem('jwt', res.data.refresh);
-          setIsLoggedIn(true);
-          handlePopupClose();
-          getCities();
-          history.push(path)
-        }
-      })
+    api.auth(username, password).then((res) => {
+      if (res.data.access) {
+        localStorage.setItem("jwt", res.data.refresh);
+        setIsLoggedIn(true);
+        handlePopupClose();
+        getCities();
+        history.push(path);
+      }
+    });
   }
 
   function handleSignOut() {
@@ -184,9 +187,9 @@ function App() {
     setIsCityPopupOpen(!isCityPopupOpen);
   }
 
-
   function handleEnroll(id) {
-    api.takePartInEvent({ 'event': id })
+    api
+      .takePartInEvent({ event: id })
       .then((res) => {
         console.log(res);
         toggleSuccessPopup();
@@ -199,7 +202,7 @@ function App() {
       .finally(() => {
         setIsEnrollPopupOpen(false);
         setIsConfirmPopupOpen(false);
-      })
+      });
   }
 
   function handleCancell(id) {
@@ -213,7 +216,8 @@ function App() {
       id: event.id,
       booked: event.booked,
       title: event.title,
-      participants: participants || getParticipants(event.tags.map((obj) => (obj.name))),
+      participants:
+        participants || getParticipants(event.tags.map((obj) => obj.name)),
       contact: event.contact,
       address: event.address,
       description: event.description,
@@ -223,9 +227,9 @@ function App() {
   }
 
   const enrollMechanism = {
-    handleEnroll, 
+    handleEnroll,
     handleCancell,
-    toggleEnrollPopup, 
+    toggleEnrollPopup,
     isEnrollPopupOpen,
     rememberEnrollPopupOpen,
     wasEnrollPopupOpened,
@@ -237,8 +241,8 @@ function App() {
     isSuccessPopupOpen,
     handleEventClick,
     isCityPopupOpen,
-    toggleCityPopup
-  }
+    toggleCityPopup,
+  };
 
   return (
     <>
@@ -263,13 +267,13 @@ function App() {
               <main className="content page__content">
                 <Switch>
                   <Route path="/main">
-                      <Main 
-                        isLoggedIn={isLoggedIn} 
-                        enroll={enrollMechanism}
-                      />
+                    <Main isLoggedIn={isLoggedIn} enroll={enrollMechanism} />
                   </Route>
                   <Route path="/about">
                     <AboutUs />
+                  </Route>
+                  <Route path="/where_to_go">
+                    <></>
                   </Route>
                   <ProtectedRoute
                     component={Calendar}
@@ -286,6 +290,10 @@ function App() {
                     onUserData={updateUserData}
                     onUserCity={getCities}
                   />
+                  <Route path="/places">
+                    <PlacesPage />
+                  </Route>
+
                   <Route exact path="/">
                     <Redirect to="/main" />
                   </Route>
@@ -300,23 +308,15 @@ function App() {
                 onClose={handlePopupClose}
                 onSubmit={handleLoginSubmit}
               />
-              <EnrollPopup 
-                enroll={enrollMechanism}
-                event={clickedEvent}
-              /> 
-              <ConfirmPopup 
-                enroll={enrollMechanism}
-                event={clickedEvent}
-              /> 
-              <SuccessPopup 
+              <EnrollPopup enroll={enrollMechanism} event={clickedEvent} />
+              <ConfirmPopup enroll={enrollMechanism} event={clickedEvent} />
+              <SuccessPopup
                 enroll={enrollMechanism}
                 event={clickedEvent}
                 history={history}
               />
-              <ErrorPopup 
-                enroll={enrollMechanism}
-              /> 
-              <CityPopup 
+              <ErrorPopup enroll={enrollMechanism} />
+              <CityPopup
                 enroll={enrollMechanism}
                 onUserData={updateUserData}
                 onUserCity={getCities}
@@ -329,6 +329,5 @@ function App() {
     </>
   );
 }
-
 
 export default App;

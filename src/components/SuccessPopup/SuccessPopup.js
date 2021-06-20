@@ -28,7 +28,10 @@ function SuccessPopup(props) {
             className="popup__close popup__close_type_calendar"
             onClick={() => enroll.toggleSuccessPopup()}
           />
-          <Animation animationData={success} />
+          <Animation
+            animationData={success}
+            containerClassname="popup-calendar__img"
+          />
           <p className="list__done">
             Вы записаны на мероприятие
             <br />
