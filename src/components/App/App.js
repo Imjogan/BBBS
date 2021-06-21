@@ -34,7 +34,6 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [citiesArray, setCitiesArray] = useState([]);
-  const [listEvents, setListEvents] = useState();
   const [path, setPath] = useState("");
 
   // определение данных пользователя
@@ -53,6 +52,7 @@ function App() {
         }
         return el;
       }
+
       const city = res.data.find(findCity).name;
       updateUserData({ ...currentUser, cityName: city });
     });
@@ -251,80 +251,77 @@ function App() {
         <link rel="canonical" /* href="https://www.tacobell.com/" */ />
       </Helmet>
       <CurrentUserContext.Provider value={currentUser}>
-        <CurrentListOfEvents.Provider value={listEvents}>
-          <div className="body">
-            <div className="page">
-              <Header
-                isLogged={isLoggedIn}
-                onLogoClick={handleProfileLogoClick}
-                onCalendarClick={handleHeaderCalendarClick}
-                fixed={fixed}
-                onMobileHeaderClick={handleHeaderMobileClick}
-                isHeaderMobileOpen={isHeaderMobileOpen}
-                onChangeCity={toggleCityPopup}
-                signOut={handleSignOut}
-              />
-              <main className="content page__content">
-                <Switch>
-                  <Route path="/main">
-                    <Main isLoggedIn={isLoggedIn} enroll={enrollMechanism} />
-                  </Route>
-                  <Route path="/about">
-                    <AboutUs />
-                  </Route>
-                  <Route path="/where_to_go">
-                    <></>
-                  </Route>
-                  <ProtectedRoute
-                    component={Calendar}
-                    path="/calendar"
+        <div className="body">
+          <div className="page">
+            <Header
+              isLogged={isLoggedIn}
+              onLogoClick={handleProfileLogoClick}
+              onCalendarClick={handleHeaderCalendarClick}
+              fixed={fixed}
+              onMobileHeaderClick={handleHeaderMobileClick}
+              isHeaderMobileOpen={isHeaderMobileOpen}
+              onChangeCity={toggleCityPopup}
+              signOut={handleSignOut}
+            />
+            <main className="content page__content">
+              <Switch>
+                <Route path="/main">
+                  <Main isLoggedIn={isLoggedIn} enroll={enrollMechanism} />
+                </Route>
+                <Route path="/about">
+                  <AboutUs />
+                </Route>
+                <Route path="/places">
+                  <PlacesPage
+                    toggleCityPopup={toggleCityPopup}
                     isLoggedIn={isLoggedIn}
-                    enroll={enrollMechanism}
                   />
-                  <ProtectedRoute
-                    component={Account}
-                    path="/account"
-                    isLoggedIn={isLoggedIn}
-                    signOut={handleSignOut}
-                    enroll={enrollMechanism}
-                    onUserData={updateUserData}
-                    onUserCity={getCities}
-                  />
-                  <Route path="/places">
-                    <PlacesPage />
-                  </Route>
-
-                  <Route exact path="/">
-                    <Redirect to="/main" />
-                  </Route>
-                  <Route path="*">
-                    <NotFoundPage />
-                  </Route>
-                </Switch>
-              </main>
-              <Footer />
-              <AuthPopup
-                isOpen={isLogPopupOpen}
-                onClose={handlePopupClose}
-                onSubmit={handleLoginSubmit}
-              />
-              <EnrollPopup enroll={enrollMechanism} event={clickedEvent} />
-              <ConfirmPopup enroll={enrollMechanism} event={clickedEvent} />
-              <SuccessPopup
-                enroll={enrollMechanism}
-                event={clickedEvent}
-                history={history}
-              />
-              <ErrorPopup enroll={enrollMechanism} />
-              <CityPopup
-                enroll={enrollMechanism}
-                onUserData={updateUserData}
-                onUserCity={getCities}
-                cities={citiesArray}
-              />
-            </div>
+                </Route>
+                <ProtectedRoute
+                  component={Calendar}
+                  path="/calendar"
+                  isLoggedIn={isLoggedIn}
+                  enroll={enrollMechanism}
+                />
+                <ProtectedRoute
+                  component={Account}
+                  path="/account"
+                  isLoggedIn={isLoggedIn}
+                  signOut={handleSignOut}
+                  enroll={enrollMechanism}
+                  onUserData={updateUserData}
+                  onUserCity={getCities}
+                />
+                <Route exact path="/">
+                  <Redirect to="/main" />
+                </Route>
+                <Route path="*">
+                  <NotFoundPage />
+                </Route>
+              </Switch>
+            </main>
+            <Footer />
+            <AuthPopup
+              isOpen={isLogPopupOpen}
+              onClose={handlePopupClose}
+              onSubmit={handleLoginSubmit}
+            />
+            <EnrollPopup enroll={enrollMechanism} event={clickedEvent} />
+            <ConfirmPopup enroll={enrollMechanism} event={clickedEvent} />
+            <SuccessPopup
+              enroll={enrollMechanism}
+              event={clickedEvent}
+              history={history}
+            />
+            <ErrorPopup enroll={enrollMechanism} />
+            <CityPopup
+              enroll={enrollMechanism}
+              onUserData={updateUserData}
+              onUserCity={getCities}
+              cities={citiesArray}
+            />
           </div>
-        </CurrentListOfEvents.Provider>
+        </div>
       </CurrentUserContext.Provider>
     </>
   );
