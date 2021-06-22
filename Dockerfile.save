@@ -1,0 +1,4 @@
+FROM node:14 WORKDIR /app COPY . package*.json ./app RUN npm install 
+--only=prod COPY . ./app/ EXPOSE 3000 RUN npm audit fix RUN npm start CMD 
+["npm", "node", "App.js"]
+y

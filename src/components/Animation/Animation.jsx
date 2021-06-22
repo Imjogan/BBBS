@@ -8,7 +8,7 @@ function Animation({ animationData }) {
     const options = {
       container,
       animationData,
-    };
+    }
     Lottie.loadAnimation(options);
   }, []);
   return <div className="popup-calendar__img" />;
