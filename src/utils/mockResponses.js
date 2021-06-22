@@ -1,34 +1,34 @@
 export const postTokenRes = {
   refresh:
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYyMDU4NTM1NSwianRpIjoiNGY5YTc5ZmZmNDEzNDM5NmJlNjhlZTVhNjk4MWNjMDgiLCJ1c2VyX2lkIjoxfQ.9pi-sEjkVsU7yxnP26Xvf-E98CVp9HgRvE_sHI7Mi_E',
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYyMDU4NTM1NSwianRpIjoiNGY5YTc5ZmZmNDEzNDM5NmJlNjhlZTVhNjk4MWNjMDgiLCJ1c2VyX2lkIjoxfQ.9pi-sEjkVsU7yxnP26Xvf-E98CVp9HgRvE_sHI7Mi_E",
   access:
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNDk5MjU1LCJqdGkiOiI3N2Q1MWNmNWM1ZGU0YzBmYjE3MDVlMDgzYjU4YjYyMSIsInVzZXJfaWQiOjF9.jPP3p030SSA4H72m1JpElYh-R-bF20CBcLwnxI7Lxjs',
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNDk5MjU1LCJqdGkiOiI3N2Q1MWNmNWM1ZGU0YzBmYjE3MDVlMDgzYjU4YjYyMSIsInVzZXJfaWQiOjF9.jPP3p030SSA4H72m1JpElYh-R-bF20CBcLwnxI7Lxjs",
 };
 
 export const getCityListRes = [
   {
     id: 1,
-    name: 'Москва',
+    name: "Москва",
     isPrimary: true,
   },
   {
     id: 2,
-    name: 'Санкт-Петербург',
+    name: "Санкт-Петербург",
     isPrimary: true,
   },
   {
     id: 3,
-    name: 'Калиниград',
+    name: "Калиниград",
     isPrimary: false,
   },
   {
     id: 4,
-    name: 'Тула',
+    name: "Тула",
     isPrimary: false,
   },
   {
     id: 5,
-    name: 'Тверь',
+    name: "Тверь",
     isPrimary: false,
   },
 ];
@@ -49,20 +49,20 @@ export const getMainPageRes = {
     tags: [
       {
         id: 111,
-        name: 'Волонтёры',
-        slug: 'volunteers',
+        name: "Волонтёры",
+        slug: "volunteers",
       },
       {
         id: 112,
-        name: 'Дети',
-        slug: 'children',
+        name: "Дети",
+        slug: "children",
       },
     ],
-    title: 'Субботний meet up: учимся проходить интевью',
-    startAt: '2021-05-08T19:22:00Z',
-    endAt: '2021-05-08T21:22:00Z',
-    address: 'Садовническая наб., д. 77 стр. 1 (офис компании Ernst&Young)',
-    contact: 'Александра, +7 926 356-78-90',
+    title: "Субботний meet up: учимся проходить интевью",
+    startAt: "2021-05-08T19:22:00Z",
+    endAt: "2021-05-08T21:22:00Z",
+    address: "Садовническая наб., д. 77 стр. 1 (офис компании Ernst&Young)",
+    contact: "Александра, +7 926 356-78-90",
     remainSeats: 5,
     description:
       'Наконец-то наступила весна и мы пережили эту долгую зиму! И возможно, что внутренних сил и ресурса сейчас не так много, а до окончания учебного года ещё целых несколько месяцев. Поэтому приглашаем вас на встречу нашего ресурсного клуба "Наставник PRO", которую мы хотим посвятить теме поиска моральных сил, смыслов и внутреннего ресурса для общения и взаимодействия с нашими подопечными.',
@@ -70,118 +70,118 @@ export const getMainPageRes = {
   },
   history: {
     id: 21,
-    imageUrl: 'https://picsum.photos/870/520',
-    title: 'История Марины и Алины',
+    imageUrl: "https://picsum.photos/870/520",
+    title: "История Марины и Алины",
   },
   place: {
     chosen: true,
     id: 31,
-    title: 'Сплав на байдарках в две строки',
-    name: 'усадьба Архангельское в две строки',
-    info: 'Девочка, 10 лет. Активный отдых',
+    title: "Сплав на байдарках в две строки",
+    name: "усадьба Архангельское в две строки",
+    info: "Девочка, 10 лет. Активный отдых",
     description:
-      'Аннотация статьи в несколько абзацев. В тот момент, как ребёнок научился говорить, и не одно слово, а задавать бесконечное количество вопросов, жизнь меняется. Вы будете не понимать друг друга,  потом понимать чуть лучше и, Аннотация статьи в несколько абзацев. В тот момент, как ребёнок научился говорить, и не одно слово, а задавать бесконечное количество вопросов, жизнь меняется. Вы будете не понимать друг друга,  потом понимать чуть лучше и,\nАннотация статьи в несколько абзацев. В тот момент, как ребёнок научился говорить, и не одно слово, а задавать бесконечное количество вопросов, жизнь меняется. Вы будете не по Аннотация статьи в несколько абзацев. В тот момент, как ребёнок научился говорить, и не одно слово, а задавать бесконечное количество вопросов, жизнь меняется.',
-    imageUrl: 'https://picsum.photos/1125/394',
-    link: 'https://www.moscowzoo.ru/',
+      "Аннотация статьи в несколько абзацев. В тот момент, как ребёнок научился говорить, и не одно слово, а задавать бесконечное количество вопросов, жизнь меняется. Вы будете не понимать друг друга,  потом понимать чуть лучше и, Аннотация статьи в несколько абзацев. В тот момент, как ребёнок научился говорить, и не одно слово, а задавать бесконечное количество вопросов, жизнь меняется. Вы будете не понимать друг друга,  потом понимать чуть лучше и,\nАннотация статьи в несколько абзацев. В тот момент, как ребёнок научился говорить, и не одно слово, а задавать бесконечное количество вопросов, жизнь меняется. Вы будете не по Аннотация статьи в несколько абзацев. В тот момент, как ребёнок научился говорить, и не одно слово, а задавать бесконечное количество вопросов, жизнь меняется.",
+    imageUrl: "https://picsum.photos/1125/394",
+    link: "https://www.moscowzoo.ru/",
   },
   articles: [
     {
       id: 41,
-      color: '#C8D1FF',
+      color: "#C8D1FF",
       title:
-        'Развитие детей-сирот отличается от развития детей, живущих в семьях. Все  этапы развития у детей-сирот проходят с искажениями и имеют ряд негативных  особенностей. ',
+        "Развитие детей-сирот отличается от развития детей, живущих в семьях. Все  этапы развития у детей-сирот проходят с искажениями и имеют ряд негативных  особенностей. ",
     },
     {
       id: 42,
-      color: '#8CDD94',
+      color: "#8CDD94",
       title:
-        'У таких детей возникает ощущение отверженности. Оно приводит к напряженности и  недоверию к людям и, как итог, к реальному неприятию себя и окружающих.',
+        "У таких детей возникает ощущение отверженности. Оно приводит к напряженности и  недоверию к людям и, как итог, к реальному неприятию себя и окружающих.",
     },
   ],
   movies: [
     {
       id: 51,
-      imageUrl: 'https://picsum.photos/420/239',
-      title: 'Жутко громко и запредельно близко',
-      info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-      link: 'https://youtu.be/8VzzlhOyOSI',
+      imageUrl: "https://picsum.photos/420/239",
+      title: "Жутко громко и запредельно близко",
+      info: "Василий Сигарев, Борисов-Мусотов (Россия), 2009 год",
+      link: "https://youtu.be/8VzzlhOyOSI",
       tags: [
         {
           id: 551,
-          name: 'рубрика',
-          slug: 'rubric',
+          name: "рубрика",
+          slug: "rubric",
         },
         {
           id: 552,
-          name: 'рубрика',
-          slug: 'rubric',
+          name: "рубрика",
+          slug: "rubric",
         },
       ],
     },
     {
       id: 52,
-      imageUrl: 'https://picsum.photos/420/239',
-      title: 'Жутко громко и запредельно близко',
-      info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-      link: 'https://youtu.be/8VzzlhOyOSI',
+      imageUrl: "https://picsum.photos/420/239",
+      title: "Жутко громко и запредельно близко",
+      info: "Василий Сигарев, Борисов-Мусотов (Россия), 2009 год",
+      link: "https://youtu.be/8VzzlhOyOSI",
       tags: [
         {
           id: 551,
-          name: 'рубрика',
-          slug: 'rubric',
+          name: "рубрика",
+          slug: "rubric",
         },
         {
           id: 552,
-          name: 'рубрика',
-          slug: 'rubric',
+          name: "рубрика",
+          slug: "rubric",
         },
       ],
     },
     {
       id: 53,
-      imageUrl: 'https://picsum.photos/420/239',
-      title: 'Жутко громко и запредельно близко',
-      info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-      link: 'https://youtu.be/8VzzlhOyOSI',
+      imageUrl: "https://picsum.photos/420/239",
+      title: "Жутко громко и запредельно близко",
+      info: "Василий Сигарев, Борисов-Мусотов (Россия), 2009 год",
+      link: "https://youtu.be/8VzzlhOyOSI",
       tags: [
         {
           id: 551,
-          name: 'рубрика',
-          slug: 'rubric',
+          name: "рубрика",
+          slug: "rubric",
         },
         {
           id: 552,
-          name: 'рубрика',
-          slug: 'rubric',
+          name: "рубрика",
+          slug: "rubric",
         },
       ],
     },
     {
       id: 54,
-      imageUrl: 'https://picsum.photos/420/239',
-      title: 'Жутко громко и запредельно близко',
-      info: 'Василий Сигарев, Борисов-Мусотов (Россия), 2009 год',
-      link: 'https://youtu.be/8VzzlhOyOSI',
+      imageUrl: "https://picsum.photos/420/239",
+      title: "Жутко громко и запредельно близко",
+      info: "Василий Сигарев, Борисов-Мусотов (Россия), 2009 год",
+      link: "https://youtu.be/8VzzlhOyOSI",
       tags: [
         {
           id: 551,
-          name: 'рубрика',
-          slug: 'rubric',
+          name: "рубрика",
+          slug: "rubric",
         },
         {
           id: 552,
-          name: 'рубрика',
-          slug: 'rubric',
+          name: "рубрика",
+          slug: "rubric",
         },
       ],
     },
   ],
   video: {
     id: 61,
-    title: 'Эфир с выпускником нашей программы',
-    info: 'Иван Рустаев, выпускник программы',
-    link: 'https://youtu.be/H980rXfjdq4',
-    imageUrl: 'https://picsum.photos/1199/675',
+    title: "Эфир с выпускником нашей программы",
+    info: "Иван Рустаев, выпускник программы",
+    link: "https://youtu.be/H980rXfjdq4",
+    imageUrl: "https://picsum.photos/1199/675",
     duration: 134,
   },
   questions: [
@@ -190,35 +190,36 @@ export const getMainPageRes = {
       tags: [
         {
           id: 771,
-          name: 'рубрика',
-          slug: 'rubric',
+          name: "рубрика",
+          slug: "rubric",
         },
       ],
-      title: 'Я боюсь, что ребёнок ко мне слишком сильно привяжется. Что делать?',
+      title:
+        "Я боюсь, что ребёнок ко мне слишком сильно привяжется. Что делать?",
     },
     {
       id: 72,
       tags: [
         {
           id: 771,
-          name: 'рубрика',
-          slug: 'rubric',
+          name: "рубрика",
+          slug: "rubric",
         },
       ],
       title:
-        'Возможно ли продлить срок участия в программе, если и я и мой «младший» хотим остаться в программе?',
+        "Возможно ли продлить срок участия в программе, если и я и мой «младший» хотим остаться в программе?",
     },
     {
       id: 73,
       tags: [
         {
           id: 771,
-          name: 'рубрика',
-          slug: 'rubric',
+          name: "рубрика",
+          slug: "rubric",
         },
       ],
       title:
-        'Что делать если Ваш младший решил закрыть пару, т.к. слишком занят с учебой и друзьями?',
+        "Что делать если Ваш младший решил закрыть пару, т.к. слишком занят с учебой и друзьями?",
     },
   ],
 };
@@ -453,4 +454,23 @@ export const getEventRes = [
 export const postEventRes = {
   id: 2,
   event: 4,
+};
+
+export const getPlaces = {
+  count: 0,
+  next: "string",
+  previous: "string",
+  results: [
+    {
+      id: 0,
+      info: "string",
+      chosen: true,
+      title: "string",
+      address: "string",
+      description: "string",
+      link: "string",
+      imageUrl: "string",
+      city: 1,
+    },
+  ],
 };
