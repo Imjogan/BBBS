@@ -36,7 +36,11 @@ export const getCityListRes = [
 export const getUserInfoRes = {
   id: 1,
   user: 1,
-  city: 2,
+  city: {
+    id:1,
+    name: "Москва",
+    isPrimary: true,
+  }
 };
 
 export const getMainPageRes = {

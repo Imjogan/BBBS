@@ -50,7 +50,8 @@ function takePartInEvent(event) {
 
 function changeCity(cityId) {
   return instance
-    .patch("/profile", {city: cityId}, headers);
+    .patch("/profile", {city: cityId}, headers)
+    .then((res) => checkResponse(res))
 }
 
 export default {

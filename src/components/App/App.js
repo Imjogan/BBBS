@@ -16,7 +16,6 @@ import api from "../../utils/api";
 import Account from "../AccountPage/Account";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import CurrentUserContext from "../../context/CurrentUserContext";
-import CurrentListOfEvents from "../../context/CurrentListOfEvents";
 import Calendar from "../CalendarPage/calendarPage";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import EnrollPopup from "../EnrollPopup/EnrollPopup";
@@ -34,29 +33,31 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [citiesArray, setCitiesArray] = useState([]);
-  const [listEvents, setListEvents] = useState();
   const [path, setPath] = useState("");
+  const [currentCity, setCurrentCity] = useState(0);
+  
 
   // определение данных пользователя
   function updateUserData(data) {
     setCurrentUser(data);
   }
 
-  // функция добавление названия города в объект данных пользователя и получения списка городов (вызывается при логиине и изменении города)
-  function getCities() {
-    api.getCitiesList().then((res) => {
-      setCitiesArray(res.data);
-
-      function findCity(el) {
-        if (el.id !== currentUser.city) {
-          return false;
-        }
-        return el;
-      }
-      const city = res.data.find(findCity).name;
-      updateUserData({ ...currentUser, cityName: city });
-    });
+console.log(currentCity)
+  // получает id выбранного города для незареганного
+   
+  function getCurrentCity (id){
+    setCurrentCity(id)
   }
+
+    useEffect(()=> {
+      api.getCitiesList().then((res) => {
+        setCitiesArray(res.data);
+    })
+      }, [])
+
+
+    
+
 
   const history = useHistory();
   const loc = useLocation();
@@ -66,10 +67,12 @@ function App() {
       api.getUserProfile().then((res) => {
         updateUserData(res.data);
         setIsLoggedIn(true);
-        history.push(loc.pathname);
+        history.push(loc.pathname); 
       });
     }
   }, []);
+
+  
 
   // при обратном скролле показываем header с display: fixed. При возврщании к началу страницы скрываем класс с фиксом
   const [fixed, setFixed] = useState(false);
@@ -129,21 +132,23 @@ function App() {
 
   function handleLoginSubmit(data) {
     const { password, username } = data;
-    api.auth(username, password).then((res) => {
+  
+     api.auth(username, password).then((res) => {
       if (res.data.access) {
         localStorage.setItem("jwt", res.data.refresh);
-        setIsLoggedIn(true);
         handlePopupClose();
-        getCities();
-        history.push(path);
       }
-    });
+    }); 
+    api.getUserProfile().then((res)=> {
+      updateUserData(res.data);
+      setIsLoggedIn(true);
+      history.push(path);
+    })
   }
 
   function handleSignOut() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
-    setCitiesArray([]);
   }
 
   // попапы календаря и запись
@@ -244,6 +249,7 @@ function App() {
     toggleCityPopup,
   };
 
+
   return (
     <>
       <Helmet>
@@ -251,10 +257,9 @@ function App() {
         <link rel="canonical" /* href="https://www.tacobell.com/" */ />
       </Helmet>
       <CurrentUserContext.Provider value={currentUser}>
-        <CurrentListOfEvents.Provider value={listEvents}>
           <div className="body">
             <div className="page">
-              <Header
+             <Header
                 isLogged={isLoggedIn}
                 onLogoClick={handleProfileLogoClick}
                 onCalendarClick={handleHeaderCalendarClick}
@@ -288,7 +293,6 @@ function App() {
                     signOut={handleSignOut}
                     enroll={enrollMechanism}
                     onUserData={updateUserData}
-                    onUserCity={getCities}
                   />
                   <Route path="/places">
                     <PlacesPage />
@@ -319,15 +323,16 @@ function App() {
               <CityPopup
                 enroll={enrollMechanism}
                 onUserData={updateUserData}
-                onUserCity={getCities}
                 cities={citiesArray}
+                getCurrentCity={getCurrentCity}
               />
             </div>
           </div>
-        </CurrentListOfEvents.Provider>
       </CurrentUserContext.Provider>
     </>
   );
+
+  
 }
 
 export default App;
