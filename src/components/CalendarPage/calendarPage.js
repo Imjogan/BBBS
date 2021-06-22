@@ -73,47 +73,45 @@ function Calendar(props) {
   if (isContentReady) {
     return (
       <>
-        <main className="content page__content">
-          <section className="content__header">
-            <h1 className="title">Календарь</h1>
-            <section className="menu">
-              <ul className="menu__list menu__list_center">
-                {sortArr.map((item, index) =>
-                  isId === index ? (
-                    <FilterButton
-                      key={index}
-                      id={index}
-                      nameMonth={item}
-                      onActive={true}
-                      onClick={handlerID}
-                    />
-                  ) : (
-                    <FilterButton
-                      key={index}
-                      id={index}
-                      nameMonth={item}
-                      onActive={false}
-                      onClick={handlerID}
-                    />
-                  )
-                )}
-              </ul>
-            </section>
-          </section>
-          <section className="calendar">
-            <ul className="list">
-              {eventsMonth &&
-                eventsMonth.map((elem) => (
-                  <CalendarBlock
-                    key={elem.id}
-                    event={elem}
-                    enroll={props.enroll}
-                    history={props.history}
+        <section className="content__header">
+          <h1 className="title">Календарь</h1>
+          <section className="menu">
+            <ul className="menu__list menu__list_center">
+              {sortArr.map((item, index) =>
+                isId === index ? (
+                  <FilterButton
+                    key={index}
+                    id={index}
+                    nameMonth={item}
+                    onActive={true}
+                    onClick={handlerID}
                   />
-                ))}
+                ) : (
+                  <FilterButton
+                    key={index}
+                    id={index}
+                    nameMonth={item}
+                    onActive={false}
+                    onClick={handlerID}
+                  />
+                )
+              )}
             </ul>
           </section>
-        </main>
+        </section>
+        <section className="calendar">
+          <ul className="list">
+            {eventsMonth &&
+              eventsMonth.map((elem) => (
+                <CalendarBlock
+                  key={elem.id}
+                  event={elem}
+                  enroll={props.enroll}
+                  history={props.history}
+                />
+              ))}
+          </ul>
+        </section>
       </>
     );
   }
