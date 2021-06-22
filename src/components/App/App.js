@@ -249,6 +249,13 @@ console.log(currentCity)
     toggleCityPopup,
   };
 
+  // отображение футера
+  const [isNotFoundPage, setIsNotFoundPage] = useState(false);
+
+  function hideFooter() {
+    setIsNotFoundPage(true);
+  }
+
 
   return (
     <>
@@ -302,11 +309,11 @@ console.log(currentCity)
                     <Redirect to="/main" />
                   </Route>
                   <Route path="*">
-                    <NotFoundPage />
+                    <NotFoundPage onFooter={hideFooter} />
                   </Route>
                 </Switch>
               </main>
-              <Footer />
+              {!isNotFoundPage && <Footer />}
               <AuthPopup
                 isOpen={isLogPopupOpen}
                 onClose={handlePopupClose}
