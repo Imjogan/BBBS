@@ -1,0 +1,175 @@
+.page__content {
+    margin-bottom: 119px;
+    padding: 0 75px 0 75px;
+}
+
+@media (max-width: 1440px) {
+    .page__content {
+        padding: 0 135px 0 135px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .page__content {
+        padding: 0 127px;
+        margin-bottom: 100px;
+    }
+}
+
+@media (max-width: 900px) {
+    .page__content {
+        padding: 0 15px;
+        margin-bottom: 50px;
+    }
+}
+
+.content__header_style_questions {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.title {
+    font-family: Proto Grotesk Web Light;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 74px;
+    line-height: 80px;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+    padding: 0 0 25px;
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+    .title {
+        font-size: 37px;
+        line-height: 39px;
+        padding-bottom: 10px;
+    }
+}
+
+.menu {
+    position: relative;
+    max-width: 1100px;
+    display: grid;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.menu__pseudo-block {
+    position: absolute;
+    width: 48px;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background: linear-gradient(to right, transparent, #f3f2f2);
+    z-index: 1;
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .menu__pseudo-block {
+        width: 41px;
+        display: block;
+    }
+}
+
+.menu__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.menu__list::-webkit-scrollbar {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .menu__list {
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        justify-content: unset;
+    }
+    .menu__list:nth-of-type(2) {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 700px) {
+    .menu__list:nth-of-type(2) {
+        justify-content: unset;
+    }
+}
+
+.menu__item {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    white-space: nowrap;
+    margin-top: 15px;
+}
+
+@media (max-width: 1024px) {
+    .menu__item {
+        margin-top: 10px;
+    }
+}
+
+.menu__button {
+    border: 1px solid #000000;
+    border-radius: 100px;
+    background: transparent;
+    font-family: Proto Grotesk Web Light;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 19px;
+    letter-spacing: 0.2px;
+    padding: 14px 19px;
+    max-height: 48px;
+}
+
+.menu__button:focus {
+    outline: none;
+}
+
+.menu__button:hover {
+    cursor: pointer;
+    background: #e0e0e0;
+}
+
+@media (max-width: 1024px) {
+    .menu__button {
+        font-size: 12px;
+        line-height: 17px;
+        padding: 11px 14px 10px;
+        white-space: nowrap;
+    }
+}
+
+.block-questions {
+    display: grid;
+    box-sizing: border-box;
+    grid-gap: 30px;
+    flex-grow: 1;
+    align-content: flex-start;
+    justify-items: center;
+    padding-top: 81px;
+    margin-right: 100px;
+}
+
+@media (max-width: 1024px) {
+    .block-questions {
+        padding-top: 50px;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 400px) {
+    .block-questions {
+        padding-top: 30px;
+    }
+}

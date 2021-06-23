@@ -39,7 +39,7 @@ function Header(props) {
             </li>
             <li className="navigation__list">
               <Link
-                to="#"
+                to="/questions"
                 className="navigation__link navigation__link_place_header"
               >
                 вопросы

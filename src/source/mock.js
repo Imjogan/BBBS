@@ -7,6 +7,7 @@ import {
   getMainPageRes,
   getEventRes,
   postEventRes,
+  getQuestionsRes,
 } from '../utils/mockResponses';
 
 const instance = axios.create({
@@ -24,6 +25,7 @@ mock.onGet('/main').reply(200, getMainPageRes, headers);
 mock.onGet('/afisha/events').reply(200, getEventRes, headers);
 mock.onPost('/afisha/event-participants/').reply(200, postEventRes, headers);
 mock.onPatch('/profile').reply(200, getUserInfoRes, headers);
+mock.onGet('/questions').reply(200, getQuestionsRes, headers);
 
 
 export default instance;
