@@ -2,6 +2,7 @@ import "./QuestionsPage.css";
 import React from "react";
 import api from "../../utils/api";
 import Question from "./Question";
+import Tag from "./Tag";
 
 function QuestionsPage() {
   const [questions, setQuestions] = React.useState([]);
@@ -28,99 +29,24 @@ function QuestionsPage() {
         <section className="menu">
           <div className="menu__pseudo-block" />
           <ul className="menu__list">
-            <li className="menu__item">
-              <button
-                type="button"
-                className="menu__button menu__button_active"
-              >
-                Все
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Первая встреча
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Вопросы детей
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Воспитатели / опекуны
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Сомнения
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Сложности
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Подарки
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Влияние на ребенка
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Времяпровождение
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Ответственность
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Завершение отношений
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Первая встреча
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Вопросы детей
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Первая встреча
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Вопросы детей
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Воспитатели / опекуны
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Сомнения
-              </button>
-            </li>
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Сложности
-              </button>
-            </li>
+            <Tag name="Все" />
+            <Tag name="Первая встреча" />
+            <Tag name="Вопросы детей" />
+            <Tag name="Воспитатели / опекуны" />
+            <Tag name="Сомнения" />
+            <Tag name="Сложности" />
+            <Tag name="Подарки" />
+            <Tag name="Влияние на ребенка" />
+            <Tag name="Времяпровождение" />
+            <Tag name="Ответственность" />
+            <Tag name="Завершение отношений" />
+            <Tag name="Первая встреча" />
+            <Tag name="Вопросы детей" />
+            <Tag name="Первая встреча" />
+            <Tag name="Вопросы детей" />
+            <Tag name="Воспитатели / опекуны" />
+            <Tag name="Сомнения" />
+            <Tag name="Сложности" />
           </ul>
         </section>
       </section>
