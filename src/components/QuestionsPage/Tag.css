@@ -1,4 +1,4 @@
-.menu__item {
+.filters__item {
   margin: 0;
   padding: 0;
   list-style-type: none;
@@ -7,12 +7,12 @@
 }
 
 @media (max-width: 1024px) {
-  .menu__item {
+  .filters__item {
     margin-top: 10px;
   }
 }
 
-.menu__button {
+.filters__button {
   border: 1px solid #000000;
   border-radius: 100px;
   background: transparent;
@@ -26,26 +26,26 @@
   max-height: 48px;
 }
 
-.menu__button:focus {
+.filters__button:focus {
   outline: none;
 }
 
-.menu__button:hover {
+.filters__button:hover {
   cursor: pointer;
   background: #e0e0e0;
 }
 
-.menu__button_active {
+.filters__button_active {
   background: #000;
   color: #f3f2f2;
 }
 
-.menu__button_active:hover {
+.filters__button_active:hover {
   background: #2e2468;
 }
 
 @media (max-width: 1024px) {
-  .menu__button {
+  .filters__button {
     font-size: 12px;
     line-height: 17px;
     padding: 11px 14px 10px;

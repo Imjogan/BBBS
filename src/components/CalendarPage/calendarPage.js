@@ -1,10 +1,10 @@
-import { useEffect, useState, useContext} from "react";
+import { useEffect, useState, useContext } from "react";
 import FilterButton from "../FilterButton/FilterButton";
 import CalendarBlock from "../CalendarBlock/CalendarBlock";
 import CurrentUserContext from "../../context/CurrentUserContext";
-import api from '../../utils/api';
-import Loader from '../Loader/Loader';
-import './CalendarPage.css';
+import api from "../../utils/api";
+import Loader from "../Loader/Loader";
+import "./CalendarPage.css";
 import {
   date,
   month,
@@ -23,36 +23,32 @@ function Calendar(props) {
   const [eventsMonth, setEventsMonth] = useState([]);
   const [isContentReady, setIsContentReady] = useState(false);
   const [isId, setIsId] = useState(""); // кнопка
-  const [firstMonth, setFirstMonth] = useState("")
-  useEffect(()=>{
-      const arrUserEventsForCity = Array.from(events).filter(
-        (item) => item.city === userData.city
-      );
-
-      userEvents = sortingArrayOrderByDate(arrUserEventsForCity).map(
-        (item) => ({
-          ...item,
-          startAt: {
-            month: month(item.startAt),
-            data: date(item.startAt),
-            day: dayOfTheWeek(item.startAt),
-            time: time(item.startAt),
-          },
-          endAt: {
-            month: month(item.endAt),
-            data: date(item.endAt),
-            day: dayOfTheWeek(item.endAt),
-            time: time(item.endAt),
-          },
-        })
-      );
-    arrMouths = userEvents.map((i) => i.startAt.month);
-    sortArr = arrMouths.filter(
-      (it, index) => index === arrMouths.indexOf(it)
+  const [firstMonth, setFirstMonth] = useState("");
+  useEffect(() => {
+    const arrUserEventsForCity = Array.from(events).filter(
+      (item) => item.city === userData.city
     );
+
+    userEvents = sortingArrayOrderByDate(arrUserEventsForCity).map((item) => ({
+      ...item,
+      startAt: {
+        month: month(item.startAt),
+        data: date(item.startAt),
+        day: dayOfTheWeek(item.startAt),
+        time: time(item.startAt),
+      },
+      endAt: {
+        month: month(item.endAt),
+        data: date(item.endAt),
+        day: dayOfTheWeek(item.endAt),
+        time: time(item.endAt),
+      },
+    }));
+    arrMouths = userEvents.map((i) => i.startAt.month);
+    sortArr = arrMouths.filter((it, index) => index === arrMouths.indexOf(it));
     setFirstMonth(sortArr[0]);
-  })
-  
+  });
+
   useEffect(() => {
     setIsMonth(sortArr[0]);
     setIsId(0);
@@ -81,7 +77,7 @@ function Calendar(props) {
           <section className="content__header">
             <h1 className="title">Календарь</h1>
             <section className="menu">
-              <ul className="menu__list menu__list_center">
+              <ul className="filters__list menu__list_center">
                 {sortArr.map((item, index) =>
                   isId === index ? (
                     <FilterButton
