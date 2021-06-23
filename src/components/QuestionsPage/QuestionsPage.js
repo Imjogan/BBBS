@@ -10,34 +10,34 @@ function QuestionsPage() {
     api
       .getQuestions()
       .then((data) => {
-        setQuestions(data);
+        setQuestions(data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  const filteredQuestions = questions.map((question) => (
-    <Question questionData={question} key={question.id} />
-  ));
+  const filteredQuestions = questions.map((question) => {
+    return <Question questionData={question} key={question.id} />;
+  });
 
   return (
-    <main className="content page__content">
-      <section className="content__header content__header_style_questions">
+    <>
+      <section className="filterTags">
         <h1 className="title">Ответы на вопросы</h1>
-        <section className="menu menu_position_center">
+        <section className="menu">
           <div className="menu__pseudo-block" />
           <ul className="menu__list">
-            <li className="menu__item">
-              <button type="button" className="menu__button">
-                Все
-              </button>
-            </li>
             <li className="menu__item">
               <button
                 type="button"
                 className="menu__button menu__button_active"
               >
+                Все
+              </button>
+            </li>
+            <li className="menu__item">
+              <button type="button" className="menu__button">
                 Первая встреча
               </button>
             </li>
@@ -57,10 +57,7 @@ function QuestionsPage() {
               </button>
             </li>
             <li className="menu__item">
-              <button
-                type="button"
-                className="menu__button menu__button_active"
-              >
+              <button type="button" className="menu__button">
                 Сложности
               </button>
             </li>
@@ -80,10 +77,7 @@ function QuestionsPage() {
               </button>
             </li>
             <li className="menu__item">
-              <button
-                type="button"
-                className="menu__button menu__button_active"
-              >
+              <button type="button" className="menu__button">
                 Ответственность
               </button>
             </li>
@@ -103,10 +97,7 @@ function QuestionsPage() {
               </button>
             </li>
             <li className="menu__item">
-              <button
-                type="button"
-                className="menu__button menu__button_active"
-              >
+              <button type="button" className="menu__button">
                 Первая встреча
               </button>
             </li>
@@ -126,10 +117,7 @@ function QuestionsPage() {
               </button>
             </li>
             <li className="menu__item">
-              <button
-                type="button"
-                className="menu__button menu__button_active"
-              >
+              <button type="button" className="menu__button">
                 Сложности
               </button>
             </li>
@@ -172,7 +160,7 @@ function QuestionsPage() {
           </form>
         </div>
       </section>
-    </main>
+    </>
   );
 }
 

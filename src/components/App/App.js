@@ -27,6 +27,7 @@ import CityPopup from "../CityPopup/CityPopup";
 import "./App.css";
 import { getParticipants } from "../../utils/commonFunctions";
 import PlacesPage from "../PlacesPage/PlacesPage";
+import QuestionsPage from "../QuestionsPage/QuestionsPage";
 
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false);
@@ -292,6 +293,9 @@ function App() {
                   />
                   <Route path="/places">
                     <PlacesPage />
+                  </Route>
+                  <Route path="/questions">
+                    <QuestionsPage />
                   </Route>
 
                   <Route exact path="/">

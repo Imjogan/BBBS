@@ -1,6 +1,14 @@
 import "./Question.css";
+import React from "react";
 
 function Question(props) {
+  const tagNames = [];
+  props.questionData.tags.forEach((tag) => {
+    tagNames.push(tag.name);
+  });
+
+  const [answerVisible, setAnswerVisible] = React.useState(false);
+
   return (
     <article className="question background-white">
       <h2 className="question__title">
@@ -9,24 +17,21 @@ function Question(props) {
           type="button"
           aria-label="toggle-answer"
           className="question__button"
+          onClick={() => {
+            setAnswerVisible(!answerVisible);
+          }}
         />
       </h2>
-      <span className="question__category">{props.questionData.tags.name}</span>
-      <p className="question__answer">
-        Настоящие дружеские отношения строятся на взаимном интересе, доверии и
-        привязанности. Когда наставник для ребенка становится именно другом, а
-        не просто знакомым или волонтером, то подопечный начинает быть искренне
-        заинтересован в общении, начинает ждать встреч, звонить по телефону. Но
-        тут важно, чтобы наставник оставался именно в роли друга, старшего брата
-        или сестры, а не потенциального родителя. Перед включением ребенка в
-        программу кураторы обязательно объясняют ребенку, кто такой наставник и
-        какую роль он может сыграть в его жизни. Конечно, здесь многое зависит
-        от умения самого наставника выстраивать отношения и границы, но, если
-        человек сомневается в своих навыках, то в рамках нашей программы
-        проводятся поддерживающие мероприятия, которые развивают компетенции
-        наставников и их коммуникативные способности, которые помогают в общении
-        с детьми, а также есть всегда возможность обратиться к куратору
-        программы.
+      <div className="question__tags-area">
+        <span className="question__category">{tagNames[0]}</span>
+        <span className="question__category">{tagNames[1]}</span>
+      </div>
+      <p
+        className={`question__answer ${
+          answerVisible ? "question__answer_visible" : ""
+        }`}
+      >
+        {props.questionData.answer}
       </p>
     </article>
   );
