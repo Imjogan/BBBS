@@ -6,7 +6,6 @@ import CurrentUserContext from "../../context/CurrentUserContext";
 function Header(props) {
   const userData = React.useContext(CurrentUserContext);
 
-  
     return (
       <>
         <header
@@ -40,7 +39,7 @@ function Header(props) {
               </li>
               <li className="navigation__list">
                 <Link
-                  to="#"
+                  to="/questions"
                   className="navigation__link navigation__link_place_header"
                 >
                   вопросы
@@ -123,7 +122,7 @@ function Header(props) {
             onClick={props.onMobileHeaderClick}
           />
         </header>
-  
+
         <div
           className={
             props.isHeaderMobileOpen ? "popup-menu visible-block" : "popup-menu"
@@ -168,7 +167,7 @@ function Header(props) {
                 </Link>
               </li>
               <li className="popup-menu__list">
-                <Link to="#" className="popup-menu__link">
+                <Link to="/questions" className="popup-menu__link">
                   вопросы
                 </Link>
               </li>
@@ -240,7 +239,5 @@ function Header(props) {
       </>
     );
   }
-  
-
 
 export default Header;

@@ -50,13 +50,17 @@ function takePartInEvent(event) {
 
 function changeCity(cityId) {
   return instance
-    .patch("/profile", {city: cityId}, headers)
-    .then((res) => checkResponse(res))
+      .patch("/profile", {city: cityId}, headers)
+      .then((res) => checkResponse(res))
 
 }
 
 function getPlaces() {
   return instance.get(`places/`);
+}
+
+function getQuestions() {
+  return instance.get("/questions", headers).then((res) => checkResponse(res));
 }
 
 export default {
@@ -68,4 +72,5 @@ export default {
   takePartInEvent,
   changeCity,
   getPlaces,
+  getQuestions
 };

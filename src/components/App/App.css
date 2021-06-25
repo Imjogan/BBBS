@@ -34,7 +34,7 @@
 }
 
 .page__content {
-  /* margin-bottom: 119px; */
+  margin-bottom: 119px;
   padding: calc(34px + 40px + 76px) 75px 0 75px;
 }
 
