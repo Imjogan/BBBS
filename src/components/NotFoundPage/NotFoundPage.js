@@ -2,10 +2,14 @@ import { Link } from "react-router-dom";
 import "./NotFoundPage.css";
 import React from "react";
 import Illustration from "../../lotties/Illustration_404.json";
-// eslint-disable-next-line import/extensions,import/no-unresolved
-import Animation from "../Animation/Animation";
+import Animation from "../Animation/Animation.jsx";
 
-function NotFoundPage() {
+function NotFoundPage(props) {
+
+  React.useEffect(() => {
+    props.onFooter();
+  }, [props])
+
   return (
     <div className="not-found">
       <Animation

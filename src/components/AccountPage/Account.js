@@ -19,9 +19,6 @@ function Account(props) {
     });
   }, [])
 
-  React.useEffect(() => {
-      props.onUserCity()
-  }, []);
 
 if(isContentReady) {
   return (
@@ -29,7 +26,7 @@ if(isContentReady) {
       <section className="account">
         <div className="account__buttons">
           <button type="button" className="account__button" onClick={() => props.enroll.toggleCityPopup()}>
-            {userData.cityName}. Изменить ваш город
+            {userData.city.name}. Изменить ваш город
           </button>
           <button
             type="button"
