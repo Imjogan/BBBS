@@ -461,11 +461,6 @@ export const getQuestionsRes = [
         name: "рубрика",
         slug: "rubric",
       },
-      {
-        id: 7711,
-        name: "рубрика",
-        slug: "rubric",
-      },
     ],
     title: "Я боюсь, что ребёнок ко мне слишком сильно привяжется. Что делать?",
     answer:
@@ -489,11 +484,6 @@ export const getQuestionsRes = [
     tags: [
       {
         id: 771,
-        name: "рубрика",
-        slug: "rubric",
-      },
-      {
-        id: 7712,
         name: "рубрика",
         slug: "rubric",
       },
@@ -521,11 +511,6 @@ export const getQuestionsRes = [
     tags: [
       {
         id: 771,
-        name: "рубрика",
-        slug: "rubric",
-      },
-      {
-        id: 7713,
         name: "рубрика",
         slug: "rubric",
       },

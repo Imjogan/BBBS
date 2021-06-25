@@ -167,7 +167,7 @@ function Header(props) {
               </Link>
             </li>
             <li className="popup-menu__list">
-              <Link to="#" className="popup-menu__link">
+              <Link to="/questions" className="popup-menu__link">
                 вопросы
               </Link>
             </li>
