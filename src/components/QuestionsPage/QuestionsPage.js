@@ -41,6 +41,13 @@ function QuestionsPage() {
             <Tag name="Времяпровождение" />
             <Tag name="Ответственность" />
             <Tag name="Завершение отношений" />
+            <Tag name="Первая встреча" />
+            <Tag name="Вопросы детей" />
+            <Tag name="Первая встреча" />
+            <Tag name="Вопросы детей" />
+            <Tag name="Воспитатели / опекуны" />
+            <Tag name="Сомнения" />
+            <Tag name="Сложности" />
           </ul>
         </section>
       </section>
