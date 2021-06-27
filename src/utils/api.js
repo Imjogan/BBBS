@@ -1,4 +1,9 @@
+import axios from "axios";
 import instance from "../source/mock";
+
+
+
+const BASE_URL = "http://178.154.255.211/api/v1";
 
 function checkResponse(res) {
   if (res) {
@@ -14,10 +19,8 @@ const headers = {
   },
 };
 
-function auth(username, password) {
-  return instance
-    .post(
-      "/token",
+function auth(username, password) { 
+   return axios.post(`${BASE_URL}/token/`,
       { username, password },
       { headers: { "Content-Type": "application/json" } }
     )
