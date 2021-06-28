@@ -36,29 +36,24 @@ function App() {
   const [citiesArray, setCitiesArray] = useState([]);
   const [path, setPath] = useState("");
   const [currentCity, setCurrentCity] = useState(0);
-  
 
   // определение данных пользователя
   function updateUserData(data) {
     setCurrentUser(data);
   }
 
-console.log(currentCity)
+  console.log(currentCity);
   // получает id выбранного города для незареганного
-   
-  function getCurrentCity (id){
-    setCurrentCity(id)
+
+  function getCurrentCity(id) {
+    setCurrentCity(id);
   }
 
-    useEffect(()=> {
-      api.getCitiesList().then((res) => {
-        setCitiesArray(res.data);
-    })
-      }, [])
-
-
-    
-
+  useEffect(() => {
+    api.getCitiesList().then((res) => {
+      setCitiesArray(res.data);
+    });
+  }, []);
 
   const history = useHistory();
   const loc = useLocation();
@@ -68,12 +63,10 @@ console.log(currentCity)
       api.getUserProfile().then((res) => {
         updateUserData(res.data);
         setIsLoggedIn(true);
-        history.push(loc.pathname); 
+        history.push(loc.pathname);
       });
     }
   }, []);
-
-  
 
   // при обратном скролле показываем header с display: fixed. При возврщании к началу страницы скрываем класс с фиксом
   const [fixed, setFixed] = useState(false);
@@ -133,18 +126,18 @@ console.log(currentCity)
 
   function handleLoginSubmit(data) {
     const { password, username } = data;
-  
-     api.auth(username, password).then((res) => {
+
+    api.auth(username, password).then((res) => {
       if (res.data.access) {
         localStorage.setItem("jwt", res.data.refresh);
         handlePopupClose();
       }
-    }); 
-    api.getUserProfile().then((res)=> {
+    });
+    api.getUserProfile().then((res) => {
       updateUserData(res.data);
       setIsLoggedIn(true);
       history.push(path);
-    })
+    });
   }
 
   function handleSignOut() {
@@ -257,7 +250,6 @@ console.log(currentCity)
     setIsNotFoundPage(true);
   }
 
-
   return (
     <>
       <Helmet>
@@ -265,85 +257,85 @@ console.log(currentCity)
         <link rel="canonical" /* href="https://www.tacobell.com/" */ />
       </Helmet>
       <CurrentUserContext.Provider value={currentUser}>
-          <div className="body">
-            <div className="page">
-             <Header
-                isLogged={isLoggedIn}
-                onLogoClick={handleProfileLogoClick}
-                onCalendarClick={handleHeaderCalendarClick}
-                fixed={fixed}
-                onMobileHeaderClick={handleHeaderMobileClick}
-                isHeaderMobileOpen={isHeaderMobileOpen}
-                onChangeCity={toggleCityPopup}
-                signOut={handleSignOut}
-              />
-              <main className="content page__content">
-                <Switch>
-                  <Route path="/main">
-                    <Main isLoggedIn={isLoggedIn} enroll={enrollMechanism} />
-                  </Route>
-                  <Route path="/about">
-                    <AboutUs />
-                  </Route>
-                  <Route path="/where_to_go">
-                    <></>
-                  </Route>
-                  <ProtectedRoute
-                    component={Calendar}
-                    path="/calendar"
+        <div className="body">
+          <div className="page">
+            <Header
+              isLogged={isLoggedIn}
+              onLogoClick={handleProfileLogoClick}
+              onCalendarClick={handleHeaderCalendarClick}
+              fixed={fixed}
+              onMobileHeaderClick={handleHeaderMobileClick}
+              isHeaderMobileOpen={isHeaderMobileOpen}
+              onChangeCity={toggleCityPopup}
+              signOut={handleSignOut}
+            />
+            <main className="content page__content">
+              <Switch>
+                <Route path="/main">
+                  <Main isLoggedIn={isLoggedIn} enroll={enrollMechanism} />
+                </Route>
+                <Route path="/about">
+                  <AboutUs />
+                </Route>
+                <ProtectedRoute
+                  component={Calendar}
+                  path="/calendar"
+                  isLoggedIn={isLoggedIn}
+                  enroll={enrollMechanism}
+                />
+                <ProtectedRoute
+                  component={Account}
+                  path="/account"
+                  isLoggedIn={isLoggedIn}
+                  signOut={handleSignOut}
+                  enroll={enrollMechanism}
+                  onUserData={updateUserData}
+                />
+                <Route path="/places">
+                  <PlacesPage
+                    toggleCityPopup={toggleCityPopup}
+                    isCityPopupOpen={isCityPopupOpen}
                     isLoggedIn={isLoggedIn}
-                    enroll={enrollMechanism}
+                    currentCity={currentCity}
                   />
-                  <ProtectedRoute
-                    component={Account}
-                    path="/account"
-                    isLoggedIn={isLoggedIn}
-                    signOut={handleSignOut}
-                    enroll={enrollMechanism}
-                    onUserData={updateUserData}
-                  />
-                  <Route path="/places">
-                    <PlacesPage />
-                  </Route>
-                  <Route path="/questions">
-                    <QuestionsPage />
-                  </Route>
+                </Route>
+                <Route path="/questions">
+                  <QuestionsPage />
+                </Route>
 
-                  <Route exact path="/">
-                    <Redirect to="/main" />
-                  </Route>
-                  <Route path="*">
-                    <NotFoundPage onFooter={hideFooter} />
-                  </Route>
-                </Switch>
-              </main>
-              {!isNotFoundPage && <Footer />}
-              <AuthPopup
-                isOpen={isLogPopupOpen}
-                onClose={handlePopupClose}
-                onSubmit={handleLoginSubmit}
-              />
-              <EnrollPopup enroll={enrollMechanism} event={clickedEvent} />
-              <ConfirmPopup enroll={enrollMechanism} event={clickedEvent} />
-              <SuccessPopup
-                enroll={enrollMechanism}
-                event={clickedEvent}
-                history={history}
-              />
-              <ErrorPopup enroll={enrollMechanism} />
-              <CityPopup
-                enroll={enrollMechanism}
-                onUserData={updateUserData}
-                cities={citiesArray}
-                getCurrentCity={getCurrentCity}
-              />
-            </div>
+                <Route exact path="/">
+                  <Redirect to="/main" />
+                </Route>
+                <Route path="*">
+                  <NotFoundPage onFooter={hideFooter} />
+                </Route>
+              </Switch>
+            </main>
+            {!isNotFoundPage && <Footer />}
+            <AuthPopup
+              isOpen={isLogPopupOpen}
+              onClose={handlePopupClose}
+              onSubmit={handleLoginSubmit}
+            />
+            <EnrollPopup enroll={enrollMechanism} event={clickedEvent} />
+            <ConfirmPopup enroll={enrollMechanism} event={clickedEvent} />
+            <SuccessPopup
+              enroll={enrollMechanism}
+              event={clickedEvent}
+              history={history}
+            />
+            <ErrorPopup enroll={enrollMechanism} />
+            <CityPopup
+              enroll={enrollMechanism}
+              onUserData={updateUserData}
+              cities={citiesArray}
+              getCurrentCity={getCurrentCity}
+            />
           </div>
+        </div>
       </CurrentUserContext.Provider>
     </>
   );
-
-  
 }
 
 export default App;
