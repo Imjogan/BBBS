@@ -13,26 +13,34 @@ function PlacesPage({
   const userData = React.useContext(CurrentUserContext);
   const [cityId, setCityId] = React.useState(null);
   const [places, setPlaces] = React.useState([]);
+
   useEffect(() => {
     if (!isLoggedIn) {
       toggleCityPopup();
+    } else {
+      setCityId(userData.city.id);
     }
   }, []);
 
   useEffect(() => {
-    if (currentCity !== 0) {
-      api.getPlaces().then((res) => {
-        console.log(res.data);
-        setPlaces(res.data.results);
-      });
-    }
+    setCityId(currentCity);
   }, [isCityPopupOpen]);
+
+  useEffect(() => {
+    api.getPlaces().then((res) => {
+      setPlaces(res.data.results);
+    });
+  }, [cityId]);
 
   return (
     <>
       <section className="content__header">
         <h1 className="title">Куда пойти</h1>
-        <Place />
+        <section className="three-columns three-columns_style_place">
+          {places.map((place) => (
+            <Place key={place.id} place={place} />
+          ))}
+        </section>
       </section>
     </>
   );

@@ -18,3 +18,24 @@
 		padding-bottom: 10px;
 	}
 }
+
+.three-columns {
+	display: grid;
+	box-sizing: border-box;
+	grid-gap: 30px;
+	flex-grow: 1;
+	align-content: flex-start;
+	justify-items: center;
+}
+
+.three-columns_style_place {
+	grid-template-rows: unset;
+	grid-template-columns: repeat(auto-fit, minmax(271px, 1fr));
+	padding-top: 50px;
+}
+
+@media screen and (max-width: 1280px) {
+	.three-columns_style_place {
+		padding-top: 0;
+	}
+}
