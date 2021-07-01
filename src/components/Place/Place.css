@@ -2,6 +2,7 @@
 .places-container {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 }
 
 @media (max-width: 1142px) {
@@ -16,7 +17,7 @@
 	}
 }
 
-.block-place {
+.place {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -31,37 +32,37 @@
 }
 
 @media (max-width: 1440px) {
-	.block-place {
+	.place {
 		width: 50%;
 	}
 }
 
 @media (max-width: 1280px) {
-	.block-place {
+	.place {
 		width: 100%;
 	}
 }
 
 @media (max-width: 1024px) {
-	.block-place {
+	.place {
 		min-height: 537px;
 		padding: 15px;
 	}
 }
 
 @media (max-width: 600px) {
-	.block-place {
+	.place {
 		min-height: 437px;
 	}
 }
 
 @media (max-width: 400px) {
-	.block-place {
+	.place {
 		min-height: 333px;
 	}
 }
 
-.block-place__tag {
+.place__tag {
 	font-family: PT Root UI;
 	font-style: normal;
 	font-weight: normal;
@@ -85,22 +86,22 @@
 	transform: translateX(-50%);
 }
 
-.block-place_type_small {
+.place_type_small {
 	width: 100%;
 	padding-bottom: 15px;
 }
 
-.block-place_size_small {
+.place_size_small {
 	min-height: 224px;
 }
 
 @media (max-width: 1024px) {
-	.block-place_size_small {
+	.place_size_small {
 		min-height: 176px;
 	}
 }
 
-.block-place__tag {
+.place__tag {
 	font-family: PT Root UI;
 	font-style: normal;
 	font-weight: normal;
@@ -124,7 +125,7 @@
 	transform: translateX(-50%);
 }
 
-.block-place__title {
+.place__title {
 	font-family: Proto Grotesk Web Light;
 	font-style: normal;
 	font-weight: 300;
@@ -140,18 +141,18 @@
 }
 
 @media (max-width: 1024px) {
-	.block-place__title {
+	.place__title {
 		font-size: 19px;
 		line-height: 23px;
 		margin-top: 22px;
 	}
 }
 
-.block-place__title_size_small {
+.place__title_size_small {
 	margin-top: 22px;
 }
 
-.block-place__caption {
+.place__caption {
 	font-family: PT Root UI;
 	font-style: normal;
 	font-weight: normal;
@@ -167,13 +168,13 @@
 }
 
 @media (max-width: 1280px) {
-	.block-place__caption {
+	.place__caption {
 		font-size: 12px;
 		line-height: 17px;
 	}
 }
 
-.block-place__category {
+.place__category {
 	font-family: Proto Grotesk Web Light;
 	font-style: normal;
 	font-weight: 300;
@@ -186,12 +187,12 @@
 	text-decoration: none;
 }
 
-.block-place__category:hover {
+.place__category:hover {
 	opacity: 0.8;
 }
 
 @media (max-width: 1024px) {
-	.block-place__category {
+	.place__category {
 		font-size: 12px;
 		line-height: 17px;
 	}

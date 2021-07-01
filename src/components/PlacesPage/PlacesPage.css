@@ -19,6 +19,86 @@
 	}
 }
 
+.places {
+	display: grid;
+	gap: 30px;
+	box-sizing: border-box;
+	align-items: center;
+	padding-top: 80px;
+}
+
+@media (max-width: 1024px) {
+	.places {
+		padding-top: 50px;
+	}
+}
+
+@media (max-width: 400px) {
+	.places {
+		padding-top: 30px;
+	}
+}
+
+/* секция для вызова формы */
+.message {
+	display: flex;
+	justify-content: center;
+}
+
+
+.block-message {
+	border-radius: 30px;
+	max-width: 770px;
+}
+
+.block-message_style_places {
+	margin-top: 40px;
+}
+
+@media (max-width: 1024px) {
+	.block-message_style_places {
+		margin-top: 30px;
+	}
+}
+
+.block-message__text {
+	font-family: Proto Grotesk Web Light;
+	font-style: normal;
+	font-weight: 300;
+	font-size: 23px;
+	line-height: 30px;
+	text-align: center;
+	color: #000000;
+	margin: 50px 30px;
+}
+
+@media (max-width: 800px) {
+	.block-message__text {
+		font-size: 19px;
+		line-height: 23px;
+		margin: 30px 15px;
+	}
+}
+
+.block-message__button {
+	color: #224cff;
+	border: none;
+	background: transparent;
+}
+
+.block-message__button:focus {
+	outline: none;
+	cursor: pointer;
+}
+
+.block-message__button:hover {
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+
+/* конец секции для вызова формы */
+
 .three-columns {
 	display: grid;
 	box-sizing: border-box;
