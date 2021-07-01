@@ -4,7 +4,6 @@ import api from "../../utils/api";
 import "./PlacesPage.css";
 import Place from "../Place/Place";
 import BigPlace from "../BigPlace/BigPlace";
-import { getPlace } from "../../utils/mockResponses";
 
 function PlacesPage({
   toggleCityPopup,
@@ -40,7 +39,7 @@ function PlacesPage({
 
   return (
     <>
-      <section className="content__header">
+      <section className="content__places">
         <h1 className="title">Куда пойти</h1>
 
         {isLoggedIn && (
@@ -58,14 +57,16 @@ function PlacesPage({
           </section>
         )}
 
-        <section className="places">
-          <BigPlace place={bigPlace} />
-          <ul className="three-columns three-columns_style_place">
-            {places.map((place) => (
-              <Place key={place.id} place={place} />
-            ))}
-          </ul>
-        </section>
+        {city && (
+          <section className="places">
+            <BigPlace place={bigPlace} />
+            <ul className="three-columns three-columns_style_place">
+              {places.map((place) => (
+                <Place key={place.id} place={place} />
+              ))}
+            </ul>
+          </section>
+        )}
       </section>
     </>
   );
