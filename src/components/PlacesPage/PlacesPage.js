@@ -60,11 +60,11 @@ function PlacesPage({
 
         <section className="places">
           <BigPlace place={bigPlace} />
-          <section className="three-columns three-columns_style_place">
+          <ul className="three-columns three-columns_style_place">
             {places.map((place) => (
               <Place key={place.id} place={place} />
             ))}
-          </section>
+          </ul>
         </section>
       </section>
     </>

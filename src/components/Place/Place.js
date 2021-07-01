@@ -2,8 +2,8 @@ import "./Place.css";
 
 function Place({ place }) {
   return (
-    <div className="places-container">
-      <article className="place background-green place_size_small place_type_small">
+    <li className="place-container">
+      <article className="place place_size_small place_type_small">
         {place.chosen && <p className="place__tag">выбор наставника</p>}
         <h2 className="place__title place__title_size_small">{place.title}</h2>
         <p className="place__caption">{place.address}</p>
@@ -17,7 +17,7 @@ function Place({ place }) {
           <p className="block-description__text">{place.description}</p>
         </div>
       </article>
-    </div>
+    </li>
   );
 }
 
