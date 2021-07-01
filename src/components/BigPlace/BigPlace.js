@@ -8,7 +8,7 @@ function BigPlace({ place }) {
         <p className="block-place__tag">выбор наставника</p>
         <h2 className="block-place__title">{place.title}</h2>
         <p className="block-place__caption">{place.name}</p>
-        <div className="block-place__image" />
+        <img className="block-place__image" src={place.imageUrl} />
         <a href={place.link} className="block-place__category">
           перейти на сайт
         </a>
