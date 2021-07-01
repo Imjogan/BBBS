@@ -1,8 +1,6 @@
 import axios from "axios";
 import instance from "../source/mock";
 
-
-
 const BASE_URL = "http://178.154.255.211/api/v1";
 
 function checkResponse(res) {
@@ -19,8 +17,10 @@ const headers = {
   },
 };
 
-function auth(username, password) { 
-   return axios.post(`${BASE_URL}/token/`,
+function auth(username, password) {
+  return axios
+    .post(
+      `${BASE_URL}/token/`,
       { username, password },
       { headers: { "Content-Type": "application/json" } }
     )
@@ -53,9 +53,12 @@ function takePartInEvent(event) {
 
 function changeCity(cityId) {
   return instance
-      .patch("/profile", {city: cityId}, headers)
-      .then((res) => checkResponse(res))
+    .patch("/profile", { city: cityId }, headers)
+    .then((res) => checkResponse(res));
+}
 
+function getPlace() {
+  return instance.get(`place/`);
 }
 
 function getPlaces() {
@@ -74,6 +77,7 @@ export default {
   getEvents,
   takePartInEvent,
   changeCity,
+  getPlace,
   getPlaces,
-  getQuestions
+  getQuestions,
 };
