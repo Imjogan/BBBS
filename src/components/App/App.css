@@ -72,3 +72,17 @@
     /* margin-bottom: 50px; */
   }
 }
+
+@media (max-width: 768px) {
+.page__content{
+	margin-bottom: 0;
+	padding-bottom: 100px;
+}
+}
+
+@media (max-width: 425px) {
+	.page__content{
+		margin-bottom: 0;
+		padding-bottom: 50px;
+	}
+}

@@ -27,6 +27,7 @@ import "./App.css";
 import { getParticipants } from "../../utils/commonFunctions";
 import PlacesPage from "../PlacesPage/PlacesPage";
 import QuestionsPage from "../QuestionsPage/QuestionsPage";
+import AddPlacePopup from "../AddPlacePopup/AddPlacePopup";
 
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false);
@@ -154,6 +155,9 @@ function App() {
   const [isCityPopupOpen, setIsCityPopupOpen] = useState(false);
   const [clickedEvent, setClickedEvent] = useState(null);
 
+  // попапы для добавления места
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
+
   useEffect(() => {
     setIsErrorPopupOpen(false);
   }, [history]);
@@ -184,6 +188,10 @@ function App() {
 
   function toggleCityPopup() {
     setIsCityPopupOpen(!isCityPopupOpen);
+  }
+
+  function toggleAddPlacePopup() {
+    setAddPlacePopupOpen(!isAddPlacePopupOpen);
   }
 
   function handleEnroll(id) {
@@ -294,6 +302,7 @@ function App() {
                 <Route path="/places">
                   <PlacesPage
                     toggleCityPopup={toggleCityPopup}
+                    toggleAddPlacePopup={toggleAddPlacePopup}
                     isCityPopupOpen={isCityPopupOpen}
                     isLoggedIn={isLoggedIn}
                     currentCity={currentCity}
@@ -330,6 +339,10 @@ function App() {
               onUserData={updateUserData}
               cities={citiesArray}
               getCurrentCity={getCurrentCity}
+            />
+            <AddPlacePopup
+              toggleAddPlacePopup={toggleAddPlacePopup}
+              isOpen={isAddPlacePopupOpen}
             />
           </div>
         </div>
