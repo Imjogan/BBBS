@@ -7,6 +7,7 @@ import BigPlace from "../BigPlace/BigPlace";
 
 function PlacesPage({
   toggleCityPopup,
+  toggleAddPlacePopup,
   isCityPopupOpen,
   isLoggedIn,
   currentCity,
@@ -48,7 +49,11 @@ function PlacesPage({
               <p className="block-message__text">
                 Если вы были в интересном месте и хотите порекомендовать его
                 другим наставникам –
-                <button type="button" className="block-message__button">
+                <button
+                  onClick={toggleAddPlacePopup}
+                  type="button"
+                  className="block-message__button"
+                >
                   заполните форму
                 </button>
                 , и мы добавим вашу рекомендацию.
@@ -57,7 +62,7 @@ function PlacesPage({
           </section>
         )}
 
-        {city && (
+        {city ? (
           <section className="places">
             <BigPlace place={bigPlace} />
             <ul className="three-columns three-columns_style_place">
@@ -66,6 +71,8 @@ function PlacesPage({
               ))}
             </ul>
           </section>
+        ) : (
+          <></>
         )}
       </section>
     </>

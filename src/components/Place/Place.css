@@ -24,7 +24,7 @@
 	}
 }
 
-@media (max-width: 400px) {
+@media (max-width: 600px) {
 	.place-container:nth-child(n + 2) {
 		display: none;
 	}
@@ -76,7 +76,7 @@
 }
 
 .place__tag {
-	font-family: PT Root UI;
+	font-family: PT Root UI, sans-serif;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 10px;
@@ -115,7 +115,7 @@
 }
 
 .place__tag {
-	font-family: PT Root UI;
+	font-family: PT Root UI, sans-serif;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 10px;

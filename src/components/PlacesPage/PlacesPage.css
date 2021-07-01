@@ -62,7 +62,7 @@
 }
 
 .block-message__text {
-	font-family: Proto Grotesk Web Light;
+	font-family: Proto Grotesk Web Light, sans-serif;
 	font-style: normal;
 	font-weight: 300;
 	font-size: 23px;
@@ -102,6 +102,7 @@
 .three-columns {
 	list-style: none;
 	padding-left: 0;
+	margin: 0;
 	display: grid;
 	box-sizing: border-box;
 	grid-gap: 30px;
