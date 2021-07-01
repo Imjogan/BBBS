@@ -100,6 +100,8 @@
 /* конец секции для вызова формы */
 
 .three-columns {
+	list-style: none;
+	padding-left: 0;
 	display: grid;
 	box-sizing: border-box;
 	grid-gap: 30px;
@@ -119,3 +121,4 @@
 		padding-top: 0;
 	}
 }
+
