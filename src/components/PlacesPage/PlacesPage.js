@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import CurrentUserContext from "../../context/CurrentUserContext";
-import api from "../../utils/api";
 import "./PlacesPage.css";
 import Place from "../Place/Place";
 import BigPlace from "../BigPlace/BigPlace";
+import apiServer from "../../utils/apiServer";
 
 function PlacesPage({
   toggleCityPopup,
@@ -13,7 +13,7 @@ function PlacesPage({
   currentCity,
 }) {
   const userData = React.useContext(CurrentUserContext);
-  const [city, setCity] = React.useState(null);
+  const [city, setCity] = React.useState(0);
   const [places, setPlaces] = React.useState([]);
   const [bigPlace, setBigPlace] = React.useState({});
 
@@ -30,12 +30,21 @@ function PlacesPage({
   }, [isCityPopupOpen]);
 
   useEffect(() => {
-    api.getPlace().then((res) => {
-      setBigPlace(res.data);
-    });
-    api.getPlaces().then((res) => {
-      setPlaces(res.data.results);
-    });
+    if (city !== 0) {
+      apiServer
+        .getPlace(city)
+        .then((res) => {
+          setBigPlace(res);
+        })
+        .catch((err) => console.log(err));
+
+      apiServer
+        .getPlaces(city)
+        .then((res) => {
+          setPlaces(res.results);
+        })
+        .catch((err) => console.log(err));
+    }
   }, [city]);
 
   return (
