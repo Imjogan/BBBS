@@ -146,12 +146,13 @@ function AddPlacePopup(props) {
                 className="popup__select-input"
                 type="hidden"
               />
-              <div className="popup__select-head" />
+              <div className="popup__select-head" >              Тип отдыха*</div>
               <ul className="popup__select-list display-none">
                 <li className="popup__select-item">Активный</li>
                 <li className="popup__select-item">Развлекательный</li>
                 <li className="popup__select-item">Познавательный</li>
               </ul>
+
             </div>
           </div>
           <label
