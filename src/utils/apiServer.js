@@ -21,7 +21,7 @@ class ApiServer {
 
   // возвращает места для города
   getPlaces(city) {
-    return fetch(`${this.baseUrl}/places/?city=${city}`).then(
+    return fetch(`${this.baseUrl}/places/?city=${city}&limit=3`).then(
       this.checkResponse
     );
   }
