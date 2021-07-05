@@ -202,6 +202,13 @@
 	color: #000;
 }
 
+@media screen and (max-width: 800px) {
+	.popup__input_type_advice {
+		font-size: 12px;
+		line-height: 17px;
+	}
+}
+
 .popup__input_type_advice::placeholder {
 	font-family: Proto Grotesk Web Light;
 	font-style: normal;
@@ -410,6 +417,14 @@
 		line-height: 17px;
 		padding: 11px 0;
 	}
+}
+
+.popup__select-head_type_active {
+	background-image: url(./../../images/popup-advice-button-select-active.svg);
+  }
+
+.popup__select-head_type_checked {
+	color: black;
 }
 
 .popup__select-list {
