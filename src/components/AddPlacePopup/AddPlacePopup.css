@@ -301,28 +301,28 @@
 
 .popup__visible-checkbox {
 	height: 20px;
-	/* background: url(../../../images/popup-advice-checkbox-disable.svg) no-repeat; */
+	background: url(./../../images/popup-advice-checkbox-disable.svg) no-repeat;
 	padding-left: 40px;
 }
 
 @media screen and (max-width: 800px) {
 	.popup__visible-checkbox {
-		/* background: url(../../../images/popup-advice-checkbox-disable.svg) no-repeat 0 30%/20%; */
+		background: url(./../../images/popup-advice-checkbox-disable.svg) no-repeat 0 30%/20%;
 		padding-left: 24px;
 	}
 }
 
 .popup__input_type_checkbox:disabled + .popup__visible-checkbox {
-	/* background-image: url(../../images/popup-advice-checkbox-disable.svg); */
+	background-image: url(../../images/popup-advice-checkbox-disable.svg);
 }
 
 .popup__input_type_checkbox:checked + .popup__visible-checkbox {
-	/* background-image: url(../../images/popup-advice-checkbox-active.svg); */
+	background-image: url(../../images/popup-advice-checkbox-active.svg);
 	color: #000;
 }
 
 .popup__input_type_checkbox:focus + .popup__visible-checkbox {
-	/* background-image: url(../../images/popup-advice-checkbox-active.svg); */
+	background-image: url(../../images/popup-advice-checkbox-active.svg);
 	color: #000;
 }
 
@@ -343,7 +343,7 @@
 	line-height: 19px;
 	letter-spacing: 0.2px;
 	color: #a7a6a6;
-	/* background-image: url(../../../images/popup-advice-button-select.svg); */
+	background-image: url(./../../images/popup-advice-button-select.svg);
 	background-repeat: no-repeat;
 	background-position: right 3.5% top 50%;
 	background-size: 24px 19px, 100%;
@@ -442,6 +442,7 @@
 		font-size: 12px;
 		line-height: 17px;
 	}
+
 	.popup__textarea::placeholder {
 		font-size: 12px;
 		line-height: 17px;
@@ -458,7 +459,8 @@
 
 .popup__field_type_add-photo {
 	position: relative;
-	/* background: url(../../../../images/button-form-place-add.svg) no-repeat 0 contain; */
+	background: url(../../images/button-form-place-add.svg) no-repeat;
+	background-size: contain;
 	padding-left: 68px;
 	font-family: Proto Grotesk Web Light, sans-serif;
 	font-style: normal;
@@ -489,7 +491,7 @@
 	height: 48px;
 	border-radius: 50px;
 	border: none;
-	/* background: url(../../../images/button-form-place-add.svg) no-repeat 100% cover; */
+	background: url(../../images/button-form-place-add.svg) no-repeat;
 }
 
 .popup__button-add:hover {
