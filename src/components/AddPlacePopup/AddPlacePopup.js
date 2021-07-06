@@ -1,9 +1,28 @@
 import "./AddPlacePopup.css";
+import React from "react";
 
 function AddPlacePopup(props) {
+
+  const [visibleTypeVacation, setVisibleTypeVacation] = React.useState(false);
+  const [valueSelectInput, setValueSelectInput] = React.useState("Тип отдыха*");
+
+function handleSelect(e) {
+  if (e.target.classList.contains("popup__select-item")) {
+    setValueSelectInput(e.target.textContent)
+  }
+}
+
+function handleCloseSelect(e) {
+  if (!e.target.classList.contains('popup__select-head')) {
+  setVisibleTypeVacation(false)
+  }
+}
+
   return (
     <div className={`popup popup-advice ${props.isOpen && "visible-block"}`}>
-      <div className="popup__container popup__container_type_advice">
+      <div 
+      onClick={handleCloseSelect}
+      className="popup__container popup__container_type_advice">
         <article className="block-message background-white block-message_type_margin">
           <p className="block-message__text block-message__text_type_advice-form">
             Если вы были в интересном месте и хотите порекомендовать его другим
@@ -139,19 +158,25 @@ function AddPlacePopup(props) {
                   popup__field_type_no-right-margin
                 "
           >
-            <div className="popup__select">
+            <div 
+            onClick={()=>setVisibleTypeVacation(!visibleTypeVacation)}
+            className={`popup__select ${visibleTypeVacation? "popup__select_type_active" : ""}`}>
               <input
                 name="type-vacation"
                 id="place-type-vacation"
                 className="popup__select-input"
                 type="hidden"
+                value={valueSelectInput}
               />
-              <div className="popup__select-head" />
-              <ul className="popup__select-list display-none">
+              <div className={` popup__select-head ${visibleTypeVacation? "popup__select-head_type_active" : ""} ${valueSelectInput!=="Тип отдыха*"? "popup__select-head_type_checked" : ""}`}>{valueSelectInput}</div>
+              <ul 
+              onClick={handleSelect}
+              className={`popup__select-list ${visibleTypeVacation? "" : "display-none"}`}>
                 <li className="popup__select-item">Активный</li>
                 <li className="popup__select-item">Развлекательный</li>
                 <li className="popup__select-item">Познавательный</li>
               </ul>
+
             </div>
           </div>
           <label
