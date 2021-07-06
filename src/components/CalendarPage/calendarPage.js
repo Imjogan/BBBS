@@ -1,10 +1,9 @@
-import { useEffect, useState, useContext} from "react";
+import { useEffect, useState } from "react";
 import FilterButton from "../FilterButton/FilterButton";
 import CalendarBlock from "../CalendarBlock/CalendarBlock";
-import CurrentUserContext from "../../context/CurrentUserContext";
-import api from '../../utils/api';
-import Loader from '../Loader/Loader';
-import './CalendarPage.css';
+import api from "../../utils/api";
+import Loader from "../Loader/Loader";
+import "./CalendarPage.css";
 import {
   date,
   month,
@@ -13,24 +12,19 @@ import {
   sortingArrayOrderByDate,
 } from "../../utils/formatTime";
 
-let userEvents;
-let arrMouths;
-let sortArr;
 function Calendar(props) {
   const [events, setEvents] = useState([]);
-  const userData = useContext(CurrentUserContext);
+  const [sortArr, setSortArr] = useState([]);
   const [isMonth, setIsMonth] = useState();
   const [eventsMonth, setEventsMonth] = useState([]);
   const [isContentReady, setIsContentReady] = useState(false);
   const [isId, setIsId] = useState(""); // кнопка
-  const [firstMonth, setFirstMonth] = useState("")
-  useEffect(()=>{
-      const arrUserEventsForCity = Array.from(events).filter(
-        (item) => item.city === userData.city
-      );
+  const [firstMonth, setFirstMonth] = useState("");
 
-      userEvents = sortingArrayOrderByDate(arrUserEventsForCity).map(
-        (item) => ({
+  useEffect(() => {
+    api.getEvents().then((res) =>
+      setEvents(
+        sortingArrayOrderByDate(res.data).map((item) => ({
           ...item,
           startAt: {
             month: month(item.startAt),
@@ -44,22 +38,31 @@ function Calendar(props) {
             day: dayOfTheWeek(item.endAt),
             time: time(item.endAt),
           },
-        })
-      );
-    arrMouths = userEvents.map((i) => i.startAt.month);
-    sortArr = arrMouths.filter(
-      (it, index) => index === arrMouths.indexOf(it)
+        }))
+      )
     );
+  }, []);
+
+  useEffect(() => {
+    console.log(events);
+    const arrMouths = events.map((i) => i.startAt.month);
+    setSortArr(
+      arrMouths.filter((it, index) => index === arrMouths.indexOf(it))
+    );
+  }, [events]);
+
+  useEffect(() => {
     setFirstMonth(sortArr[0]);
-  })
-  
+  }, [sortArr]);
+
   useEffect(() => {
     setIsMonth(sortArr[0]);
     setIsId(0);
   }, [firstMonth]);
 
   useEffect(() => {
-    setEventsMonth(userEvents.filter((item) => item.startAt.month === isMonth));
+    setEventsMonth(events.filter((item) => item.startAt.month === isMonth));
+     setIsContentReady(true);
   }, [isMonth]);
 
   function handlerID(e, id) {
@@ -67,57 +70,48 @@ function Calendar(props) {
     setIsId(id);
   }
 
-  useEffect(() => {
-    api.getEvents().then((res) => {
-      setEvents(res.data);
-      setIsContentReady(true);
-    });
-  }, []);
-
   if (isContentReady) {
     return (
       <>
-        <main className="content page__content">
-          <section className="content__header">
-            <h1 className="title">Календарь</h1>
-            <section className="menu">
-              <ul className="menu__list menu__list_center">
-                {sortArr.map((item, index) =>
-                  isId === index ? (
-                    <FilterButton
-                      key={index}
-                      id={index}
-                      nameMonth={item}
-                      onActive={true}
-                      onClick={handlerID}
-                    />
-                  ) : (
-                    <FilterButton
-                      key={index}
-                      id={index}
-                      nameMonth={item}
-                      onActive={false}
-                      onClick={handlerID}
-                    />
-                  )
-                )}
-              </ul>
-            </section>
-          </section>
-          <section className="calendar">
-            <ul className="list">
-              {eventsMonth &&
-                eventsMonth.map((elem) => (
-                  <CalendarBlock
-                    key={elem.id}
-                    event={elem}
-                    enroll={props.enroll}
-                    history={props.history}
+        <section className="content__header">
+          <h1 className="title">Календарь</h1>
+          <section className="menu">
+            <ul className="menu__list menu__list_center">
+              {sortArr.map((item, index) =>
+                isId === index ? (
+                  <FilterButton
+                    key={index}
+                    id={index}
+                    nameMonth={item}
+                    onActive={true}
+                    onClick={handlerID}
                   />
-                ))}
+                ) : (
+                  <FilterButton
+                    key={index}
+                    id={index}
+                    nameMonth={item}
+                    onActive={false}
+                    onClick={handlerID}
+                  />
+                )
+              )}
             </ul>
           </section>
-        </main>
+        </section>
+        <section className="calendar">
+          <ul className="list">
+            {eventsMonth &&
+              eventsMonth.map((elem) => (
+                <CalendarBlock
+                  key={elem.id}
+                  event={elem}
+                  enroll={props.enroll}
+                  history={props.history}
+                />
+              ))}
+          </ul>
+        </section>
       </>
     );
   }

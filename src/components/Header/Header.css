@@ -4,6 +4,10 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .header__logo {
@@ -382,9 +386,7 @@
   position: fixed;
   background: #F3F2F2;
   z-index: 50;
-  width: 100%;
   margin-top: 0;
-  box-sizing: border-box;
   max-width: inherit;
 }
 
@@ -471,7 +473,6 @@
   }
 
   .page__header {
-    margin-top: 40px;
     margin-bottom: 40px;
     padding: 0 127px;
   }

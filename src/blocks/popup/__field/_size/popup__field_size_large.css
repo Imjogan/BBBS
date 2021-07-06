@@ -1,9 +1,0 @@
-.popup__field_size_large {
-  width: 570px;
-}
-
-@media (max-width: 800px) {
-  .popup__field_size_large {
-    width: unset;
-  }
-}

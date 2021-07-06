@@ -1,6 +1,8 @@
 .not-found {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-bottom: 197px;
 }
 
 .not-found__image {
@@ -11,6 +13,11 @@
   background-repeat: no-repeat;
   background-position: bottom;
   background-image: url('../../images/not-found-image.svg');
+}
+
+.not-found__animation {
+  width: 570px;
+  height: 199px;
 }
 
 .not-found__title {
