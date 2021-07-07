@@ -5,6 +5,9 @@ function AddPlacePopup(props) {
 
   const [visibleTypeVacation, setVisibleTypeVacation] = React.useState(false);
   const [valueSelectInput, setValueSelectInput] = React.useState("Тип отдыха*");
+  const [isValidForm, setIsValidForm] = React.useState(false);
+  const [showRequiredFields, setShowRequiredFields] = React.useState(false);
+  const [checkedRadioInput, setCheckedRadioInput] = React.useState(false);
 
 function handleSelect(e) {
   if (e.target.classList.contains("popup__select-item")) {
@@ -45,7 +48,7 @@ function handleCloseSelect(e) {
               minLength="2"
               maxLength="40"
               placeholder="Название*"
-              className="popup__input popup__input_type_advice"
+              className={` popup__input popup__input_type_advice ${showRequiredFields? "popup__input_type_advice-error" : ""}`}
               type="text"
             />
             <span className="popup__input-error" />
@@ -83,7 +86,7 @@ function handleCloseSelect(e) {
               minLength="2"
               maxLength="40"
               placeholder="Адрес*"
-              className="popup__input popup__input_type_advice"
+              className={` popup__input popup__input_type_advice ${showRequiredFields? "popup__input_type_advice-error" : ""}`}
               type="text"
             />
             <span className="popup__input-error" />
@@ -97,6 +100,7 @@ function handleCloseSelect(e) {
                 "
           >
             <input
+              onChange={()=>setCheckedRadioInput(true)}
               id="place-boy"
               required
               name="gender"
@@ -104,10 +108,10 @@ function handleCloseSelect(e) {
                     popup__input
                     popup__input_type_advice
                     popup__input_type_checkbox
-                  "
+                    "
               type="radio"
             />
-            <span className="popup__visible-checkbox">Мальчик</span>
+            <span className={` popup__visible-checkbox ${!checkedRadioInput && showRequiredFields? "popup__visible-checkbox_type_error" : ""}`}>Мальчик</span>
             <span className="popup__input-error" />
           </label>
           <label
@@ -119,6 +123,7 @@ function handleCloseSelect(e) {
                 "
           >
             <input
+              onChange={()=>setCheckedRadioInput(true)}
               id="place-girl"
               required
               name="gender"
@@ -129,7 +134,7 @@ function handleCloseSelect(e) {
                   "
               type="radio"
             />
-            <span className="popup__visible-checkbox">Девочка</span>
+            <span className={` popup__visible-checkbox ${!checkedRadioInput && showRequiredFields? "popup__visible-checkbox_type_error" : ""}`}>Девочка</span>
             <span className="popup__input-error"></span>
           </label>
           <label
@@ -145,7 +150,7 @@ function handleCloseSelect(e) {
               required
               name="age"
               placeholder="Возраст*"
-              className="popup__input popup__input_type_advice"
+              className={` popup__input popup__input_type_advice ${showRequiredFields? "popup__input_type_advice-error" : ""}`}
               type="number"
             />
             <span className="popup__input-error" />
@@ -168,7 +173,7 @@ function handleCloseSelect(e) {
                 type="hidden"
                 value={valueSelectInput}
               />
-              <div className={` popup__select-head ${visibleTypeVacation? "popup__select-head_type_active" : ""} ${valueSelectInput!=="Тип отдыха*"? "popup__select-head_type_checked" : ""}`}>{valueSelectInput}</div>
+              <div className={` popup__select-head ${visibleTypeVacation? "popup__select-head_type_active" : ""} ${valueSelectInput!=="Тип отдыха*"? "popup__select-head_type_checked" : ""} ${showRequiredFields? "popup__select-head_type_error" : ""}`}>{valueSelectInput}</div>
               <ul 
               onClick={handleSelect}
               className={`popup__select-list ${visibleTypeVacation? "" : "display-none"}`}>
@@ -188,7 +193,8 @@ function handleCloseSelect(e) {
                 "
           >
             <textarea
-              className="popup__textarea"
+            onChange={(e)=>setIsValidForm(e.target.closest("form").checkValidity())}
+              className={ `popup__textarea ${showRequiredFields? "popup__textarea-error" : ""}`}
               id="place-comment"
               name="main-text"
               placeholder="Комментарий* Поделитесь впечатлениями о проведенном времени"
@@ -206,8 +212,9 @@ function handleCloseSelect(e) {
             />
           </label>
           <button
+          onClick={()=>setShowRequiredFields(true)}
             aria-label="submit-form"
-            className="popup__button-submit popup__button-submit_type_advice"
+            className={` popup__button-submit popup__button-submit_type_advice ${isValidForm? "popup__button-submit_type_active": ""}`}
             type="submit"
           >
             Отправить
