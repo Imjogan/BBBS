@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import Lottie from "lottie-web";
 
-function Animation({ animationData }) {
+function Animation({ animationData, containerClassname }) {
   useEffect(() => {
-    const container = document.querySelector(".not-found__animation");
+    const container = document.querySelector(`.${containerClassname}`);
     const options = {
       container,
       animationData,
-    }
+    };
     Lottie.loadAnimation(options);
   }, [animationData]);
-  return <div className="not-found__animation" />;
+  return <div className={containerClassname} />;
 }
 
 export default Animation;

@@ -5,16 +5,15 @@ import Illustration from "../../lotties/Illustration_404.json";
 import Animation from "../Animation/Animation.jsx";
 
 function NotFoundPage(props) {
-
   React.useEffect(() => {
     props.onFooter();
-  }, [props])
+  }, [props]);
 
   return (
     <div className="not-found">
       <Animation
         animationData={Illustration}
-        containerClassname="not-found__image"
+        containerClassname="not-found__animation"
       />
       <h1 className="not-found__title">404</h1>
       <p className="not-found__info">
