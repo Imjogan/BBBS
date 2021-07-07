@@ -28,6 +28,7 @@ import { getParticipants } from "../../utils/commonFunctions";
 import PlacesPage from "../PlacesPage/PlacesPage";
 import QuestionsPage from "../QuestionsPage/QuestionsPage";
 import AddPlacePopup from "../AddPlacePopup/AddPlacePopup";
+import ContentMenuPage from '../ContentMenuPage/ContentMenuPage';
 
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false);
@@ -311,7 +312,9 @@ function App() {
                 <Route path="/questions">
                   <QuestionsPage />
                 </Route>
-
+                <Route path="/content_menu">
+                  <ContentMenuPage />
+                </Route>
                 <Route exact path="/">
                   <Redirect to="/main" />
                 </Route>
