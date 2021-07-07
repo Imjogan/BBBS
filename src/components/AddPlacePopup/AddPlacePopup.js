@@ -4,14 +4,19 @@ import React from "react";
 function AddPlacePopup(props) {
 
   const [visibleTypeVacation, setVisibleTypeVacation] = React.useState(false);
-  const [valueSelectInput, setValueSelectInput] = React.useState("Тип отдыха*");
+  const [valueSelectInput, setValueSelectInput] = React.useState("");
   const [isValidForm, setIsValidForm] = React.useState(false);
   const [showRequiredFields, setShowRequiredFields] = React.useState(false);
   const [checkedRadioInput, setCheckedRadioInput] = React.useState(false);
 
+  function handleChangeValidity (e) {
+    setIsValidForm(e.target.closest("form").checkValidity())
+  }
+
 function handleSelect(e) {
   if (e.target.classList.contains("popup__select-item")) {
     setValueSelectInput(e.target.textContent)
+    handleChangeValidity(e)
   }
 }
 
@@ -19,6 +24,11 @@ function handleCloseSelect(e) {
   if (!e.target.classList.contains('popup__select-head')) {
   setVisibleTypeVacation(false)
   }
+}
+
+function handleChangeRadioInput (e) {
+  setCheckedRadioInput(true)
+  handleChangeValidity(e)
 }
 
   return (
@@ -42,6 +52,7 @@ function handleCloseSelect(e) {
         >
           <label className="popup__field popup__field_type_advice">
             <input
+            onChange={handleChangeValidity}
               id="place-name"
               required
               name="login"
@@ -61,6 +72,7 @@ function handleCloseSelect(e) {
                 "
           >
             <input
+            onChange={handleChangeValidity}
               id="place-website"
               name="website"
               minLength="2"
@@ -80,6 +92,7 @@ function handleCloseSelect(e) {
                 "
           >
             <input
+            onChange={handleChangeValidity}
               id="place-address"
               required
               name="address"
@@ -100,7 +113,7 @@ function handleCloseSelect(e) {
                 "
           >
             <input
-              onChange={()=>setCheckedRadioInput(true)}
+              onChange={handleChangeRadioInput}
               id="place-boy"
               required
               name="gender"
@@ -123,7 +136,7 @@ function handleCloseSelect(e) {
                 "
           >
             <input
-              onChange={()=>setCheckedRadioInput(true)}
+              onChange={handleChangeRadioInput}
               id="place-girl"
               required
               name="gender"
@@ -146,6 +159,7 @@ function handleCloseSelect(e) {
                 "
           >
             <input
+            onChange={handleChangeValidity}
               id="place-age"
               required
               name="age"
@@ -173,7 +187,7 @@ function handleCloseSelect(e) {
                 type="hidden"
                 value={valueSelectInput}
               />
-              <div className={` popup__select-head ${visibleTypeVacation? "popup__select-head_type_active" : ""} ${valueSelectInput!=="Тип отдыха*"? "popup__select-head_type_checked" : ""} ${showRequiredFields? "popup__select-head_type_error" : ""}`}>{valueSelectInput}</div>
+              <div className={` popup__select-head ${visibleTypeVacation? "popup__select-head_type_active" : ""} ${valueSelectInput? "popup__select-head_type_checked" : ""} ${showRequiredFields? "popup__select-head_type_error" : ""}`}>{valueSelectInput || 'Тип отдыха*'}</div>
               <ul 
               onClick={handleSelect}
               className={`popup__select-list ${visibleTypeVacation? "" : "display-none"}`}>
@@ -193,7 +207,7 @@ function handleCloseSelect(e) {
                 "
           >
             <textarea
-            onChange={(e)=>setIsValidForm(e.target.closest("form").checkValidity())}
+            onChange={handleChangeValidity}
               className={ `popup__textarea ${showRequiredFields? "popup__textarea-error" : ""}`}
               id="place-comment"
               name="main-text"
@@ -214,7 +228,7 @@ function handleCloseSelect(e) {
           <button
           onClick={()=>setShowRequiredFields(true)}
             aria-label="submit-form"
-            className={` popup__button-submit popup__button-submit_type_advice ${isValidForm? "popup__button-submit_type_active": ""}`}
+            className={` popup__button-submit popup__button-submit_type_advice ${isValidForm && valueSelectInput? "popup__button-submit_type_active": ""}`}
             type="submit"
           >
             Отправить
