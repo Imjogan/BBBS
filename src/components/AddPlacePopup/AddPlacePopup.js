@@ -4,6 +4,9 @@ import React from "react";
 function AddPlacePopup(props) {
   const [visibleTypeVacation, setVisibleTypeVacation] = React.useState(false);
   const [valueSelectInput, setValueSelectInput] = React.useState("Тип отдыха*");
+  const [isValidForm, setIsValidForm] = React.useState(false);
+  const [showRequiredFields, setShowRequiredFields] = React.useState(false);
+  const [checkedRadioInput, setCheckedRadioInput] = React.useState(false);
 
   function handleSelect(e) {
     if (e.target.classList.contains("popup__select-item")) {
@@ -52,7 +55,7 @@ function AddPlacePopup(props) {
               minLength="2"
               maxLength="40"
               placeholder="Название*"
-              className="popup__input popup__input_type_advice"
+              className={` popup__input popup__input_type_advice ${showRequiredFields? "popup__input_type_advice-error" : ""}`}
               type="text"
             />
             <span className="popup__input-error" />
@@ -90,7 +93,7 @@ function AddPlacePopup(props) {
               minLength="2"
               maxLength="40"
               placeholder="Адрес*"
-              className="popup__input popup__input_type_advice"
+              className={` popup__input popup__input_type_advice ${showRequiredFields? "popup__input_type_advice-error" : ""}`}
               type="text"
             />
             <span className="popup__input-error" />
@@ -104,6 +107,7 @@ function AddPlacePopup(props) {
                 "
           >
             <input
+              onChange={()=>setCheckedRadioInput(true)}
               id="place-boy"
               required
               name="gender"
@@ -111,10 +115,10 @@ function AddPlacePopup(props) {
                     popup__input
                     popup__input_type_advice
                     popup__input_type_checkbox
-                  "
+                    "
               type="radio"
             />
-            <span className="popup__visible-checkbox">Мальчик</span>
+            <span className={` popup__visible-checkbox ${!checkedRadioInput && showRequiredFields? "popup__visible-checkbox_type_error" : ""}`}>Мальчик</span>
             <span className="popup__input-error" />
           </label>
           <label
@@ -126,6 +130,7 @@ function AddPlacePopup(props) {
                 "
           >
             <input
+              onChange={()=>setCheckedRadioInput(true)}
               id="place-girl"
               required
               name="gender"
@@ -136,7 +141,7 @@ function AddPlacePopup(props) {
                   "
               type="radio"
             />
-            <span className="popup__visible-checkbox">Девочка</span>
+            <span className={` popup__visible-checkbox ${!checkedRadioInput && showRequiredFields? "popup__visible-checkbox_type_error" : ""}`}>Девочка</span>
             <span className="popup__input-error"></span>
           </label>
           <label
@@ -152,7 +157,7 @@ function AddPlacePopup(props) {
               required
               name="age"
               placeholder="Возраст*"
-              className="popup__input popup__input_type_advice"
+              className={` popup__input popup__input_type_advice ${showRequiredFields? "popup__input_type_advice-error" : ""}`}
               type="number"
             />
             <span className="popup__input-error" />
@@ -178,23 +183,11 @@ function AddPlacePopup(props) {
                 type="hidden"
                 value={valueSelectInput}
               />
-              <div
-                className={` popup__select-head ${
-                  visibleTypeVacation ? "popup__select-head_type_active" : ""
-                } ${
-                  valueSelectInput !== "Тип отдыха*"
-                    ? "popup__select-head_type_checked"
-                    : ""
-                }`}
-              >
-                {valueSelectInput}
-              </div>
-              <ul
-                onClick={handleSelect}
-                className={`popup__select-list ${
-                  visibleTypeVacation ? "" : "display-none"
-                }`}
-              >
+              <div className={` popup__select-head ${visibleTypeVacation? "popup__select-head_type_active" : ""} ${valueSelectInput!=="Тип отдыха*"? "popup__select-head_type_checked" : ""} ${showRequiredFields? "popup__select-head_type_error" : ""}`}>{valueSelectInput}</div>
+              <ul 
+              onClick={handleSelect}
+              className={`popup__select-list ${visibleTypeVacation? "" : "display-none"}`}>
+
                 <li className="popup__select-item">Активный</li>
                 <li className="popup__select-item">Развлекательный</li>
                 <li className="popup__select-item">Познавательный</li>
@@ -210,7 +203,8 @@ function AddPlacePopup(props) {
                 "
           >
             <textarea
-              className="popup__textarea"
+            onChange={(e)=>setIsValidForm(e.target.closest("form").checkValidity())}
+              className={ `popup__textarea ${showRequiredFields? "popup__textarea-error" : ""}`}
               id="place-comment"
               name="main-text"
               placeholder="Комментарий* Поделитесь впечатлениями о проведенном времени"
@@ -228,8 +222,9 @@ function AddPlacePopup(props) {
             />
           </label>
           <button
+          onClick={()=>setShowRequiredFields(true)}
             aria-label="submit-form"
-            className="popup__button-submit popup__button-submit_type_advice"
+            className={` popup__button-submit popup__button-submit_type_advice ${isValidForm? "popup__button-submit_type_active": ""}`}
             type="submit"
           >
             Отправить
