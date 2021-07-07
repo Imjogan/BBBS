@@ -343,6 +343,7 @@ function App() {
             <AddPlacePopup
               toggleAddPlacePopup={toggleAddPlacePopup}
               isOpen={isAddPlacePopupOpen}
+              toggleSuccessPopup={toggleSuccessPopup}
             />
           </div>
         </div>
