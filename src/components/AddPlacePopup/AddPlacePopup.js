@@ -7,16 +7,16 @@ function AddPlacePopup(props) {
   const [isValidForm, setIsValidForm] = React.useState(false);
   const [showRequiredFields, setShowRequiredFields] = React.useState(false);
   const [checkedRadioInput, setCheckedRadioInput] = React.useState(false);
-  
-  function handleChangeValidity (e) {
-    setIsValidForm(e.target.closest("form").checkValidity())
+
+  function handleChangeValidity(e) {
+    setIsValidForm(e.target.closest("form").checkValidity());
   }
 
-function handleSelect(e) {
-  if (e.target.classList.contains("popup__select-item")) {
-    setValueSelectInput(e.target.textContent)
-    handleChangeValidity(e)
-  }
+  function handleSelect(e) {
+    if (e.target.classList.contains("popup__select-item")) {
+      setValueSelectInput(e.target.textContent);
+      handleChangeValidity(e);
+    }
   }
 
   function handleCloseSelect(e) {
@@ -31,10 +31,10 @@ function handleSelect(e) {
     props.toggleSuccessPopup();
   }
 
-function handleChangeRadioInput (e) {
-  setCheckedRadioInput(true)
-  handleChangeValidity(e)
-}
+  function handleChangeRadioInput(e) {
+    setCheckedRadioInput(true);
+    handleChangeValidity(e);
+  }
 
   return (
     <div className={`popup popup-advice ${props.isOpen && "visible-block"}`}>
@@ -59,14 +59,16 @@ function handleChangeRadioInput (e) {
         >
           <label className="popup__field popup__field_type_advice">
             <input
-            onChange={handleChangeValidity}
+              onChange={handleChangeValidity}
               id="place-name"
               required
               name="login"
               minLength="2"
               maxLength="40"
               placeholder="Название*"
-              className={` popup__input popup__input_type_advice ${showRequiredFields? "popup__input_type_advice-error" : ""}`}
+              className={` popup__input popup__input_type_advice ${
+                showRequiredFields ? "popup__input_type_advice-error" : ""
+              }`}
               type="text"
             />
             <span className="popup__input-error" />
@@ -79,7 +81,7 @@ function handleChangeRadioInput (e) {
                 "
           >
             <input
-            onChange={handleChangeValidity}
+              onChange={handleChangeValidity}
               id="place-website"
               name="website"
               minLength="2"
@@ -99,14 +101,16 @@ function handleChangeRadioInput (e) {
                 "
           >
             <input
-            onChange={handleChangeValidity}
+              onChange={handleChangeValidity}
               id="place-address"
               required
               name="address"
               minLength="2"
               maxLength="40"
               placeholder="Адрес*"
-              className={` popup__input popup__input_type_advice ${showRequiredFields? "popup__input_type_advice-error" : ""}`}
+              className={` popup__input popup__input_type_advice ${
+                showRequiredFields ? "popup__input_type_advice-error" : ""
+              }`}
               type="text"
             />
             <span className="popup__input-error" />
@@ -131,7 +135,15 @@ function handleChangeRadioInput (e) {
                     "
               type="radio"
             />
-            <span className={` popup__visible-checkbox ${!checkedRadioInput && showRequiredFields? "popup__visible-checkbox_type_error" : ""}`}>Мальчик</span>
+            <span
+              className={` popup__visible-checkbox ${
+                !checkedRadioInput && showRequiredFields
+                  ? "popup__visible-checkbox_type_error"
+                  : ""
+              }`}
+            >
+              Мальчик
+            </span>
             <span className="popup__input-error" />
           </label>
           <label
@@ -154,7 +166,15 @@ function handleChangeRadioInput (e) {
                   "
               type="radio"
             />
-            <span className={` popup__visible-checkbox ${!checkedRadioInput && showRequiredFields? "popup__visible-checkbox_type_error" : ""}`}>Девочка</span>
+            <span
+              className={` popup__visible-checkbox ${
+                !checkedRadioInput && showRequiredFields
+                  ? "popup__visible-checkbox_type_error"
+                  : ""
+              }`}
+            >
+              Девочка
+            </span>
             <span className="popup__input-error"></span>
           </label>
           <label
@@ -166,12 +186,14 @@ function handleChangeRadioInput (e) {
                 "
           >
             <input
-            onChange={handleChangeValidity}
+              onChange={handleChangeValidity}
               id="place-age"
               required
               name="age"
               placeholder="Возраст*"
-              className={` popup__input popup__input_type_advice ${showRequiredFields? "popup__input_type_advice-error" : ""}`}
+              className={` popup__input popup__input_type_advice ${
+                showRequiredFields ? "popup__input_type_advice-error" : ""
+              }`}
               type="number"
             />
             <span className="popup__input-error" />
@@ -197,11 +219,21 @@ function handleChangeRadioInput (e) {
                 type="hidden"
                 value={valueSelectInput}
               />
-              <div className={` popup__select-head ${visibleTypeVacation? "popup__select-head_type_active" : ""} ${valueSelectInput? "popup__select-head_type_checked" : ""} ${showRequiredFields? "popup__select-head_type_error" : ""}`}>{valueSelectInput || 'Тип отдыха*'}</div>
-              <ul 
-              onClick={handleSelect}
-              className={`popup__select-list ${visibleTypeVacation? "" : "display-none"}`}>
-
+              <div
+                className={` popup__select-head ${
+                  visibleTypeVacation ? "popup__select-head_type_active" : ""
+                } ${
+                  valueSelectInput ? "popup__select-head_type_checked" : ""
+                } ${showRequiredFields ? "popup__select-head_type_error" : ""}`}
+              >
+                {valueSelectInput || "Тип отдыха*"}
+              </div>
+              <ul
+                onClick={handleSelect}
+                className={`popup__select-list ${
+                  visibleTypeVacation ? "" : "display-none"
+                }`}
+              >
                 <li className="popup__select-item">Активный</li>
                 <li className="popup__select-item">Развлекательный</li>
                 <li className="popup__select-item">Познавательный</li>
@@ -217,8 +249,10 @@ function handleChangeRadioInput (e) {
                 "
           >
             <textarea
-            onChange={handleChangeValidity}
-              className={ `popup__textarea ${showRequiredFields? "popup__textarea-error" : ""}`}
+              onChange={handleChangeValidity}
+              className={`popup__textarea ${
+                showRequiredFields ? "popup__textarea-error" : ""
+              }`}
               id="place-comment"
               name="main-text"
               placeholder="Комментарий* Поделитесь впечатлениями о проведенном времени"
@@ -236,9 +270,13 @@ function handleChangeRadioInput (e) {
             />
           </label>
           <button
-          onClick={()=>setShowRequiredFields(true)}
+            onClick={() => setShowRequiredFields(true)}
             aria-label="submit-form"
-            className={` popup__button-submit popup__button-submit_type_advice ${isValidForm && valueSelectInput? "popup__button-submit_type_active": ""}`}
+            className={` popup__button-submit popup__button-submit_type_advice ${
+              isValidForm && valueSelectInput
+                ? "popup__button-submit_type_active"
+                : ""
+            }`}
             type="submit"
           >
             Отправить
