@@ -2,13 +2,12 @@ import "./AddPlacePopup.css";
 import React from "react";
 
 function AddPlacePopup(props) {
-
   const [visibleTypeVacation, setVisibleTypeVacation] = React.useState(false);
   const [valueSelectInput, setValueSelectInput] = React.useState("");
   const [isValidForm, setIsValidForm] = React.useState(false);
   const [showRequiredFields, setShowRequiredFields] = React.useState(false);
   const [checkedRadioInput, setCheckedRadioInput] = React.useState(false);
-
+  
   function handleChangeValidity (e) {
     setIsValidForm(e.target.closest("form").checkValidity())
   }
@@ -18,13 +17,19 @@ function handleSelect(e) {
     setValueSelectInput(e.target.textContent)
     handleChangeValidity(e)
   }
-}
-
-function handleCloseSelect(e) {
-  if (!e.target.classList.contains('popup__select-head')) {
-  setVisibleTypeVacation(false)
   }
-}
+
+  function handleCloseSelect(e) {
+    if (!e.target.classList.contains("popup__select-head")) {
+      setVisibleTypeVacation(false);
+    }
+  }
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    props.toggleAddPlacePopup();
+    props.toggleSuccessPopup();
+  }
 
 function handleChangeRadioInput (e) {
   setCheckedRadioInput(true)
@@ -33,9 +38,10 @@ function handleChangeRadioInput (e) {
 
   return (
     <div className={`popup popup-advice ${props.isOpen && "visible-block"}`}>
-      <div 
-      onClick={handleCloseSelect}
-      className="popup__container popup__container_type_advice">
+      <div
+        onClick={handleCloseSelect}
+        className="popup__container popup__container_type_advice"
+      >
         <article className="block-message background-white block-message_type_margin">
           <p className="block-message__text block-message__text_type_advice-form">
             Если вы были в интересном месте и хотите порекомендовать его другим
@@ -49,6 +55,7 @@ function handleChangeRadioInput (e) {
           name="sign-in"
           className="popup__form popup__form_type_advice"
           method="POST"
+          onSubmit={handleSubmit}
         >
           <label className="popup__field popup__field_type_advice">
             <input
@@ -177,9 +184,12 @@ function handleChangeRadioInput (e) {
                   popup__field_type_no-right-margin
                 "
           >
-            <div 
-            onClick={()=>setVisibleTypeVacation(!visibleTypeVacation)}
-            className={`popup__select ${visibleTypeVacation? "popup__select_type_active" : ""}`}>
+            <div
+              onClick={() => setVisibleTypeVacation(!visibleTypeVacation)}
+              className={`popup__select ${
+                visibleTypeVacation ? "popup__select_type_active" : ""
+              }`}
+            >
               <input
                 name="type-vacation"
                 id="place-type-vacation"
@@ -191,11 +201,11 @@ function handleChangeRadioInput (e) {
               <ul 
               onClick={handleSelect}
               className={`popup__select-list ${visibleTypeVacation? "" : "display-none"}`}>
+
                 <li className="popup__select-item">Активный</li>
                 <li className="popup__select-item">Развлекательный</li>
                 <li className="popup__select-item">Познавательный</li>
               </ul>
-
             </div>
           </div>
           <label
@@ -238,4 +248,5 @@ function handleChangeRadioInput (e) {
     </div>
   );
 }
+
 export default AddPlacePopup;

@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./SuccessPopup.css";
 // eslint-disable-next-line import/extensions,import/no-unresolved
 import Animation from "../Animation/Animation";
-import success from "../../lotties/success.json";
+import successCalendar from "../../lotties/success_calendar.json";
+import successPlaces from "../../lotties/success_places.json";
 
 function SuccessPopup(props) {
   const { enroll, history, event } = props;
 
-  function goToCalendar() {
-    history.push("/calendar");
+  const [animation, setAnimation] = useState(successPlaces);
+
+  const { pathname } = useLocation();
+  function placesPage() {
+    return pathname.includes("places");
+  }
+
+  useEffect(() => {
+    if (placesPage()) {
+      setAnimation(successPlaces);
+    } else {
+      setAnimation(successCalendar);
+    }
+  }, [pathname]);
+
+  function goToPage() {
+    if (!placesPage()) history.push("/calendar");
     enroll.toggleSuccessPopup();
   }
 
@@ -29,24 +46,31 @@ function SuccessPopup(props) {
             onClick={() => enroll.toggleSuccessPopup()}
           />
           <Animation
-            animationData={success}
+            animationData={animation}
             containerClassname="popup-calendar__img"
           />
+          {!placesPage() && (
+            <p className="list__done">
+              Вы записаны на мероприятие
+              <br />
+              {event.title}
+            </p>
+          )}
           <p className="list__done">
-            Вы записаны на мероприятие
-            <br />
-            {event.title}
-          </p>
-          <p className="list__done">
-            Если у вас не получится прийти — отмените, пожалуйста, запись.
+            {placesPage()
+              ? "Спасибо, мы проверим информацию, и скоро все пользователи смогут увидеть вашу" +
+                " рекомендацию"
+              : "Если у вас не получится прийти — отмените, пожалуйста, запись."}
           </p>
           <div className="list__buttons">
             <button
               type="submit"
               className="list__submit list__submit_return"
-              onClick={() => goToCalendar()}
+              onClick={() => goToPage()}
             >
-              Вернуться к календарю
+              {placesPage()
+                ? "Вернуться к рекомендациям"
+                : "Вернуться к календарю"}
             </button>
           </div>
         </div>
