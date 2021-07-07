@@ -5,6 +5,7 @@ import Place from "../Place/Place";
 import BigPlace from "../BigPlace/BigPlace";
 import apiServer from "../../utils/apiServer";
 import Tag from "../QuestionsPage/Tag";
+import FilterButton from "../FilterButton/FilterButton";
 
 function PlacesPage({
   toggleCityPopup,
@@ -48,6 +49,10 @@ function PlacesPage({
     }
   }, [city]);
 
+  function handleServerFilter(e, id) {
+    console.log(id);
+  }
+
   return (
     <>
       <section className="content__places">
@@ -55,6 +60,7 @@ function PlacesPage({
         <section className="filters">
           <div className="filters__pseudo-block" />
           <ul className="filters__list">
+            <FilterButton nameMonth="Хай" id={1} onClick={handleServerFilter} />
             <Tag name="Все" />
             <Tag name="Выбор наставников" />
             <Tag name="Музеи" />
