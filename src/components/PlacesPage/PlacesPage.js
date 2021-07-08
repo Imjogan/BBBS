@@ -4,8 +4,7 @@ import "./PlacesPage.css";
 import Place from "../Place/Place";
 import BigPlace from "../BigPlace/BigPlace";
 import apiServer from "../../utils/apiServer";
-import Tag from "../QuestionsPage/Tag";
-import FilterButton from "../FilterButton/FilterButton";
+import Filter from "../Filter/Filter";
 
 function PlacesPage({
   toggleCityPopup,
@@ -16,8 +15,9 @@ function PlacesPage({
 }) {
   const userData = React.useContext(CurrentUserContext);
   const [city, setCity] = React.useState(0);
+  const [isAll, setIsAll] = React.useState(false);
   const [places, setPlaces] = React.useState([]);
-  const [bigPlace, setBigPlace] = React.useState({});
+  const [bigPlace, setBigPlace] = React.useState(null);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -44,39 +44,17 @@ function PlacesPage({
         .getPlaces(city)
         .then((res) => {
           setPlaces(res.results);
+          setIsAll(true);
         })
         .catch((err) => console.log(err));
     }
   }, [city]);
 
-  function handleServerFilter(e, id) {
-    console.log(id);
-  }
-
   return (
     <>
       <section className="content__places">
         <h1 className="title">Куда пойти</h1>
-        <section className="filters">
-          <div className="filters__pseudo-block" />
-          <ul className="filters__list">
-            <FilterButton nameMonth="Хай" id={1} onClick={handleServerFilter} />
-            <Tag name="Все" />
-            <Tag name="Выбор наставников" />
-            <Tag name="Музеи" />
-            <Tag name="Парки" />
-            <Tag name="Театры" />
-            <Tag name="Спорт" />
-            <Tag name="Экскурсии" />
-            <Tag name="Секции" />
-          </ul>
-          <ul className="filters__list">
-            <Tag name="8-10 лет" />
-            <Tag name="11-13 лет" />
-            <Tag name="14-18 лет" />
-            <Tag name="18+ лет" />
-          </ul>
-        </section>
+        <Filter isAll={isAll} />
 
         {/* сообщение для наставника с кнопкой для открытия формы */}
         {isLoggedIn && (
@@ -97,10 +75,11 @@ function PlacesPage({
             </article>
           </section>
         )}
+        {/* конец сообщения для наставника с кнопкой для открытия формы */}
 
         {city ? (
           <section className="places">
-            <BigPlace place={bigPlace} />
+            {bigPlace && <BigPlace place={bigPlace} />}
             <ul className="three-columns three-columns_style_place">
               {places.map((place) => (
                 <Place key={place.id} place={place} />

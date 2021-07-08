@@ -25,6 +25,11 @@ class ApiServer {
       this.checkResponse
     );
   }
+
+  // возвращает теги для фильтра
+  getTags(pathname) {
+    return fetch(`${this.baseUrl}${pathname}/tags/`).then(this.checkResponse);
+  }
 }
 
 const apiServer = new ApiServer();
