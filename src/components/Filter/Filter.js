@@ -3,9 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import apiServer from "../../utils/apiServer";
 import FilterButton from "../FilterButton/FilterButton";
-import Tag from "../QuestionsPage/Tag";
 
-function Filter({ isAll }) {
+function Filter({ isAll, applyFilter }) {
   const [tags, setTags] = useState([]);
   const [chosenTags, setChosenTags] = useState([]);
   const { pathname } = useLocation();
@@ -18,12 +17,17 @@ function Filter({ isAll }) {
   }, [pathname]);
 
   useEffect(() => {
-    console.log(chosenTags);
+    applyFilter(chosenTags);
   }, [chosenTags]);
 
-  // формирует массив параметров
+  // формирует массив параметров для запроса на сервер
   function handleServerFilter(e, id) {
-    setChosenTags([id, ...chosenTags]);
+    // если тега нет в списке добавляем, если есть - удаляем
+    if (!chosenTags.find((tag) => tag === id)) {
+      setChosenTags([...chosenTags, id]);
+    } else {
+      setChosenTags(chosenTags.filter((tag) => tag !== id));
+    }
   }
 
   return (
@@ -48,10 +52,10 @@ function Filter({ isAll }) {
 
       {pathname === "/places" && (
         <ul className="filters__list">
-          <Tag name="8-10 лет" />
-          <Tag name="11-13 лет" />
-          <Tag name="14-18 лет" />
-          <Tag name="18+ лет" />
+          <FilterButton name="8-10 лет" id="8-10" />
+          <FilterButton name="11-13 лет" id="11-13" />
+          <FilterButton name="14-18 лет" id="14-18" />
+          <FilterButton name="18+ лет" id="18+" />
         </ul>
       )}
     </section>

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import "./PlacesPage.css";
 import Place from "../Place/Place";
@@ -13,6 +14,7 @@ function PlacesPage({
   isLoggedIn,
   currentCity,
 }) {
+  const { pathname } = useLocation();
   const userData = React.useContext(CurrentUserContext);
   const [city, setCity] = React.useState(0);
   const [isAll, setIsAll] = React.useState(false);
@@ -26,6 +28,14 @@ function PlacesPage({
       setCity(userData.city.id);
     }
   }, []);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      toggleCityPopup();
+    } else {
+      setCity(userData.city.id);
+    }
+  }, [pathname]);
 
   useEffect(() => {
     setCity(currentCity);
@@ -50,11 +60,15 @@ function PlacesPage({
     }
   }, [city]);
 
+  function applyFilter(filterList) {
+    console.log(filterList);
+  }
+
   return (
     <>
       <section className="content__places">
         <h1 className="title">Куда пойти</h1>
-        <Filter isAll={isAll} />
+        <Filter isAll={isAll} applyFilter={applyFilter} />
 
         {/* сообщение для наставника с кнопкой для открытия формы */}
         {isLoggedIn && (
@@ -77,7 +91,7 @@ function PlacesPage({
         )}
         {/* конец сообщения для наставника с кнопкой для открытия формы */}
 
-        {city ? (
+        {city !== 0 && !isCityPopupOpen && (
           <section className="places">
             {bigPlace && <BigPlace place={bigPlace} />}
             <ul className="three-columns three-columns_style_place">
@@ -86,8 +100,6 @@ function PlacesPage({
               ))}
             </ul>
           </section>
-        ) : (
-          <></>
         )}
       </section>
     </>
