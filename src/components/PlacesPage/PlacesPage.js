@@ -17,7 +17,7 @@ function PlacesPage({
   const { pathname } = useLocation();
   const userData = React.useContext(CurrentUserContext);
   const [city, setCity] = React.useState(0);
-  const [isAll, setIsAll] = React.useState(false);
+  const [isLoad, setIsLoad] = React.useState(false);
   const [places, setPlaces] = React.useState([]);
   const [bigPlace, setBigPlace] = React.useState(null);
 
@@ -54,21 +54,24 @@ function PlacesPage({
         .getPlaces(city)
         .then((res) => {
           setPlaces(res.results);
-          setIsAll(true);
+          setIsLoad(true);
         })
         .catch((err) => console.log(err));
     }
   }, [city]);
 
   function applyFilter(filterList) {
-    console.log(filterList);
+    if (city !== 0)
+      apiServer.getPlacesWithParams(city, filterList).then((res) => {
+        setPlaces(res.results);
+      });
   }
 
   return (
     <>
       <section className="content__places">
         <h1 className="title">Куда пойти</h1>
-        <Filter isAll={isAll} applyFilter={applyFilter} />
+        <Filter isLoad={isLoad} applyFilter={applyFilter} />
 
         {/* сообщение для наставника с кнопкой для открытия формы */}
         {isLoggedIn && (

@@ -28,7 +28,7 @@ import { getParticipants } from "../../utils/commonFunctions";
 import PlacesPage from "../PlacesPage/PlacesPage";
 import QuestionsPage from "../QuestionsPage/QuestionsPage";
 import AddPlacePopup from "../AddPlacePopup/AddPlacePopup";
-import ContentMenuPage from '../ContentMenuPage/ContentMenuPage';
+import ContentMenuPage from "../ContentMenuPage/ContentMenuPage";
 
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false);
@@ -43,9 +43,6 @@ function App() {
   function updateUserData(data) {
     setCurrentUser(data);
   }
-
-  console.log(currentCity);
-  // получает id выбранного города для незареганного
 
   function getCurrentCity(id) {
     setCurrentCity(id);
