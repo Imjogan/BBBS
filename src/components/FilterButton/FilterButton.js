@@ -1,5 +1,5 @@
 import "./FilterButton.css";
-import React from "react";
+import React, { useEffect } from "react";
 
 function FilterButton({ name, id, onActive, onClick }) {
   const [isSelected, setIsSelected] = React.useState(false);
@@ -12,6 +12,10 @@ function FilterButton({ name, id, onActive, onClick }) {
     if (onActive === undefined) return isSelected;
     return onActive;
   }
+
+  useEffect(() => {
+    if (onActive === false) setIsSelected(false);
+  }, [onActive]);
 
   return (
     <li className="filters__item">
