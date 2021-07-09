@@ -62,7 +62,7 @@ function Calendar(props) {
 
   useEffect(() => {
     setEventsMonth(events.filter((item) => item.startAt.month === isMonth));
-     setIsContentReady(true);
+    setIsContentReady(true);
   }, [isMonth]);
 
   function handlerID(e, id) {
@@ -82,7 +82,7 @@ function Calendar(props) {
                   <FilterButton
                     key={index}
                     id={index}
-                    nameMonth={item}
+                    name={item}
                     onActive={true}
                     onClick={handlerID}
                   />
@@ -90,7 +90,7 @@ function Calendar(props) {
                   <FilterButton
                     key={index}
                     id={index}
-                    nameMonth={item}
+                    name={item}
                     onActive={false}
                     onClick={handlerID}
                   />

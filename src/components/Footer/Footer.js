@@ -69,12 +69,12 @@ function Footer() {
               </a>
             </li>
             <li className="navigation__list navigation__list_place_footer">
-              <a
-                href="/#"
+              <Link
+                to="/content_menu"
                 className="navigation__link navigation__link_place_footer"
               >
                 читать и смотреть
-              </a>
+              </Link>
             </li>
             <li className="navigation__list navigation__list_place_footer">
               <a
