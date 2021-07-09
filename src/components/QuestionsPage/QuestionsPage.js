@@ -24,38 +24,36 @@ function QuestionsPage() {
   });
 
   return (
-    <>
-      <section className="questions-page">
-        <h1 className="title">Ответы на вопросы</h1>
-        <section className="filters">
-          <div className="filters__pseudo-block" />
-          <ul className="filters__list">
-            <Tag name="Все" />
-            <Tag name="Первая встреча" />
-            <Tag name="Вопросы детей" />
-            <Tag name="Воспитатели / опекуны" />
-            <Tag name="Сомнения" />
-            <Tag name="Сложности" />
-            <Tag name="Подарки" />
-            <Tag name="Влияние на ребенка" />
-            <Tag name="Времяпровождение" />
-            <Tag name="Ответственность" />
-            <Tag name="Завершение отношений" />
-            <Tag name="Первая встреча" />
-            <Tag name="Вопросы детей" />
-            <Tag name="Первая встреча" />
-            <Tag name="Вопросы детей" />
-            <Tag name="Воспитатели / опекуны" />
-            <Tag name="Сомнения" />
-            <Tag name="Сложности" />
-          </ul>
-        </section>
+    <main className="questions-page">
+      <h1 className="title">Ответы на вопросы</h1>
+      <section className="filters">
+        <div className="filters__pseudo-block" />
+        <ul className="filters__list">
+          <Tag name="Все" />
+          <Tag name="Первая встреча" />
+          <Tag name="Вопросы детей" />
+          <Tag name="Воспитатели / опекуны" />
+          <Tag name="Сомнения" />
+          <Tag name="Сложности" />
+          <Tag name="Подарки" />
+          <Tag name="Влияние на ребенка" />
+          <Tag name="Времяпровождение" />
+          <Tag name="Ответственность" />
+          <Tag name="Завершение отношений" />
+          <Tag name="Первая встреча" />
+          <Tag name="Вопросы детей" />
+          <Tag name="Первая встреча" />
+          <Tag name="Вопросы детей" />
+          <Tag name="Воспитатели / опекуны" />
+          <Tag name="Сомнения" />
+          <Tag name="Сложности" />
+        </ul>
       </section>
       <section className="block-questions">{filteredQuestions}</section>
       <section className="questions-form">
         <QuestionsForm />
       </section>
-    </>
+    </main>
   );
 }
 
