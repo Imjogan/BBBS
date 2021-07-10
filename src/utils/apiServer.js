@@ -42,6 +42,10 @@ class ApiServer {
       `${this.baseUrl}/places/?city=${city}&limit=3${paramStrList}`
     ).then(this.checkResponse);
   }
+
+  getPagination(pageLink) {
+    return fetch(`${pageLink}`).then(this.checkResponse);
+  }
 }
 
 const apiServer = new ApiServer();

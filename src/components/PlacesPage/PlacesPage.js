@@ -21,7 +21,12 @@ function PlacesPage({
   const [isLoad, setIsLoad] = React.useState(false);
   const [places, setPlaces] = React.useState([]);
   const [bigPlace, setBigPlace] = React.useState(null);
+
+  // пагинация
   const [pageCount, setPageCount] = React.useState(0);
+  const [currentPage, setCurrentPage] = React.useState(0);
+  const [nextPage, setNextPage] = React.useState("");
+  const [previousPage, setPreviousPage] = React.useState("");
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -56,7 +61,9 @@ function PlacesPage({
         .getPlaces(city)
         .then((res) => {
           setPlaces(res.results);
-          setPageCount(res.count);
+          setPageCount(Math.ceil((res.count - 3) / 6) + 1);
+          setCurrentPage(1);
+          setNextPage(res.next);
           setIsLoad(true);
         })
         .catch((err) => {
@@ -70,8 +77,28 @@ function PlacesPage({
     if (city !== 0)
       apiServer.getPlacesWithParams(city, filterList).then((res) => {
         setPlaces(res.results);
-        setPageCount(res.count);
+        setPageCount(Math.ceil((res.count - 3) / 6) + 1);
+        setCurrentPage(1);
+        setNextPage(res.next);
       });
+  }
+
+  function paginateNextPlaces() {
+    apiServer.getPagination(nextPage).then((res) => {
+      setPlaces(res.results);
+      setNextPage(res.next);
+      setPreviousPage(res.previous);
+      setCurrentPage(currentPage + 1);
+    });
+  }
+
+  function paginatePreviousPlaces() {
+    apiServer.getPagination(previousPage).then((res) => {
+      setPlaces(res.results);
+      setNextPage(res.next);
+      setPreviousPage(res.previous);
+      setCurrentPage(currentPage - 1);
+    });
   }
 
   return (
@@ -102,7 +129,7 @@ function PlacesPage({
 
       {city !== 0 && !isCityPopupOpen && (
         <section className="places">
-          {bigPlace && <BigPlace place={bigPlace} />}
+          {bigPlace && currentPage === 1 && <BigPlace place={bigPlace} />}
           <ul className="three-columns three-columns_style_place">
             {places.map((place) => (
               <Place key={place.id} place={place} />
@@ -111,7 +138,14 @@ function PlacesPage({
         </section>
       )}
 
-      <PaginationByPage count={pageCount} />
+      {pageCount > 1 && (
+        <PaginationByPage
+          count={pageCount}
+          applyNextPagination={paginateNextPlaces}
+          currentPage={currentPage}
+          applyPreviousPagination={paginatePreviousPlaces}
+        />
+      )}
     </section>
   );
 }

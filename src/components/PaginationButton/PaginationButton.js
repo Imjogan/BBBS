@@ -1,15 +1,13 @@
 import "./PaginationButton.css";
 
-function PaginationButton(props) {
+function PaginationButton({ isActive, pageNumber }) {
   return (
     <li className="select-page__item">
       <button
         type="button"
-        className={`select-page__btn ${
-          props.isActiv && "select-page__btn_active"
-        }`}
+        className={`select-page__btn ${isActive && "select-page__btn_active"}`}
       >
-        {props.pageNumber}
+        {pageNumber}
       </button>
     </li>
   );
