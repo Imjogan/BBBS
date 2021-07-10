@@ -7,7 +7,7 @@ function Place({ place }) {
         {place.chosen && <p className="place__tag">выбор наставника</p>}
         <h2 className="place__title place__title_size_small">{place.title}</h2>
         <p className="place__caption">{place.address}</p>
-        <a href={place.link} target="_blank" className="place__category">
+        <a href={place.link} target="_blank" className="place__category" rel="noreferrer">
           перейти на сайт
         </a>
       </article>

@@ -35,9 +35,7 @@ class ApiServer {
   // eslint-disable-next-line class-methods-use-this
   getPlacesWithParams(city, filterList) {
     const paramStr = "&tags__slug=";
-    const paramStrList = filterList.reduce((acc, filter) => {
-      return acc + paramStr + filter;
-    }, "");
+    const paramStrList = filterList.reduce((acc, filter) => acc + paramStr + filter, "");
     return fetch(
       `${this.baseUrl}/places/?city=${city}&limit=3${paramStrList}`
     ).then(this.checkResponse);

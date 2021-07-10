@@ -29,6 +29,7 @@ import PlacesPage from "../PlacesPage/PlacesPage";
 import QuestionsPage from "../QuestionsPage/QuestionsPage";
 import AddPlacePopup from "../AddPlacePopup/AddPlacePopup";
 import ContentMenuPage from "../ContentMenuPage/ContentMenuPage";
+import ChildrensRightsPage from "../ChildrensRightsPage/ChildrensRightsPage";
 
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false);
@@ -311,6 +312,9 @@ function App() {
                 </Route>
                 <Route path="/content_menu">
                   <ContentMenuPage />
+                </Route>
+                <Route path="/childrens-rights">
+                  <ChildrensRightsPage />
                 </Route>
                 <Route exact path="/">
                   <Redirect to="/main" />

@@ -19,9 +19,7 @@ function QuestionsPage() {
       });
   }, []);
 
-  const filteredQuestions = questions.map((question) => {
-    return <Question questionData={question} key={question.id} />;
-  });
+  const filteredQuestions = questions.map((question) => <Question questionData={question} key={question.id} />);
 
   return (
     <>
