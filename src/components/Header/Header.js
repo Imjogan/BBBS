@@ -55,7 +55,7 @@ function Header(props) {
             </li>
             <li className="navigation__list">
               <Link
-                to="/childrens-rights"
+                to="/rights"
                 className="navigation__link navigation__link_place_header"
               >
                 права детей
@@ -177,7 +177,7 @@ function Header(props) {
               </Link>
             </li>
             <li className="popup-menu__list">
-              <Link to="/childrens-rights" className="popup-menu__link">
+              <Link to="/rights" className="popup-menu__link">
                 права детей
               </Link>
             </li>
