@@ -1,7 +1,5 @@
 import "./FriendshipPage.css";
 import React from "react";
-import api from "../../utils/api";
-import Tag from "./Tag";
 
 function FriendshipPage() {
   return (
