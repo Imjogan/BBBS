@@ -1,6 +1,5 @@
 import "./QuestionsPage.css";
-import React from "react";
-import api from "../../utils/api";
+import React, { useEffect } from "react";
 import Question from "./Question";
 import QuestionsForm from "./QuestionsForm";
 import Filter from "../Filter/Filter";
@@ -10,40 +9,32 @@ function QuestionsPage() {
   const [questions, setQuestions] = React.useState([]);
   const [isLoad, setIsLoad] = React.useState(false);
 
-  React.useEffect(() => {
-    api
-      .getQuestions()
-      .then((data) => {
-        setQuestions(data.data);
-        setIsLoad(true);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoad(false);
-      });
+  useEffect(() => {
+    apiServer.getQuestions().then((allQuestions) => {
+      setQuestions(allQuestions);
+    });
   }, []);
 
   function applyQuestionsFilter(filterList) {
-    apiServer.getQuestionsWithParams(filterList).then((res) => {
-      // setQuestions(res.results);
+    apiServer.getQuestionsWithParams(filterList).then((filteredQuestions) => {
+      setQuestions(filteredQuestions);
+      setIsLoad(true);
     });
   }
 
   return (
-    <>
-      <section className="questions-page">
-        <h1 className="title">Ответы на вопросы</h1>
-        <Filter isLoad={isLoad} applyFilter={applyQuestionsFilter} />
-      </section>
+    <section className="questions-page">
+      <h1 className="title">Ответы на вопросы</h1>
+      <Filter isLoad={isLoad} applyFilter={applyQuestionsFilter} />
       <ul className="block-questions">
         {questions.map((question) => (
           <Question questionData={question} key={question.id} />
         ))}
       </ul>
-      <section className="questions-form">
+      <div className="questions-form">
         <QuestionsForm />
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 

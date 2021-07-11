@@ -47,10 +47,14 @@ class ApiServer {
     return fetch(`${pageLink}`).then(this.checkResponse);
   }
 
+  getQuestions() {
+    return fetch(`${this.baseUrl}/questions/`).then(this.checkResponse);
+  }
+
   // возвращает вопросы с параметрами фильтров
   // eslint-disable-next-line class-methods-use-this
   getQuestionsWithParams(filterList) {
-    const paramStr = "&tags__slug=";
+    const paramStr = "?tags__slug=";
     const paramStrList = filterList.reduce((acc, filter) => {
       return acc + paramStr + filter;
     }, "");
