@@ -22,7 +22,7 @@ function AuthPopup(props) {
       username: data.login,
       password: data.password
     })
-
+    props.onClose();
     setRed(false);
   };
 
