@@ -73,7 +73,7 @@ function PlacesPage({
     }
   }, [city]);
 
-  function applyFilter(filterList) {
+  function applyPlacesFilter(filterList) {
     if (city !== 0)
       apiServer.getPlacesWithParams(city, filterList).then((res) => {
         setPlaces(res.results);
@@ -104,7 +104,7 @@ function PlacesPage({
   return (
     <section className="content__places">
       <h1 className="title">Куда пойти</h1>
-      <Filter isLoad={isLoad} applyFilter={applyFilter} />
+      <Filter isLoad={isLoad} applyFilter={applyPlacesFilter} />
 
       {/* сообщение для наставника с кнопкой для открытия формы */}
       {isLoggedIn && (

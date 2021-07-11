@@ -46,6 +46,18 @@ class ApiServer {
   getPagination(pageLink) {
     return fetch(`${pageLink}`).then(this.checkResponse);
   }
+
+  // возвращает вопросы с параметрами фильтров
+  // eslint-disable-next-line class-methods-use-this
+  getQuestionsWithParams(filterList) {
+    const paramStr = "&tags__slug=";
+    const paramStrList = filterList.reduce((acc, filter) => {
+      return acc + paramStr + filter;
+    }, "");
+    return fetch(`${this.baseUrl}/questions/${paramStrList}`).then(
+      this.checkResponse
+    );
+  }
 }
 
 const apiServer = new ApiServer();
