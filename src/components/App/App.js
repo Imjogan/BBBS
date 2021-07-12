@@ -113,6 +113,7 @@ function App() {
   function handleHeaderCalendarClick() {
     if (isLoggedIn) {
       history.push("/calendar");
+      handleHeaderMobileClick()
     } else {
       handleLogPopupOpen("/calendar");
     }
@@ -121,6 +122,7 @@ function App() {
   function handleProfileLogoClick() {
     if (isLoggedIn) {
       history.push("/account");
+      handleHeaderMobileClick();
     } else {
       handleLogPopupOpen("/account");
     }
