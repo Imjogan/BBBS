@@ -65,7 +65,7 @@ class ApiServer {
     // возвращает вопросы с параметрами фильтров
   // eslint-disable-next-line class-methods-use-this
   getRightsWithParams(filterList) {
-    const paramStr = "&tags__slug=";
+    const paramStr = "?tags__slug=";
     const paramStrList = filterList.reduce((acc, filter) => {
       return acc + paramStr + filter;
     }, "");
