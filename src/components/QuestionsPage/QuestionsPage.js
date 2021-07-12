@@ -24,7 +24,7 @@ function QuestionsPage() {
 
   return (
     <section className="questions-page">
-      <h1 className="title">Ответы на вопросы</h1>
+      <h1 className="title-questions">Ответы на вопросы</h1>
       <Filter isLoad={isLoad} applyFilter={applyQuestionsFilter} />
       <ul className="block-questions">
         {questions.map((question) => (

@@ -1,0 +1,369 @@
+.content__stories {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 75px 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1440px) {
+  .content__stories {
+    padding: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .content__stories {
+    padding: 0 15px 0;
+  }
+}
+
+.block-stories__photo {
+  width: calc(min(1169px, 60vw));
+  height: calc(min(769px, 40vw));
+  min-height: 191px;
+  background: url(../../images/Stories/AlinaAndMarina.png) no-repeat 100% / cover;
+  border-radius: 30px;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 1440px) {
+  .block-stories__photo {
+    width: calc(min(1169px, 80vw));
+    height: calc(min(769px, 53vw));
+  }
+}
+
+@media (max-width: 1024px) {
+  .block-stories__photo {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .block-stories__photo_pos {
+    margin-bottom: 15px;
+  }
+}
+
+.block-stories__crosshead {
+  font-family: Proto Grotesk Web Light;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 44px;
+  line-height: 50px;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  width: 100%;
+  margin: 0;
+  max-width: 1170px;
+}
+
+@media (max-width: 1024px) {
+  .block-stories__crosshead {
+    font-size: 23px;
+    line-height: 30px;
+    max-width: 770px;
+  }
+}
+
+.block-stories__crosshead_pos_blockquote {
+  margin: 60px auto 58px;
+}
+
+@media (max-width: 1024px) {
+  .block-stories__crosshead_pos_blockquote {
+    margin: 30px auto 28px;
+  }
+}
+
+.block-stories__caption {
+  font-family: PT Root UI;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.2px;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  margin: 10px auto 30px;
+}
+
+@media (max-width: 1024px) {
+  .block-stories__caption {
+    font-size: 12px;
+    line-height: 17px;
+    margin-bottom: 20px;
+  }
+}
+
+.block-stories__subtitle {
+  font-family: Proto Grotesk Web Light;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 23px;
+  line-height: 30px;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  width: 100%;
+  max-width: 970px;
+}
+
+@media (max-width: 1024px) {
+  .block-stories__subtitle {
+    max-width: 770px;
+    font-size: 19px;
+    line-height: 23px;
+  }
+}
+
+@media (max-width: 400px) {
+  .block-stories__subtitle {
+    max-width: 290px;
+  }
+}
+
+.block-stories__subtitle_pos_article {
+  margin: 0 auto 50px;
+}
+
+@media (max-width: 1024px) {
+  .block-stories__subtitle_pos_article {
+    margin-bottom: 30px;
+  }
+}
+
+.block-stories__text {
+  font-family: PT Root UI;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 26px;
+  text-align: left;
+  color: #000000;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 770px;
+}
+
+@media (max-width: 1024px) {
+  .block-stories__text {
+    max-width: 570px;
+    font-size: 15px;
+    line-height: 21px;
+  }
+}
+
+@media (max-width: 400px) {
+  .block-stories__text {
+    max-width: 290px;
+  }
+}
+
+.block_stories__text_margins {
+  margin: 25px auto 0;
+}
+
+.block_stories__text_margins:first-child {
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .block_stories__text_margins {
+    margin-top: 19px;
+  }
+}
+
+.block-stories__crossline {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 80px 0 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .block-stories__crossline {
+    margin: 50px 0 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .block-stories__crossline {
+    padding: 0 15px 0;
+  }
+}
+
+.block-stories__horisont-line {
+  box-sizing: border-box;
+  max-width: 770px;
+  width: 100%;
+  border-top: 1px solid #464646;
+  height: 1px;
+}
+
+.block-stories__photo-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow-x: hidden;
+  overflow-wrap: unset;
+  width: 100vw;
+  padding: 0;
+  margin: 80px 0;
+}
+
+@media (max-width: 1024px) {
+  .block-stories__photo-grid {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+}
+
+.block-stories__photo-grid-item {
+  max-width: 770px;
+  width: calc(min(770px, 40vw));
+  height: calc(min(505px, 26vw));
+  background: url(../../images/Stories/AlinaAndMarina.png) no-repeat 100% / cover;
+  border-radius: 30px;
+  flex: 0 0 auto;
+  display: inline-block;
+  margin: 0 50px;
+}
+
+@media (max-width: 1024px) {
+  .block-stories__photo-grid-item {
+    width: calc(min(570px, 55vw));
+    height: calc(min(379px, 37vw));
+    margin: 0 30px 0 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .block-stories__photo-grid-item {
+    width: calc(min(260px, 80vw));
+    height: calc(min(172px, 53vw));
+    min-width: 260px;
+    min-height: 172px;
+    margin-right: 15px;
+  }
+}
+
+.menu__arrow {
+  box-sizing: border-box;
+  background-image: url(../../images/arrow-stories.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  align-self: center;
+  width: 30px;
+  height: 30px;
+  margin: 15px 5px 5px 20px;
+}
+
+.menu__arrow:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .menu__arrow {
+    display: none;
+  }
+}
+
+.block-stories__arrow {
+  margin: auto 0;
+  min-width: 30px;
+  min-height: 30px;
+  display: inline-block;
+}
+
+@media (max-width: 1024px) {
+  .block-stories__arrow {
+    display: none;
+  }
+}
+
+.block-stories__arrow_direction_left {
+  transform: rotate(180deg);
+}
+
+.block-stories__article {
+  margin: 0 0 80px;
+}
+
+.block-stories__article::after {
+  content: "";
+  display: block;
+  border-bottom: 1px solid #464646;
+  width: 100%;
+  max-width: 1170px;
+  margin-top: 80px;
+}
+
+@media (max-width: 1024px) {
+  .block-stories__article {
+    margin-bottom: 50px;
+  }
+  .block-stories__article::after {
+    margin-top: 50px;
+  }
+}
+
+.content__wrapper {
+  max-width: 770px;
+  padding: 0;
+}
+
+@media (max-width: 1440px) {
+  .content__wrapper {
+    max-width: 760px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .content__wrapper {
+    max-width: 570px;
+  }
+}
+
+@media (max-width: 400px) {
+  .content__wrapper {
+    padding: 0 15px 50px;
+  }
+}
+
+.block-stories__contact-button {
+  font-family: "Proto Grotesk Web Light", Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 19px;
+  letter-spacing: 0.2px;
+  text-align: start;
+  text-decoration: none;
+  color: #224cff;
+  margin-top: 50px;
+  display: block;
+}
+
+.block-stories__contact-button:hover {
+  color: #2e2468;
+}
+
+@media (max-width: 1024px) {
+  .block-stories__contact-button {
+    font-size: 12px;
+    line-height: 17px;
+    margin-top: 30px;
+  }
+}

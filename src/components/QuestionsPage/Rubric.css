@@ -18,14 +18,14 @@
 }
 
 .question__category_style_on-answer {
-  margin-bottom: 31px;
+  margin-bottom: 30px;
 }
 
 @media (max-width: 1024px) {
   .question__category {
     font-size: 10px;
     line-height: 13px;
-    margin-bottom: 30px;
+    margin-bottom: 43px;
   }
 
   .question__category:nth-child(n + 3) {
@@ -34,5 +34,11 @@
 
   .question__category_style_on-answer {
     margin-bottom: 37px;
+  }
+}
+
+@media (max-width: 550px) {
+  .question__category {
+    margin-bottom: 10px;
   }
 }
