@@ -1,61 +1,40 @@
 import "./QuestionsPage.css";
-import React from "react";
-import api from "../../utils/api";
+import React, { useEffect } from "react";
 import Question from "./Question";
-import Tag from "./Tag";
 import QuestionsForm from "./QuestionsForm";
+import Filter from "../Filter/Filter";
+import apiServer from "../../utils/apiServer";
 
 function QuestionsPage() {
   const [questions, setQuestions] = React.useState([]);
+  const [isLoad, setIsLoad] = React.useState(false);
 
-  React.useEffect(() => {
-    api
-      .getQuestions()
-      .then((data) => {
-        setQuestions(data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  useEffect(() => {
+    apiServer.getQuestions().then((allQuestions) => {
+      setQuestions(allQuestions);
+    });
   }, []);
 
-  const filteredQuestions = questions.map((question) => {
-    return <Question questionData={question} key={question.id} />;
-  });
+  function applyQuestionsFilter(filterList) {
+    apiServer.getQuestionsWithParams(filterList).then((filteredQuestions) => {
+      setQuestions(filteredQuestions);
+      setIsLoad(true);
+    });
+  }
 
   return (
-    <>
-      <section className="questions-page">
-        <h1 className="title">Ответы на вопросы</h1>
-        <section className="filters">
-          <div className="filters__pseudo-block" />
-          <ul className="filters__list">
-            <Tag name="Все" />
-            <Tag name="Первая встреча" />
-            <Tag name="Вопросы детей" />
-            <Tag name="Воспитатели / опекуны" />
-            <Tag name="Сомнения" />
-            <Tag name="Сложности" />
-            <Tag name="Подарки" />
-            <Tag name="Влияние на ребенка" />
-            <Tag name="Времяпровождение" />
-            <Tag name="Ответственность" />
-            <Tag name="Завершение отношений" />
-            <Tag name="Первая встреча" />
-            <Tag name="Вопросы детей" />
-            <Tag name="Первая встреча" />
-            <Tag name="Вопросы детей" />
-            <Tag name="Воспитатели / опекуны" />
-            <Tag name="Сомнения" />
-            <Tag name="Сложности" />
-          </ul>
-        </section>
-      </section>
-      <section className="block-questions">{filteredQuestions}</section>
-      <section className="questions-form">
+    <section className="questions-page">
+      <h1 className="title-questions">Ответы на вопросы</h1>
+      <Filter isLoad={isLoad} applyFilter={applyQuestionsFilter} />
+      <ul className="block-questions">
+        {questions.map((question) => (
+          <Question questionData={question} key={question.id} />
+        ))}
+      </ul>
+      <div className="questions-form">
         <QuestionsForm />
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 
