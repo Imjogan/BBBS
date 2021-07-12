@@ -63,7 +63,7 @@ function Header(props) {
             </li>
             <li className="navigation__list">
               <Link
-                to="#"
+                to="/stories"
                 className="navigation__link navigation__link_place_header"
               >
                 истории

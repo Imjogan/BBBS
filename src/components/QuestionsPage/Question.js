@@ -10,7 +10,7 @@ function Question(props) {
 
   return (
     <article className="question background-white">
-      <h2 className="question__title">
+      <h2 className="question__title" onClick={handleAnswerButtonClick}>
         {props.questionData.question}
         <button
           type="button"
@@ -22,7 +22,7 @@ function Question(props) {
       </h2>
       <ul className="question__category-field">
         {props.questionData.tags.map((tag) => (
-          <Rubric name={tag.name} key={tag.id} />
+          <Rubric name={tag.name} key={tag.id} answerVisible={answerVisible} />
         ))}
       </ul>
       <p
