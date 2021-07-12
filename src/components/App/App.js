@@ -29,6 +29,7 @@ import PlacesPage from "../PlacesPage/PlacesPage";
 import QuestionsPage from "../QuestionsPage/QuestionsPage";
 import AddPlacePopup from "../AddPlacePopup/AddPlacePopup";
 import ContentMenuPage from "../ContentMenuPage/ContentMenuPage";
+import apiServer from "../../utils/apiServer";
 
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false);
@@ -59,8 +60,9 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
-      api.getUserProfile().then((res) => {
-        updateUserData(res.data);
+      const jwt = localStorage.getItem("jwt");
+      apiServer.getUserProfile(jwt).then((res) => {
+        updateUserData(res[0]);
         setIsLoggedIn(true);
         history.push(loc.pathname);
       });
@@ -126,17 +128,21 @@ function App() {
   function handleLoginSubmit(data) {
     const { password, username } = data;
 
-    api.auth(username, password).then((res) => {
-      if (res.data.access) {
-        localStorage.setItem("jwt", res.data.refresh);
-        handlePopupClose();
+    apiServer.auth(username, password).then((res) => {
+      if (res.access) {
+        localStorage.setItem("jwt", res.access);
       }
-    });
-    api.getUserProfile().then((res) => {
-      updateUserData(res.data);
-      setIsLoggedIn(true);
-      history.push(path);
-    });
+    })
+    .then(()=> 
+      apiServer.getUserProfile(localStorage.getItem('jwt')).then((res) => {
+        updateUserData(res[0]);
+        setIsLoggedIn(true);
+        history.push(path);
+        handlePopupClose();
+        console.log(currentUser);
+      })
+    )
+    
   }
 
   function handleSignOut() {
@@ -209,6 +215,8 @@ function App() {
         setIsConfirmPopupOpen(false);
       });
   }
+
+  
 
   function handleCancell(id) {
     // тут будет апи запрос для отмены записи
