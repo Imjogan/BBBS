@@ -148,13 +148,12 @@ function Header(props) {
         <nav className="popup-menu__navigation">
           <ul className="popup-menu__links">
             <li className="popup-menu__list">
-              <Link to="/about" className="popup-menu__link">
+              <Link onClick={props.onMobileHeaderClick} to="/about" className="popup-menu__link">
                 о проекте
               </Link>
             </li>
             <li className="popup-menu__list">
-              <Link
-                to="/calendar"
+              <Link onClick={props.onMobileHeaderClick}  to="/calendar"
                 className="popup-menu__link"
                 onClick={props.onCalendarClick}
               >
@@ -162,27 +161,27 @@ function Header(props) {
               </Link>
             </li>
             <li className="popup-menu__list">
-              <Link to="/places" className="popup-menu__link">
+              <Link onClick={props.onMobileHeaderClick} to="/places" className="popup-menu__link">
                 куда пойти
               </Link>
             </li>
             <li className="popup-menu__list">
-              <Link to="/questions" className="popup-menu__link">
+              <Link onClick={props.onMobileHeaderClick} to="/questions" className="popup-menu__link">
                 вопросы
               </Link>
             </li>
             <li className="popup-menu__list">
-              <Link to="#" className="popup-menu__link">
+              <Link onClick={props.onMobileHeaderClick} to="#" className="popup-menu__link">
                 читать и смотреть
               </Link>
             </li>
             <li className="popup-menu__list">
-              <Link to="#" className="popup-menu__link">
+              <Link onClick={props.onMobileHeaderClick} to="#" className="popup-menu__link">
                 права детей
               </Link>
             </li>
             <li className="popup-menu__list">
-              <Link to="#" className="popup-menu__link">
+              <Link onClick={props.onMobileHeaderClick} to="#" className="popup-menu__link">
                 истории
               </Link>
             </li>

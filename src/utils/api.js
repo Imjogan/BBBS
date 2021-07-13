@@ -1,7 +1,8 @@
+import React from 'react';
 import axios from "axios";
 import instance from "../source/mock";
 
-const BASE_URL = "http://178.154.255.211/api/v1";
+const BASE_URL = "http://84.252.134.34:7000/api/v1";
 
 function checkResponse(res) {
   if (res) {
@@ -10,12 +11,15 @@ function checkResponse(res) {
   return Promise.reject(new Error(`Произошла непредвиденная ошибка.`));
 }
 
+const jwt = localStorage.getItem("jwt");
+
 const headers = {
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    "Authorization": `Bearer ${jwt}`,
   },
 };
+
 
 function auth(username, password) {
   return axios
@@ -32,7 +36,12 @@ function getCitiesList() {
 }
 
 function getUserProfile() {
-  return instance.get("/profile", headers).then((res) => checkResponse(res));
+  return axios.get(`${BASE_URL}/profile/`, {headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${jwt}`,
+  }}).then((res) => {
+    console.log(jwt)
+    checkResponse(res)});
 }
 
 function getMainPage() {

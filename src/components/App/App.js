@@ -29,6 +29,7 @@ import PlacesPage from "../PlacesPage/PlacesPage";
 import QuestionsPage from "../QuestionsPage/QuestionsPage";
 import AddPlacePopup from "../AddPlacePopup/AddPlacePopup";
 import ContentMenuPage from "../ContentMenuPage/ContentMenuPage";
+import apiServer from "../../utils/apiServer";
 import StoriesPage from "../StoriesPage/StoriesPage";
 
 function App() {
@@ -60,8 +61,9 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
-      api.getUserProfile().then((res) => {
-        updateUserData(res.data);
+      const jwt = localStorage.getItem("jwt");
+      apiServer.getUserProfile(jwt).then((res) => {
+        updateUserData(res[0]);
         setIsLoggedIn(true);
         history.push(loc.pathname);
       });
@@ -111,6 +113,7 @@ function App() {
   function handleHeaderCalendarClick() {
     if (isLoggedIn) {
       history.push("/calendar");
+      handleHeaderMobileClick()
     } else {
       handleLogPopupOpen("/calendar");
     }
@@ -119,6 +122,7 @@ function App() {
   function handleProfileLogoClick() {
     if (isLoggedIn) {
       history.push("/account");
+      handleHeaderMobileClick();
     } else {
       handleLogPopupOpen("/account");
     }
@@ -127,17 +131,21 @@ function App() {
   function handleLoginSubmit(data) {
     const { password, username } = data;
 
-    api.auth(username, password).then((res) => {
-      if (res.data.access) {
-        localStorage.setItem("jwt", res.data.refresh);
-        handlePopupClose();
+    apiServer.auth(username, password).then((res) => {
+      if (res.access) {
+        localStorage.setItem("jwt", res.access);
       }
-    });
-    api.getUserProfile().then((res) => {
-      updateUserData(res.data);
-      setIsLoggedIn(true);
-      history.push(path);
-    });
+    })
+    .then(()=> 
+      apiServer.getUserProfile(localStorage.getItem('jwt')).then((res) => {
+        updateUserData(res[0]);
+        setIsLoggedIn(true);
+        history.push(path);
+        handlePopupClose();
+        console.log(currentUser);
+      })
+    )
+    
   }
 
   function handleSignOut() {
@@ -210,6 +218,8 @@ function App() {
         setIsConfirmPopupOpen(false);
       });
   }
+
+  
 
   function handleCancell(id) {
     // тут будет апи запрос для отмены записи

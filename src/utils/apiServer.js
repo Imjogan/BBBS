@@ -11,6 +11,31 @@ class ApiServer {
     // eslint-disable-next-line prefer-promise-reject-errors
     return Promise.reject(`Ошибка: ${res.status}`);
   }
+   
+
+
+  auth(username, password) {
+    return fetch  (`${this.baseUrl}/token/`,
+    {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json" 
+      },
+      body: JSON.stringify({username, password})
+    })
+      .then((res) => this.checkResponse(res));
+  }
+
+  getUserProfile(jwt) {
+    return fetch (`${this.baseUrl}/profile/`, {
+      method: "Get",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${jwt}`
+      }
+    }).then((res) => this.checkResponse(res));
+  }
+  
 
   // возвращает место для BigPlace
   getPlace(city) {
