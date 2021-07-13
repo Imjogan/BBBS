@@ -27,6 +27,7 @@
   gap: 30px;
   box-sizing: border-box;
   align-items: center;
+  z-index: 1;
 }
 
 .page__footer {
@@ -85,4 +86,8 @@
 		margin-bottom: 0;
 		padding-bottom: 50px;
 	}
+}
+
+.content_style_rights-article {
+  padding: 0;
 }

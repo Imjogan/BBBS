@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect, useState, useCallback, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import {
@@ -31,6 +32,35 @@ import AddPlacePopup from "../AddPlacePopup/AddPlacePopup";
 import ContentMenuPage from "../ContentMenuPage/ContentMenuPage";
 import apiServer from "../../utils/apiServer";
 import StoriesPage from "../StoriesPage/StoriesPage";
+=======
+import { useEffect, useState, useCallback, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { Route, Switch, useHistory, Redirect, useLocation } from 'react-router-dom';
+import Main from '../MainPage/Main/Main';
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+import AuthPopup from '../AuthPopup/AuthPopup';
+import AboutUs from '../AboutUsPage/AboutUs';
+import api from '../../utils/api';
+import Account from '../AccountPage/Account';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import CurrentUserContext from '../../context/CurrentUserContext';
+import Calendar from '../CalendarPage/calendarPage';
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
+import EnrollPopup from '../EnrollPopup/EnrollPopup';
+import ConfirmPopup from '../ConfirmPopup/ConfirmPopup';
+import SuccessPopup from '../SuccessPopup/SuccessPopup';
+import ErrorPopup from '../ErrorPopup/ErrorPopup';
+import CityPopup from '../CityPopup/CityPopup';
+import './App.css';
+import { getParticipants } from '../../utils/commonFunctions';
+import PlacesPage from '../PlacesPage/PlacesPage';
+import QuestionsPage from '../QuestionsPage/QuestionsPage';
+import AddPlacePopup from '../AddPlacePopup/AddPlacePopup';
+import ContentMenuPage from '../ContentMenuPage/ContentMenuPage';
+import RightsPage from '../RightsPage/RightsPage';
+import RightPage from '../RightPage/RightPage';
+>>>>>>> childrens-rights-page
 
 function App() {
   const [isLogPopupOpen, setIsLogPopupOpen] = useState(false);
@@ -38,7 +68,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [citiesArray, setCitiesArray] = useState([]);
-  const [path, setPath] = useState("");
+  const [path, setPath] = useState('');
   const [currentCity, setCurrentCity] = useState(0);
 
   // определение данных пользователя
@@ -60,10 +90,16 @@ function App() {
   const loc = useLocation();
 
   useEffect(() => {
+<<<<<<< HEAD
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
       apiServer.getUserProfile(jwt).then((res) => {
         updateUserData(res[0]);
+=======
+    if (localStorage.getItem('jwt')) {
+      api.getUserProfile().then((res) => {
+        updateUserData(res.data);
+>>>>>>> childrens-rights-page
         setIsLoggedIn(true);
         history.push(loc.pathname);
       });
@@ -112,28 +148,43 @@ function App() {
 
   function handleHeaderCalendarClick() {
     if (isLoggedIn) {
+<<<<<<< HEAD
       history.push("/calendar");
       handleHeaderMobileClick()
+=======
+      history.push('/calendar');
+>>>>>>> childrens-rights-page
     } else {
-      handleLogPopupOpen("/calendar");
+      handleLogPopupOpen('/calendar');
     }
   }
 
   function handleProfileLogoClick() {
     if (isLoggedIn) {
+<<<<<<< HEAD
       history.push("/account");
       handleHeaderMobileClick();
+=======
+      history.push('/account');
+>>>>>>> childrens-rights-page
     } else {
-      handleLogPopupOpen("/account");
+      handleLogPopupOpen('/account');
     }
   }
 
   function handleLoginSubmit(data) {
     const { password, username } = data;
 
+<<<<<<< HEAD
     apiServer.auth(username, password).then((res) => {
       if (res.access) {
         localStorage.setItem("jwt", res.access);
+=======
+    api.auth(username, password).then((res) => {
+      if (res.data.access) {
+        localStorage.setItem('jwt', res.data.refresh);
+        handlePopupClose();
+>>>>>>> childrens-rights-page
       }
     })
     .then(()=> 
@@ -149,7 +200,7 @@ function App() {
   }
 
   function handleSignOut() {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem('jwt');
     setIsLoggedIn(false);
   }
 
@@ -286,7 +337,11 @@ function App() {
               onChangeCity={toggleCityPopup}
               signOut={handleSignOut}
             />
-            <main className="content page__content">
+            <main
+              className={`content page__content ${
+                loc.pathname.match('/right/') && 'content_style_rights-article'
+              }`}
+            >
               <Switch>
                 <Route path="/main">
                   <Main isLoggedIn={isLoggedIn} enroll={enrollMechanism} />
@@ -323,8 +378,16 @@ function App() {
                 <Route path="/content_menu">
                   <ContentMenuPage />
                 </Route>
+<<<<<<< HEAD
                 <Route path="/stories">
                   <StoriesPage />
+=======
+                <Route path="/rights">
+                  <RightsPage />
+                </Route>
+                <Route path="/right/:id">
+                  <RightPage />
+>>>>>>> childrens-rights-page
                 </Route>
                 <Route exact path="/">
                   <Redirect to="/main" />
