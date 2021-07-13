@@ -176,11 +176,7 @@ function Header(props) {
               </Link>
             </li>
             <li className="popup-menu__list">
-<<<<<<< HEAD
-              <Link onClick={props.onMobileHeaderClick} to="#" className="popup-menu__link">
-=======
-              <Link to="/rights" className="popup-menu__link">
->>>>>>> childrens-rights-page
+              <Link onClick={props.onMobileHeaderClick} to="/rights" className="popup-menu__link">
                 права детей
               </Link>
             </li>
