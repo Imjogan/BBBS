@@ -78,7 +78,7 @@ function Footer() {
             </li>
             <li className="navigation__list navigation__list_place_footer">
               <a
-                href="/#"
+                href="/rights"
                 className="navigation__link navigation__link_place_footer"
               >
                 права детей

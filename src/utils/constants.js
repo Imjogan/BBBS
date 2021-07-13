@@ -21,3 +21,5 @@ export const day = [
   "Суббота",
   "Воскресенье",
 ];
+
+export const formArray = ['form-circle', 'form-semicircle', 'form-default'];

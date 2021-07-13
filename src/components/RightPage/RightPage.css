@@ -1,0 +1,491 @@
+.content__header_style_rights-article {
+  margin-top: 100px;
+  width: 100%;
+  min-height: 772px;
+  border-radius: 3px 400px 400px 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1440px) {
+  .content__header_style_rights-article {
+    margin-top: 172px;
+    min-height: 579px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .content__header_style_rights-article {
+    margin-top: 156px;
+    min-height: 412px;
+  }
+}
+
+@media (max-width: 900px) {
+  .content__header_style_rights-article {
+    margin-top: 1px;
+    border-radius: 3px;
+  }
+}
+
+.background-purple {
+  background-color: #c8d1ff;
+}
+
+.background-green {
+  background-color: #8cdd94;
+}
+
+.background-red {
+  background-color: #ff8585;
+}
+
+.background-orange {
+  background-color: #f8d162;
+}
+
+.content__wrapper {
+  max-width: 870px;
+}
+
+@media (max-width: 1440px) {
+  .content__wrapper {
+    max-width: 760px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .content__wrapper {
+    max-width: 570px;
+  }
+}
+
+@media (max-width: 400px) {
+  .content__wrapper {
+    padding: 0 15px 50px;
+  }
+}
+
+.title {
+  font-family: Proto Grotesk Web Light;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 74px;
+  line-height: 80px;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  padding: 0 0 25px;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .title {
+    font-size: 37px;
+    line-height: 39px;
+    padding-bottom: 10px;
+  }
+}
+  
+.title_style_rights-article {
+  padding-bottom: 30px;
+  font-family: Proto Grotesk Web Light;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 44px;
+  line-height: 50px;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+@media (max-width: 1024px) {
+  .title_style_rights-article {
+    font-size: 37px;
+    line-height: 39px;
+  }
+}
+
+@media (max-width: 400px) {
+  .title_style_rights-article {
+    font-size: 23px;
+    line-height: 30px;
+  }
+}
+
+.subtitle {
+  font-family: Proto Grotesk Web Light;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 23px;
+  line-height: 30px;
+  text-align: center;
+  color: #1a1a1a;
+  margin: 0;
+  padding-bottom: 80px;
+}
+
+@media (max-width: 1024px) {
+  .subtitle {
+    font-size: 19px;
+    line-height: 23px;
+    padding-bottom: 50px;
+  }
+}
+
+.subtitle_style_rights-article {
+  padding-bottom: 0;
+}
+
+.guide-article-description {
+  max-width: 769px;
+  padding-top: 50px;
+}
+
+@media (max-width: 1024px) {
+  .guide-article-description {
+    max-width: 570px;
+    padding-top: 30px;
+  }
+}
+
+.guide-article-description_style_rights-article {
+  padding: 80px 15px 0;
+}
+
+@media (max-width: 1024px) {
+  .guide-article-description_style_rights-article {
+    padding: 52px 15px 0;
+  }
+}
+
+.guide-article-description_position_center {
+  margin: 0 auto;
+}
+
+.blocks-atricle__title {
+  margin: auto;
+  font-family: Proto Grotesk Web Light;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 44px;
+  line-height: 50px;
+  text-align: center;
+  color: #1a1a1a;
+  max-width: 970px;
+  transform: translate(0, 10px);
+}
+
+@media (max-width: 1024px) {
+  .blocks-atricle__title {
+    font-size: 19px;
+    line-height: 23px;
+    margin-top: 0;
+    transform: unset;
+  }
+}
+
+.blocks-atricle__title_style_guide-article {
+  margin: 0;
+  font-size: 23px;
+  line-height: 30px;
+  color: #000000;
+  max-width: unset;
+  transform: unset;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 1024px) {
+  .blocks-atricle__title_style_guide-article {
+    margin-top: unset;
+    margin-bottom: 20px;
+    font-size: 19px;
+    line-height: 23px;
+  }
+}
+
+.blocks-article__text {
+  font-family: PT Root UI;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 26px;
+  color: #1a1a1a;
+  margin: 0;
+  margin-bottom: 80px;
+}
+
+@media (max-width: 1024px) {
+  .blocks-article__text {
+    font-size: 15px;
+    line-height: 21px;
+    margin-bottom: 30px;
+  }
+}
+
+.blocks-article__text_type_accent {
+  border-radius: 30px;
+  padding: 50px;
+}
+
+@media (max-width: 1024px) {
+  .blocks-article__text_type_accent {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 400px) {
+  .blocks-article__text_type_accent {
+    padding: 30px 15px;
+  }
+}
+
+
+.blocks-article__list {
+  border-radius: 30px;
+  padding: 50px;
+  margin: 0;
+  margin-bottom: 80px;
+}
+
+@media (max-width: 1024px) {
+  .blocks-article__list {
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 400px) {
+  .blocks-article__list {
+    padding: 30px 15px;
+  }
+}
+
+.background-white {
+  background-color: #fff;
+}
+
+.blocks-article__item {
+  list-style-type: none;
+  font-family: PT Root UI;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 26px;
+  color: #000000;
+}
+
+.blocks-article__item:after {
+  content: "";
+  border-bottom: 1px solid #a7a6a6;
+  display: block;
+  margin: 14.4px 0;
+}
+
+.blocks-article__item:last-child::after {
+  border-bottom: none;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .blocks-article__item {
+    font-size: 15px;
+    line-height: 21px;
+  }
+  .blocks-article__item::after {
+    margin: 14.4px 0 9.5px;
+  }
+}
+
+.select-page {
+  padding-top: 82px;
+}
+
+@media (max-width: 1024px) {
+  .select-page {
+    padding-top: 60px;
+  }
+}
+
+@media (max-width: 400px) {
+  .select-page {
+    padding-top: 30px;
+  }
+}
+
+.select-page_style_rights-article {
+  padding: 0 15px;
+  padding-top: unset;
+  max-width: 769px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .select-page_style_rights-article {
+    max-width: 570px;
+  }
+}
+
+.select-page__image {
+  width: 69px;
+  height: 69px;
+  background: url(../../images/block-guide-photo-2.jpg) no-repeat
+    center/cover;
+}
+
+.select-page__image_style_rights-article {
+  background: unset;
+}
+
+.background-green {
+  background-color: #8cdd94;
+}
+
+.form-circle {
+  border-radius: 50%;
+}
+
+.select-page__link {
+  text-decoration: none;
+  font-family: Proto Grotesk Web Light;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 23px;
+  line-height: 30px;
+  text-align: center;
+  color: #000000;
+}
+
+@media (max-width: 1024px) {
+  .select-page__link {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
+.select-page__link_style_guide-article {
+  color: #224cff;
+  margin: 0 30px;
+  text-align: start;
+  flex-shrink: 100;
+}
+
+.select-page__link_style_guide-article:hover {
+  color: #2e2468;
+}
+
+@media (max-width: 1024px) {
+  .select-page__link_style_guide-article {
+    max-width: 380px;
+    font-size: 19px;
+    line-height: 23px;
+  }
+}
+
+@media (max-width: 560px) {
+  .select-page__link_style_guide-article {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 400px) {
+  .select-page__link_style_guide-article {
+    margin-left: 15px;
+  }
+}
+
+.select-page__link_active {
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+  border: 1px solid #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .select-page__link_active {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+.button-next {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  background-image: url(../../images/content-section-button-next.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.button-next:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+@media (max-width: 1024px) {
+  .button-next {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.button-next_active {
+  background-image: url(../../images/content-section-button-next-active.png);
+}
+
+.content__pseudo-blocks {
+  position: absolute;
+  top: -522px;
+  right: 0;
+  width: 79%;
+  height: 772px;
+  z-index: -1;
+  border-radius: 3px 3px 3px 400px;
+}
+
+@media (max-width: 1440px) {
+  .content__pseudo-blocks {
+    height: 322px;
+    top: 0;
+    border-radius: 3px 3px 3px 295px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .content__pseudo-blocks {
+    height: 368px;
+    top: -102px;
+    border-radius: 3px 3px 3px 200px;
+  }
+}
+
+@media (max-width: 900px) {
+  .content__pseudo-blocks {
+    width: 100%;
+    border-radius: 3px;
+  }
+}
+
+.content-rights {
+  padding-top: 149px;
+}
+
+@media (max-width: 1024px) {
+  .content-rights {
+    padding-top: 109px;
+  }
+}
+
+@media (max-width: 900px) {
+  .content-rights {
+    padding-top: 40px;
+  }
+}

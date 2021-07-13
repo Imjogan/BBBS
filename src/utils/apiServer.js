@@ -60,9 +60,7 @@ class ApiServer {
   // eslint-disable-next-line class-methods-use-this
   getPlacesWithParams(city, filterList) {
     const paramStr = "&tags__slug=";
-    const paramStrList = filterList.reduce((acc, filter) => {
-      return acc + paramStr + filter;
-    }, "");
+    const paramStrList = filterList.reduce((acc, filter) => acc + paramStr + filter, "");
     return fetch(
       `${this.baseUrl}/places/?city=${city}&limit=3${paramStrList}`
     ).then(this.checkResponse);
@@ -86,6 +84,28 @@ class ApiServer {
     return fetch(`${this.baseUrl}/questions/${paramStrList}`).then(
       this.checkResponse
     );
+  }
+
+  getRights() {
+    return fetch(`${this.baseUrl}/rights/`)
+    .then(this.checkResponse);
+  }
+
+    // возвращает вопросы с параметрами фильтров
+  // eslint-disable-next-line class-methods-use-this
+  getRightsWithParams(filterList) {
+    const paramStr = "?tags__slug=";
+    const paramStrList = filterList.reduce((acc, filter) => {
+      return acc + paramStr + filter;
+    }, "");
+    return fetch(`${this.baseUrl}/rights/${paramStrList}`).then(
+      this.checkResponse
+    );
+  }
+
+  getRight(id) {
+    return fetch(`${this.baseUrl}/right/${id}`)
+    .then(this.checkResponse);
   }
 }
 
