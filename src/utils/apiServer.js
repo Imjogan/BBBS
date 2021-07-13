@@ -11,31 +11,26 @@ class ApiServer {
     // eslint-disable-next-line prefer-promise-reject-errors
     return Promise.reject(`Ошибка: ${res.status}`);
   }
-   
-
 
   auth(username, password) {
-    return fetch  (`${this.baseUrl}/token/`,
-    {
-      method: 'POST',
+    return fetch(`${this.baseUrl}/token/`, {
+      method: "POST",
       headers: {
-        "Content-Type": "application/json" 
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({username, password})
-    })
-      .then((res) => this.checkResponse(res));
+      body: JSON.stringify({ username, password }),
+    }).then((res) => this.checkResponse(res));
   }
 
   getUserProfile(jwt) {
-    return fetch (`${this.baseUrl}/profile/`, {
+    return fetch(`${this.baseUrl}/profile/`, {
       method: "Get",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${jwt}`
-      }
+        Authorization: `Bearer ${jwt}`,
+      },
     }).then((res) => this.checkResponse(res));
   }
-  
 
   // возвращает место для BigPlace
   getPlace(city) {
@@ -60,7 +55,10 @@ class ApiServer {
   // eslint-disable-next-line class-methods-use-this
   getPlacesWithParams(city, filterList) {
     const paramStr = "&tags__slug=";
-    const paramStrList = filterList.reduce((acc, filter) => acc + paramStr + filter, "");
+    const paramStrList = filterList.reduce(
+      (acc, filter) => acc + paramStr + filter,
+      ""
+    );
     return fetch(
       `${this.baseUrl}/places/?city=${city}&limit=3${paramStrList}`
     ).then(this.checkResponse);
@@ -77,35 +75,33 @@ class ApiServer {
   // возвращает вопросы с параметрами фильтров
   // eslint-disable-next-line class-methods-use-this
   getQuestionsWithParams(filterList) {
-    const paramStr = "?tags__slug=";
+    const paramStr = "&tags__slug=";
     const paramStrList = filterList.reduce((acc, filter) => {
       return acc + paramStr + filter;
     }, "");
-    return fetch(`${this.baseUrl}/questions/${paramStrList}`).then(
+    return fetch(`${this.baseUrl}/questions/?${paramStrList}`).then(
       this.checkResponse
     );
   }
 
   getRights() {
-    return fetch(`${this.baseUrl}/rights/`)
-    .then(this.checkResponse);
+    return fetch(`${this.baseUrl}/rights/`).then(this.checkResponse);
   }
 
-    // возвращает вопросы с параметрами фильтров
+  // возвращает вопросы с параметрами фильтров
   // eslint-disable-next-line class-methods-use-this
   getRightsWithParams(filterList) {
-    const paramStr = "?tags__slug=";
+    const paramStr = "&tags__slug=";
     const paramStrList = filterList.reduce((acc, filter) => {
       return acc + paramStr + filter;
     }, "");
-    return fetch(`${this.baseUrl}/rights/${paramStrList}`).then(
+    return fetch(`${this.baseUrl}/rights/?${paramStrList}`).then(
       this.checkResponse
     );
   }
 
   getRight(id) {
-    return fetch(`${this.baseUrl}/right/${id}`)
-    .then(this.checkResponse);
+    return fetch(`${this.baseUrl}/right/${id}`).then(this.checkResponse);
   }
 }
 
