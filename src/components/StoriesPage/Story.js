@@ -1,5 +1,5 @@
 import React from "react";
-/* import "./Story.css"; */
+import "./Story.css";
 
 function Story() {
   return (
