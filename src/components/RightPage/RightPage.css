@@ -1,31 +1,78 @@
 .content__header_style_rights-article {
-  margin-top: 100px;
   width: 100%;
-  min-height: 772px;
-  border-radius: 3px 400px 400px 3px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 248px;
+  min-height: 772px;
+}
+
+.content__header_variant_flank-semicircle {
+  border-radius: 3px 400px 400px 3px;
+}
+
+.content__header_variant_bottom-semicircle {
+  border-radius: 3px 3px 400px 400px;
+}
+
+.content__header_variant_ellipse {
+  border-radius: 400px;
 }
 
 @media (max-width: 1440px) {
   .content__header_style_rights-article {
-    margin-top: 172px;
+    margin-top: 220px;
+  }
+
+  .content__header_variant_flank-semicircle {
+    margin-top: 322px;
     min-height: 579px;
+  }
+
+  .content__header_variant_bottom-semicircle {
+    min-height: 680px;
+  }
+
+  .content__header_variant_ellipse {
+    min-height: 680px;
   }
 }
 
 @media (max-width: 1024px) {
   .content__header_style_rights-article {
-    margin-top: 156px;
+    margin-top: 166px;
+  }
+
+  .content__header_variant_flank-semicircle {
+    margin-top: 267px;
     min-height: 412px;
+  }
+
+  .content__header_variant_bottom-semicircle {
+    min-height: 513px;
+  }
+
+  .content__header_variant_ellipse {
+    min-height: 513px;
   }
 }
 
 @media (max-width: 900px) {
   .content__header_style_rights-article {
-    margin-top: 1px;
+    margin-top: 0;
+    min-height: 200px;
+  }
+
+  .content__header_variant_flank-semicircle {
+    border-radius: 3px;
+  }
+
+  .content__header_variant_bottom-semicircle {
+    border-radius: 3px;
+  }
+
+  .content__header_variant_ellipse {
     border-radius: 3px;
   }
 }
@@ -62,7 +109,7 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 900px) {
   .content__wrapper {
     padding: 0 15px 50px;
   }
@@ -88,7 +135,7 @@
     padding-bottom: 10px;
   }
 }
-  
+
 .title_style_rights-article {
   padding-bottom: 30px;
   font-family: Proto Grotesk Web Light;
@@ -241,7 +288,6 @@
   }
 }
 
-
 .blocks-article__list {
   border-radius: 30px;
   padding: 50px;
@@ -277,7 +323,7 @@
 }
 
 .blocks-article__item:after {
-  content: "";
+  content: '';
   border-bottom: 1px solid #a7a6a6;
   display: block;
   margin: 14.4px 0;
@@ -332,8 +378,7 @@
 .select-page__image {
   width: 69px;
   height: 69px;
-  background: url(../../images/block-guide-photo-2.jpg) no-repeat
-    center/cover;
+  background: url(../../images/block-guide-photo-2.jpg) no-repeat center/cover;
 }
 
 .select-page__image_style_rights-article {
@@ -443,49 +488,83 @@
 
 .content__pseudo-blocks {
   position: absolute;
-  top: -522px;
   right: 0;
-  width: 79%;
-  height: 772px;
+  top: 0;
   z-index: -1;
+  width: 79%;
+}
+
+.content__pseudo-blocks_variant_flank-semicircle {
   border-radius: 3px 3px 3px 400px;
+  top: -524px;
+  height: 772px;
+}
+
+.content__pseudo-blocks_variant_bottom-semicircle {
+  border-radius: 3px 3px 400px 400px;
+  width: 100%;
+  height: 248px;
+}
+
+.content__pseudo-blocks_variant_ellipse {
+  border-radius: 3px 400px 400px 3px;
+  top: -524px;
+  left: 0;
+  height: 772px;
 }
 
 @media (max-width: 1440px) {
-  .content__pseudo-blocks {
-    height: 322px;
-    top: 0;
-    border-radius: 3px 3px 3px 295px;
+  .content__pseudo-blocks_variant_flank-semicircle {
+    height: 579px;
+    top: -257px;
+  }
+
+  .content__pseudo-blocks_variant_bottom-semicircle {
+    height: 220px;
+  }
+
+  .content__pseudo-blocks_variant_ellipse {
+    height: 477px;
+    top: -257px;
   }
 }
 
 @media (max-width: 1024px) {
-  .content__pseudo-blocks {
-    height: 368px;
-    top: -102px;
-    border-radius: 3px 3px 3px 200px;
+  .content__pseudo-blocks_variant_flank-semicircle {
+    height: 412px;
+    top: -144px;
+    border-radius: 200px 3px 3px 200px;
+  }
+
+  .content__pseudo-blocks_variant_bottom-semicircle {
+    height: 166px;
+  }
+
+  .content__pseudo-blocks_variant_ellipse {
+    height: 310px;
+    top: -144px;
+    border-radius: 3px 200px 200px 3px;
   }
 }
 
 @media (max-width: 900px) {
-  .content__pseudo-blocks {
+  .content__pseudo-blocks_variant_flank-semicircle {
+    width: 100%;
+    border-radius: 3px;
+  }
+
+  .content__pseudo-blocks_variant_bottom-semicircle {
+    border-radius: 3px;
+  }
+
+  .content__pseudo-blocks_variant_ellipse {
     width: 100%;
     border-radius: 3px;
   }
 }
 
-.content-rights {
-  padding-top: 149px;
-}
-
-@media (max-width: 1024px) {
-  .content-rights {
-    padding-top: 109px;
-  }
-}
-
 @media (max-width: 900px) {
   .content-rights {
-    padding-top: 40px;
+    padding-top: 60px;
   }
 }
