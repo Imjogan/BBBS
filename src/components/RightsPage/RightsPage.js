@@ -20,7 +20,6 @@ const RightsPage = () => {
       .getRights()
       .then((res) => {
         setRights(res.results);
-        console.log(res.count)
         setPageCount(Math.ceil(res.count/16));
         setCurrentPage(1);
         setNextPage(res.next);
