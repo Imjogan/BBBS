@@ -6,8 +6,20 @@ import Right from '../Right/Right';
 import PaginationByPage from '../PaginationByPage/PaginationByPage';
 
 const RightsPage = () => {
+  const [width, setWidth] = useState(window.innerWidth);
   const [rights, setRights] = useState([]);
   const [isLoad, setIsLoad] = useState(false);
+
+  const updateWidth = () => {
+    setWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', updateWidth);
+    return () => {
+      window.removeEventListener('resize', updateWidth);
+    };
+  });
 
   // пагинация
   const [pageCount, setPageCount] = useState(0);
@@ -19,8 +31,9 @@ const RightsPage = () => {
     apiServer
       .getRights()
       .then((res) => {
+        console.log(res.results);
         setRights(res.results);
-        setPageCount(Math.ceil(res.count/16));
+        setPageCount(Math.ceil(res.count / 2));
         setCurrentPage(1);
         setNextPage(res.next);
         setIsLoad(true);
@@ -35,8 +48,9 @@ const RightsPage = () => {
     apiServer
       .getRightsWithParams(filterList)
       .then((res) => {
+        console.log(res);
         setRights(res.results);
-        setPageCount(Math.ceil(res.count/16));
+        setPageCount(Math.ceil(res.count / 2));
         setCurrentPage(1);
         setNextPage(res.next);
       })
@@ -71,9 +85,27 @@ const RightsPage = () => {
       </section>
 
       <section className="guide-container guide-container_style_rights">
-        <div className="guide-container__divisor"></div>
-        <div className="guide-container__divisor"></div>
-        <div className="guide-container__divisor"></div>
+        {rights.length === 1 && (
+          <div className="guide-container__divisor_hidden" />
+        )}
+        {((width > 1840 && rights.length > 4) ||
+          (width > 1199 && width <= 1840 && rights.length > 3) ||
+          (width > 639 && width <= 1199 && rights.length > 2) ||
+          (width <= 639 && rights.length > 1)) && (
+          <div className="guide-container__divisor" />
+        )}
+        {((width > 1840 && rights.length > 8) ||
+          (width > 1199 && width <= 1840 && rights.length > 6) ||
+          (width > 639 && width <= 1199 && rights.length > 4) ||
+          (width <= 639 && rights.length > 2)) && (
+          <div className="guide-container__divisor" />
+        )}
+        {((width > 1840 && rights.length > 12) ||
+          (width > 1199 && width <= 1840 && rights.length > 9) ||
+          (width > 639 && width <= 1199 && rights.length > 6) ||
+          (width <= 639 && rights.length > 3)) && (
+          <div className="guide-container__divisor" />
+        )}
         {rights.map((right) => (
           <Right {...right} key={right.id} />
         ))}

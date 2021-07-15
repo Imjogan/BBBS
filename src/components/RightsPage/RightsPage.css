@@ -84,6 +84,12 @@
   border-bottom: 1px solid #000000;
 }
 
+.guide-container__divisor_hidden {
+  grid-column: 1/-1;
+  grid-row: 2/3;
+  border-bottom: 1px solid transparent;
+}
+
 .guide-container__divisor:nth-child(2) {
   grid-row: 4/5;
 }

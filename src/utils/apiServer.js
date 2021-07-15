@@ -95,7 +95,7 @@ class ApiServer {
     const paramStrList = filterList.reduce((acc, filter) => {
       return acc + paramStr + filter;
     }, "");
-    return fetch(`${this.baseUrl}/rights/?${paramStrList}`).then(
+    return fetch(`${this.baseUrl}/rights/?&limit=2${paramStrList}`).then(
       this.checkResponse
     );
   }
